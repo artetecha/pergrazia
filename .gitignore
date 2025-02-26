@@ -1,6 +1,7 @@
 # Ignore local configuration files.
 /.env
 /wp-config-local.php
+/pg/wp-translation-downloader.lock
 
 # Ignore Composer packages.
 /*/vendor/
