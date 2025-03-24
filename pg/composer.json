@@ -67,7 +67,7 @@
 	"postbuild": [
 	  "mv wp-config.php wordpress/",
 	  "rm -rf wordpress/wp-content/themes/twenty*",
-	  "rm -rf wordpress/wp-content/themes/hello.php"
+	  "rm -rf wordpress/wp-content/plugins/hello.php"
 	],
 	"post-install-cmd": "@postbuild"
   },
