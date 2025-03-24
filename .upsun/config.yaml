@@ -96,7 +96,7 @@ routes:
     # Each route describes how an incoming URL is going
     # to be processed by Upsun.
 
-    "https://www.pergrazia.com/":
+    "https://www.{default}/":
         type: upstream
         upstream: "pg:http"
         cache:
@@ -109,6 +109,6 @@ routes:
                 - "/^wp-settings-/"
                 - "/^wp-postpass/"
 
-    "https://pergrazia.com/":
+    "https://{default}/":
         type: redirect
-        to: "https://www.pergrazia.com/"
+        to: "https://www.{default}/"
