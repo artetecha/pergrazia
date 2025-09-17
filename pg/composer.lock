@@ -541,15 +541,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-rss-aggregator",
-            "version": "5.0.2",
+            "version": "5.0.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-rss-aggregator/",
-                "reference": "tags/5.0.2"
+                "reference": "tags/5.0.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-rss-aggregator.5.0.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-rss-aggregator.5.0.3.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
