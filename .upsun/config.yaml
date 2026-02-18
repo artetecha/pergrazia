@@ -6,7 +6,7 @@ applications:
             root: "pg"
 
         # The runtime the application uses.
-        type: "php:8.4"
+        type: "php:8.5"
 
         runtime:
             extensions:
@@ -83,13 +83,16 @@ applications:
 
 services:
     pgdb:
-        type: mariadb:11.4
+        type: mariadb:11.8
 
     redis:
-        type: redis:7.2
+        type: redis:8.0
 
     es:
         type: elasticsearch:7.10
+
+    os:
+        type: opensearch:3
 
 routes:
     # The routes of the project.
