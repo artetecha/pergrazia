@@ -1,139 +1,197 @@
 <?php
+/**
+ * Upsun-aware WordPress configuration. Composer copies this file into
+ * wordpress/ during each build. Off Upsun, configuration comes from the
+ * gitignored wp-config-local.php in the project root.
+ */
 
 use Platformsh\ConfigReader\Config;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-// Create a new config object to ease reading the Platform.sh environment variables.
-// You can alternatively use getenv() yourself.
 $config = new Config();
 
-// Set default scheme and hostname.
-$site_scheme = 'http';
 $site_host   = 'localhost';
+$site_scheme = 'http';
 
-// Update scheme and hostname for the requested page.
 if ( isset( $_SERVER['HTTP_HOST'] ) ) {
-	$site_host   = $_SERVER['HTTP_HOST'];
-	$site_scheme = ! empty( $_SERVER['HTTPS'] ) ? 'https' : 'http';
+	$site_host = $_SERVER['HTTP_HOST'];
+}
+
+$forwarded_proto = isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] )
+	? strtolower( trim( explode( ',', $_SERVER['HTTP_X_FORWARDED_PROTO'] )[0] ) )
+	: '';
+
+if (
+	( ! empty( $_SERVER['HTTPS'] ) && 'off' !== strtolower( (string) $_SERVER['HTTPS'] ) )
+	|| 'https' === $forwarded_proto
+) {
+	$site_scheme      = 'https';
+	$_SERVER['HTTPS'] = 'on';
 }
 
 if ( $config->isValidPlatform() ) {
 	if ( $config->hasRelationship( 'database' ) ) {
-		// This is where we get the relationships of our application dynamically
-		// from Platform.sh.
+		$database = $config->credentials( 'database' );
 
-		// Avoid PHP notices on CLI requests.
-		if ( php_sapi_name() === 'cli' ) {
-			session_save_path( "/tmp" );
-		}
-
-		// Get the database credentials
-		$credentials = $config->credentials( 'database' );
-
-		// We are using the first relationship called "database" found in your
-		// relationships. Note that you can call this relationship as you wish
-		// in your `.platform.app.yaml` file, but 'database' is a good name.
-		define( 'DB_NAME', $credentials['path'] );
-		define( 'DB_USER', $credentials['username'] );
-		define( 'DB_PASSWORD', $credentials['password'] );
-		define( 'DB_HOST', $credentials['host'] );
-		define( 'DB_CHARSET', 'utf8' );
+		define( 'DB_NAME', $database['path'] );
+		define( 'DB_USER', $database['username'] );
+		define( 'DB_PASSWORD', $database['password'] );
+		define( 'DB_HOST', $database['host'] . ':' . $database['port'] );
+		define( 'DB_CHARSET', 'utf8mb4' );
 		define( 'DB_COLLATE', '' );
+	}
 
-		// Check whether a route is defined for this application in the Platform.sh
-		// routes. Use it as the site hostname if so (it is not ideal to trust HTTP_HOST).
-		if ( $config->routes() ) {
+	if ( $config->routes() ) {
+		$application_upstreams = array(
+			$config->applicationName,
+			$config->applicationName . ':http',
+		);
+		$selected_route_score  = -1;
 
-			$routes = $config->routes();
-
-			foreach ( $routes as $url => $route ) {
-				if ( $route['type'] === 'upstream' && $route['upstream'] === $config->applicationName ) {
-
-					// Pick the first hostname, or the first HTTPS hostname if one exists.
-					$host   = parse_url( $url, PHP_URL_HOST );
-					$scheme = parse_url( $url, PHP_URL_SCHEME );
-					if ( $host !== false && ( ! isset( $site_host ) || ( $site_scheme === 'http' && $scheme === 'https' ) ) ) {
-						$site_host   = $host;
-						$site_scheme = $scheme ?: 'http';
-					}
-				}
+		foreach ( $config->routes() as $url => $route ) {
+			if (
+				'upstream' !== ( $route['type'] ?? '' )
+				|| ! in_array( $route['upstream'] ?? '', $application_upstreams, true )
+			) {
+				continue;
 			}
-		}
 
-		// Debug mode should be disabled on Platform.sh. Set this constant to true
-		// in a wp-config-local.php file to skip this setting on local development.
-		if ( ! defined( 'WP_DEBUG' ) ) {
-			define( 'WP_DEBUG', false );
-		}
+			$route_host   = parse_url( $url, PHP_URL_HOST );
+			$route_scheme = parse_url( $url, PHP_URL_SCHEME ) ?: 'http';
 
-		// Set all the necessary keys to unique values, based on the Platform.sh
-		// entropy value.
-		if ( $config->projectEntropy ) {
-			$keys    = [
-				'AUTH_KEY',
-				'SECURE_AUTH_KEY',
-				'LOGGED_IN_KEY',
-				'NONCE_KEY',
-				'AUTH_SALT',
-				'SECURE_AUTH_SALT',
-				'LOGGED_IN_SALT',
-				'NONCE_SALT',
-			];
-			$entropy = $config->projectEntropy;
-			foreach ( $keys as $key ) {
-				if ( ! defined( $key ) ) {
-					define( $key, $entropy . $key );
-				}
+			if ( ! $route_host ) {
+				continue;
+			}
+
+			// Prefer the canonical www route, then HTTPS, regardless of route order.
+			$route_score = ( str_starts_with( $route_host, 'www.' ) ? 2 : 0 )
+				+ ( 'https' === $route_scheme ? 1 : 0 );
+
+			if ( $route_score > $selected_route_score ) {
+				$site_host            = $route_host;
+				$site_scheme          = $route_scheme;
+				$selected_route_score = $route_score;
 			}
 		}
 	}
+
+	// Derive independent, deterministic values from Upsun's project entropy.
+	if ( $config->projectEntropy ) {
+		foreach ( array(
+			'AUTH_KEY',
+			'SECURE_AUTH_KEY',
+			'LOGGED_IN_KEY',
+			'NONCE_KEY',
+			'AUTH_SALT',
+			'SECURE_AUTH_SALT',
+			'LOGGED_IN_SALT',
+			'NONCE_SALT',
+		) as $key ) {
+			if ( ! defined( $key ) ) {
+				define( $key, hash( 'sha256', $config->projectEntropy . $key ) );
+			}
+		}
+	}
+
 	if ( $config->hasRelationship( 'rediscache' ) ) {
-		$credentials = $config->credentials( 'rediscache' );
-		define( 'WP_REDIS_CLIENT', 'pecl' );
-		define( 'WP_REDIS_HOST', $credentials['host'] );
-		define( 'WP_REDIS_PORT', $credentials['port'] );
+		$redis = $config->credentials( 'rediscache' );
+
+		define( 'WP_REDIS_CLIENT', 'phpredis' );
+		define( 'WP_REDIS_HOST', $redis['host'] );
+		define( 'WP_REDIS_PORT', $redis['port'] );
+		if ( ! empty( $redis['password'] ) ) {
+			define( 'WP_REDIS_PASSWORD', $redis['password'] );
+		}
+
+		define( 'WP_REDIS_PREFIX', 'wp:' . $config->environment . ':' );
+		define( 'WP_CACHE_KEY_SALT', WP_REDIS_PREFIX );
+		define( 'WP_REDIS_SELECTIVE_FLUSH', true );
+		define( 'WP_REDIS_GRACEFUL', true );
+		define( 'WP_REDIS_IGBINARY', true );
+		define( 'WP_REDIS_TIMEOUT', 0.5 );
+		define( 'WP_REDIS_READ_TIMEOUT', 0.5 );
+		define( 'WP_REDIS_DISABLE_METRICS', true );
+		define( 'WP_REDIS_DISABLE_ADMINBAR', true );
+		define( 'WP_REDIS_DISABLE_BANNERS', true );
+		define( 'WP_REDIS_DISABLE_COMMENT', true );
+		define( 'WP_REDIS_DISABLE_DROPIN_CHECK', true );
+		define( 'WP_REDIS_DISABLE_DROPIN_AUTOUPDATE', true );
 	}
-	if ( ! $config->onProduction() ) {
+
+	if ( ! defined( 'WP_DEBUG' ) ) {
+		define( 'WP_DEBUG', false );
+	}
+
+	if ( ! defined( 'WP_ENVIRONMENT_TYPE' ) ) {
+		$wp_environment_type = match ( $config->environmentType ) {
+			'production' => 'production',
+			'staging'    => 'staging',
+			default      => 'development',
+		};
+		define( 'WP_ENVIRONMENT_TYPE', $wp_environment_type );
+	}
+
+	if ( ! $config->onProduction() && ! defined( 'JETPACK_DEV_DEBUG' ) ) {
 		define( 'JETPACK_DEV_DEBUG', true );
 	}
-} else {
-	// Local configuration file should be in project root.
-	if ( file_exists( dirname( __FILE__, 2 ) . '/wp-config-local.php' ) ) {
-		include( dirname( __FILE__, 2 ) . '/wp-config-local.php' );
+
+	// Composer owns the read-only application tree on Upsun.
+	if ( ! defined( 'DISALLOW_FILE_MODS' ) ) {
+		define( 'DISALLOW_FILE_MODS', true );
 	}
+} elseif ( file_exists( dirname( __FILE__, 2 ) . '/wp-config-local.php' ) ) {
+	include dirname( __FILE__, 2 ) . '/wp-config-local.php';
 }
 
-// Do not put a slash "/" at the end.
-// https://codex.wordpress.org/Editing_wp-config.php#WP_HOME
-define( 'WP_HOME', $site_scheme . '://' . $site_host );
-// Do not put a slash "/" at the end.
-// https://codex.wordpress.org/Editing_wp-config.php#WP_SITEURL
-define( 'WP_SITEURL', WP_HOME );
-define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/wp-content' );
+if ( ! defined( 'WP_DEBUG' ) ) {
+	define( 'WP_DEBUG', false );
+}
+
+if ( ! defined( 'DB_CHARSET' ) ) {
+	define( 'DB_CHARSET', 'utf8mb4' );
+}
+
+if ( ! defined( 'DB_COLLATE' ) ) {
+	define( 'DB_COLLATE', '' );
+}
+
+if ( ! defined( 'WP_HOME' ) ) {
+	define( 'WP_HOME', $site_scheme . '://' . $site_host );
+}
+
+if ( ! defined( 'WP_SITEURL' ) ) {
+	define( 'WP_SITEURL', WP_HOME );
+}
+
+define( 'WP_CONTENT_DIR', __DIR__ . '/wp-content' );
 define( 'WP_CONTENT_URL', WP_HOME . '/wp-content' );
 
-// Since you can have multiple installations in one database, you need a unique
-// prefix.
-$table_prefix = 'wp_';
-
-// Default PHP settings.
-ini_set( 'session.gc_probability', 1 );
-ini_set( 'session.gc_divisor', 100 );
-ini_set( 'session.gc_maxlifetime', 200000 );
-ini_set( 'session.cookie_lifetime', 2000000 );
-ini_set( 'pcre.backtrack_limit', 200000 );
-ini_set( 'pcre.recursion_limit', 200000 );
-
-// Really Simple SSL session cookie settings.
-@ini_set( 'session.cookie_httponly', true );
-@ini_set( 'session.cookie_secure', true );
-@ini_set( 'session.use_only_cookies', true );
-
-/** Absolute path to the WordPress directory. */
-if ( ! defined( 'ABSPATH' ) ) {
-	define( 'ABSPATH', dirname( __FILE__ ) . '/' );
+if ( ! defined( 'WP_TEMP_DIR' ) ) {
+	define( 'WP_TEMP_DIR', sys_get_temp_dir() );
 }
 
-/** Sets up WordPress vars and included files. */
-require_once( ABSPATH . 'wp-settings.php' );
+if ( ! defined( 'FS_METHOD' ) ) {
+	define( 'FS_METHOD', 'direct' );
+}
+
+if ( ! defined( 'DISALLOW_FILE_EDIT' ) ) {
+	define( 'DISALLOW_FILE_EDIT', true );
+}
+
+// Upsun invokes due events every five minutes; disable loopback cron.
+if ( ! defined( 'DISABLE_WP_CRON' ) ) {
+	define( 'DISABLE_WP_CRON', true );
+}
+
+if ( ! defined( 'UPSUN_MIGRATIONS_DIR' ) ) {
+	define( 'UPSUN_MIGRATIONS_DIR', dirname( __DIR__ ) . '/migrations' );
+}
+
+$table_prefix = 'wp_';
+
+if ( ! defined( 'ABSPATH' ) ) {
+	define( 'ABSPATH', __DIR__ . '/' );
+}
+
+require_once ABSPATH . 'wp-settings.php';

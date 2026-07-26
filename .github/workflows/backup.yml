@@ -1,0 +1,42 @@
+name: Production backup
+
+on:
+  schedule:
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    name: Back up the main environment
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install checksum-verified Upsun CLI
+        env:
+          UPSUN_CLI_VERSION: "5.10.8"
+          UPSUN_CLI_SHA256: "ca629954b6af1a219aac3bddcd8bf10954c7a8f9b660f4796c9a904d075d88fc"
+        run: |
+          archive="$RUNNER_TEMP/upsun.tar.gz"
+          bin_dir="$RUNNER_TEMP/bin"
+          curl --fail --location --silent --show-error \
+            "https://github.com/upsun/cli/releases/download/v${UPSUN_CLI_VERSION}/upsun_${UPSUN_CLI_VERSION}_linux_amd64.tar.gz" \
+            --output "$archive"
+          echo "${UPSUN_CLI_SHA256}  ${archive}" | sha256sum --check -
+          mkdir -p "$bin_dir"
+          tar --extract --gzip --file "$archive" --directory "$bin_dir"
+          echo "$bin_dir" >> "$GITHUB_PATH"
+
+      - name: Create Upsun backup
+        env:
+          UPSUN_CLI_TOKEN: ${{ secrets.UPSUN_CLI_TOKEN }}
+          UPSUN_PROJECT: ${{ secrets.UPSUN_PROJECT }}
+        run: upsun backup:create -W -y -p "$UPSUN_PROJECT" main

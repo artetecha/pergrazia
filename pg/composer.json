@@ -1,104 +1,116 @@
 {
-	"name": "johnpbloch/wordpress",
-	"description": "WordPress is open source software you can use to create a beautiful website, blog, or app.",
-	"keywords": [
-		"wordpress",
-		"blog",
-		"cms"
-	],
-	"type": "package",
-	"homepage": "http://wordpress.org/",
-	"license": "GPL-2.0+",
-	"authors": [
-		{
-			"name": "WordPress Community",
-			"homepage": "http://wordpress.org/about/"
-		}
-	],
-	"support": {
-		"issues": "http://core.trac.wordpress.org/",
-		"forum": "http://wordpress.org/support/",
-		"wiki": "http://codex.wordpress.org/",
-		"irc": "irc://irc.freenode.net/wordpress",
-		"source": "http://core.trac.wordpress.org/browser"
-	},
-	"repositories": [
-		{
-			"type": "composer",
-			"url": "https://wpackagist.org"
-		}
-	],
-	"require": {
-		"php": ">=8.0",
-		"johnpbloch/wordpress-core-installer": "^2.0",
-		"johnpbloch/wordpress-core": "^7.0.0",
-		"platformsh/config-reader": "^3.0",
-		"wpackagist-theme/lovecraft": "^2.0.1",
-		"wpackagist-plugin/akismet": "^5.0",
-		"wpackagist-plugin/jetpack": "^16.0",
-		"wpackagist-plugin/really-simple-ssl": "^9.0.0",
-		"wpackagist-plugin/wordpress-importer": "^0.9",
-		"wpackagist-plugin/contextual-category-widget": "^0.6.1",
-		"wpackagist-plugin/social-pug": "^1.7.0",
-		"wpackagist-plugin/series": "^2.0.1",
-		"wpackagist-plugin/wpforms-lite": "^2.0.0.2",
-		"wpackagist-plugin/wp-cloudflare-page-cache": "^5.0.0",
-		"wpackagist-plugin/redis-cache": "^2.0.2",
-		"wpackagist-plugin/redirection": "^5.8",
-		"wpackagist-plugin/elasticpress": "^5.0.0",
-		"wpackagist-plugin/wp-rss-aggregator": "^5.0",
-		"inpsyde/wp-translation-downloader": "^2.0",
-		"wpackagist-plugin/mailchimp-for-wp": "^4.10"
-	},
-	"distro": {
-		"default-theme": "lovecraft",
-		"enable-plugins": [
-			"akismet",
-			"contextual-category-widget",
-			"elasticpress",
-			"jetpack",
-			"mailchimp-for-wp",
-			"redirection",
-			"really-simple-ssl",
-			"redis-cache",
-			"series",
-			"social-pug",
-			"wp-cloudflare-page-cache",
-			"wpforms-lite"
-		]
-	},
-	"scripts": {
-		"postbuild": [
-			"mv wp-config.php wordpress/",
-			"rm -rf wordpress/wp-content/themes/twenty*",
-			"rm -rf wordpress/wp-content/plugins/hello.php"
-		],
-		"post-install-cmd": "@postbuild"
-	},
-	"extra": {
-		"installer-paths": {
-			"wordpress/wp-content/plugins/{$name}": [
-				"type:wordpress-plugin"
-			],
-			"wordpress/wp-content/themes/{$name}": [
-				"type:wordpress-theme"
-			],
-			"wordpress/wp-content/mu-plugins/{$name}": [
-				"type:wordpress-muplugin"
-			]
-		},
-		"wp-translation-downloader": {
-			"languages": [
-				"it_IT"
-			],
-			"directory": "wordpress/wp-content/languages"
-		}
-	},
-	"config": {
-		"allow-plugins": {
-			"composer/installers": true,
-			"inpsyde/wp-translation-downloader": true,
-			"johnpbloch/wordpress-core-installer": true
-		}
-	}
+  "name": "artetecha/pergrazia",
+  "description": "Composer-managed WordPress project for pergrazia.com on Upsun.",
+  "keywords": [
+    "upsun",
+    "wordpress"
+  ],
+  "type": "project",
+  "license": "GPL-2.0-or-later",
+  "homepage": "https://www.pergrazia.com/",
+  "authors": [
+    {
+      "name": "ArteTecha",
+      "homepage": "https://artetecha.com/"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org",
+      "only": [
+        "wpackagist-plugin/*",
+        "wpackagist-theme/*"
+      ]
+    }
+  ],
+  "require": {
+    "php": ">=8.4",
+    "artetecha/upsun-wp": "^0.6",
+    "composer/installers": "^2.3",
+    "inpsyde/wp-translation-downloader": "^2.0",
+    "johnpbloch/wordpress-core": "^7.0.0",
+    "johnpbloch/wordpress-core-installer": "^2.0",
+    "platformsh/config-reader": "^3.0",
+    "wpackagist-plugin/akismet": "^5.0",
+    "wpackagist-plugin/contextual-category-widget": "^0.6.1",
+    "wpackagist-plugin/elasticpress": "^5.0.0",
+    "wpackagist-plugin/jetpack": "^16.0",
+    "wpackagist-plugin/mailchimp-for-wp": "^4.10",
+    "wpackagist-plugin/really-simple-ssl": "^9.0.0",
+    "wpackagist-plugin/redis-cache": "^2.8",
+    "wpackagist-plugin/redirection": "^5.8",
+    "wpackagist-plugin/series": "^2.0.1",
+    "wpackagist-plugin/social-pug": "^1.7.0",
+    "wpackagist-plugin/wordpress-importer": "^0.9",
+    "wpackagist-plugin/wp-cloudflare-page-cache": "^5.0.0",
+    "wpackagist-plugin/wp-rss-aggregator": "^5.0",
+    "wpackagist-plugin/wpforms-lite": "^2.0.0.2",
+    "wpackagist-theme/lovecraft": "^2.0.1"
+  },
+  "extra": {
+    "wordpress-install-dir": "wordpress",
+    "installer-paths": {
+      "composer-mu-plugins/{$name}": [
+        "artetecha/upsun-wp"
+      ],
+      "wordpress/wp-content/plugins/{$name}": [
+        "type:wordpress-plugin"
+      ],
+      "wordpress/wp-content/themes/{$name}": [
+        "type:wordpress-theme"
+      ],
+      "wordpress/wp-content/mu-plugins/{$name}": [
+        "type:wordpress-muplugin"
+      ]
+    },
+    "distro": {
+      "default-theme": "lovecraft",
+      "enable-plugins": [
+        "akismet",
+        "contextual-category-widget",
+        "elasticpress",
+        "jetpack",
+        "mailchimp-for-wp",
+        "redirection",
+        "really-simple-ssl",
+        "redis-cache",
+        "series",
+        "social-pug",
+        "wp-cloudflare-page-cache",
+        "wpforms-lite"
+      ]
+    },
+    "wp-translation-downloader": {
+      "languages": [
+        "it_IT"
+      ],
+      "directory": "wordpress/wp-content/languages"
+    }
+  },
+  "scripts": {
+    "postbuild": [
+      "cp wp-config.php wordpress/",
+      "cp -R mu-plugins wordpress/wp-content/",
+      "rm -rf wordpress/wp-content/mu-plugins/upsun",
+      "cp -R composer-mu-plugins/upsun wordpress/wp-content/mu-plugins/upsun",
+      "cp composer-mu-plugins/upsun/upsun-loader.php wordpress/wp-content/mu-plugins/upsun-loader.php",
+      "cp wordpress/wp-content/plugins/redis-cache/includes/object-cache.php wordpress/wp-content/object-cache.php",
+      "rm -rf wordpress/wp-content/themes/twenty*",
+      "rm -f wordpress/wp-content/plugins/hello.php"
+    ],
+    "post-install-cmd": "@postbuild",
+    "post-update-cmd": "@postbuild"
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "inpsyde/wp-translation-downloader": true,
+      "johnpbloch/wordpress-core-installer": true
+    },
+    "platform": {
+      "php": "8.4.0"
+    },
+    "sort-packages": true
+  }
 }
