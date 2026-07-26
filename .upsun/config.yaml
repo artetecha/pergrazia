@@ -24,15 +24,17 @@ applications:
       rediscache: "redis:redis"
       essearch: "es:elasticsearch"
 
+    # These are legacy Platform.sh local mounts. Upsun's continuity-preserving
+    # equivalent is instance; changing them to storage creates new empty data.
     mounts:
       "wordpress/wp-content/uploads":
-        source: storage
+        source: instance
         source_path: "uploads"
       "wordpress/wp-content/cache":
-        source: storage
+        source: instance
         source_path: "cache"
       "wordpress/wp-content/wp-cloudflare-super-page-cache":
-        source: storage
+        source: instance
         source_path: "wp-cloudflare-page-cache"
 
     web:
