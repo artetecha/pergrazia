@@ -4,8 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ba8d4ad542fd79a373aeebec6c768e7",
+    "content-hash": "864c993791d37d654bce189a731132f8",
     "packages": [
+        {
+            "name": "artetecha/upsun-wp",
+            "version": "0.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artetecha/upsun-wp.git",
+                "reference": "5c5a00927f43a27f75996d7fb445b4f830e90a97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artetecha/upsun-wp/zipball/5c5a00927f43a27f75996d7fb445b4f830e90a97",
+                "reference": "5c5a00927f43a27f75996d7fb445b4f830e90a97",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10.5"
+            },
+            "type": "wordpress-muplugin",
+            "extra": {
+                "installer-name": "upsun"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vince Russo",
+                    "homepage": "https://artetecha.com"
+                }
+            ],
+            "description": "Must-use plugin integrating WordPress with the Upsun platform: environment awareness, router-cache friendliness, safe preview clones, deploy migrations, Site Health checks, and a wp upsun CLI command.",
+            "homepage": "https://upsun.artetecha.com/",
+            "keywords": [
+                "mu-plugin",
+                "platformsh",
+                "upsun",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/artetecha/upsun-wp/issues",
+                "source": "https://github.com/artetecha/upsun-wp"
+            },
+            "time": "2026-07-24T10:12:41+00:00"
+        },
         {
             "name": "composer/installers",
             "version": "v2.3.0",
@@ -637,8 +685,11 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.0"
+        "php": ">=8.4"
     },
     "platform-dev": {},
+    "platform-overrides": {
+        "php": "8.4.0"
+    },
     "plugin-api-version": "2.9.0"
 }
