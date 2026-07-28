@@ -22,7 +22,6 @@ applications:
     relationships:
       database: "pgdb:mysql"
       rediscache: "redis:redis"
-      essearch: "es:elasticsearch"
 
     # These are legacy Platform.sh local mounts. Upsun's continuity-preserving
     # equivalent is instance; changing them to storage creates new empty data.
@@ -33,10 +32,6 @@ applications:
       "wordpress/wp-content/cache":
         source: instance
         source_path: "cache"
-      "wordpress/wp-content/wp-cloudflare-super-page-cache":
-        source: instance
-        source_path: "wp-cloudflare-page-cache"
-
     web:
       locations:
         "/":
@@ -50,13 +45,13 @@ applications:
           headers:
             X-Content-Type-Options: nosniff
           rules:
-            ^/composer\.(json|lock)$:
+            ^composer\.(json|lock)$:
               allow: false
-            ^/license\.txt$:
+            ^license\.txt$:
               allow: false
-            ^/readme\.html$:
+            ^readme\.html$:
               allow: false
-            ^/xmlrpc\.php$:
+            ^xmlrpc\.php$:
               allow: false
         "/wp-content/cache":
           root: "wordpress/wp-content/cache"
@@ -87,8 +82,6 @@ services:
     type: mariadb:11.8
   redis:
     type: redis:8.0
-  es:
-    type: elasticsearch:7.10
 
 routes:
   "https://www.{default}/":

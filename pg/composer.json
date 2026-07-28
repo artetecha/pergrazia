@@ -34,17 +34,11 @@
     "platformsh/config-reader": "^3.0",
     "wpackagist-plugin/akismet": "^5.0",
     "wpackagist-plugin/contextual-category-widget": "^0.6.1",
-    "wpackagist-plugin/elasticpress": "^5.0.0",
-    "wpackagist-plugin/jetpack": "^16.0",
     "wpackagist-plugin/mailchimp-for-wp": "^4.10",
-    "wpackagist-plugin/really-simple-ssl": "^9.0.0",
     "wpackagist-plugin/redis-cache": "^2.8",
     "wpackagist-plugin/redirection": "^5.8",
     "wpackagist-plugin/series": "^2.0.1",
     "wpackagist-plugin/social-pug": "^1.7.0",
-    "wpackagist-plugin/wordpress-importer": "^0.9",
-    "wpackagist-plugin/wp-cloudflare-page-cache": "^5.0.0",
-    "wpackagist-plugin/wp-rss-aggregator": "^5.0",
     "wpackagist-plugin/wpforms-lite": "^2.0.0.2",
     "wpackagist-theme/lovecraft": "^2.0.1"
   },
@@ -69,15 +63,11 @@
       "enable-plugins": [
         "akismet",
         "contextual-category-widget",
-        "elasticpress",
-        "jetpack",
         "mailchimp-for-wp",
         "redirection",
-        "really-simple-ssl",
         "redis-cache",
         "series",
         "social-pug",
-        "wp-cloudflare-page-cache",
         "wpforms-lite"
       ]
     },

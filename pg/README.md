@@ -48,11 +48,10 @@ Composer build.
 
 ## Upsun runtime
 
-The `pg` application uses PHP 8.4 and relationships named `database`,
-`rediscache`, and `essearch` for MariaDB, Redis, and Elasticsearch. Uploads,
-WordPress cache files, and the Cloudflare page-cache directory use persistent
-storage mounts. `www.pergrazia.com` is canonical and the apex route redirects
-to it.
+The `pg` application uses PHP 8.4 and relationships named `database` and
+`rediscache` for MariaDB and Redis. Uploads and WordPress cache files use
+persistent storage mounts. `www.pergrazia.com` is canonical and the apex route
+redirects to it.
 
 `wp-config.php` obtains credentials and routes from Upsun, isolates Redis keys
 by environment, disables dashboard file changes, and disables WordPress's
