@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "864c993791d37d654bce189a731132f8",
+    "content-hash": "1c91fdbc05f635d92b583446251422ae",
     "packages": [
         {
             "name": "artetecha/upsun-wp",
-            "version": "0.6.0",
+            "version": "0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/artetecha/upsun-wp.git",
-                "reference": "5c5a00927f43a27f75996d7fb445b4f830e90a97"
+                "reference": "b2405c0c87880fb0cc53f17580abc02b9b1d621c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/artetecha/upsun-wp/zipball/5c5a00927f43a27f75996d7fb445b4f830e90a97",
-                "reference": "5c5a00927f43a27f75996d7fb445b4f830e90a97",
+                "url": "https://api.github.com/repos/artetecha/upsun-wp/zipball/b2405c0c87880fb0cc53f17580abc02b9b1d621c",
+                "reference": "b2405c0c87880fb0cc53f17580abc02b9b1d621c",
                 "shasum": ""
             },
             "require": {
@@ -52,7 +52,7 @@
                 "issues": "https://github.com/artetecha/upsun-wp/issues",
                 "source": "https://github.com/artetecha/upsun-wp"
             },
-            "time": "2026-07-24T10:12:41+00:00"
+            "time": "2026-07-27T06:38:51+00:00"
         },
         {
             "name": "composer/installers",
