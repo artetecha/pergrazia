@@ -132,10 +132,6 @@ if ( $config->isValidPlatform() ) {
 		define( 'WP_ENVIRONMENT_TYPE', $wp_environment_type );
 	}
 
-	if ( ! $config->onProduction() && ! defined( 'JETPACK_DEV_DEBUG' ) ) {
-		define( 'JETPACK_DEV_DEBUG', true );
-	}
-
 	// Composer owns the read-only application tree on Upsun.
 	if ( ! defined( 'DISALLOW_FILE_MODS' ) ) {
 		define( 'DISALLOW_FILE_MODS', true );
