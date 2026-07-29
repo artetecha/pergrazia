@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="444" viewBox="0 0 1280 444" role="img" aria-labelledby="title desc">
+	<title id="title">Per Grazia hero concept: sacred balance</title>
+	<desc id="desc">An abstract heart and mind orbit a cross held in a luminous circle.</desc>
+	<defs>
+		<linearGradient id="halo" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0" stop-color="#00b7c9"/>
+			<stop offset="1" stop-color="#007c89"/>
+		</linearGradient>
+	</defs>
+	<rect width="1280" height="444" fill="#fff"/>
+	<path d="M274 225C394 75 513 88 640 222C769 358 893 369 1006 219" fill="none" stroke="#e6e2de" stroke-width="2"/>
+	<path d="M274 219C394 369 513 356 640 222C769 86 893 75 1006 225" fill="none" stroke="#e6e2de" stroke-width="2"/>
+	<circle cx="640" cy="222" r="150" fill="#f6fbfc"/>
+	<circle cx="640" cy="222" r="116" fill="url(#halo)"/>
+	<circle cx="640" cy="222" r="116" fill="none" stroke="#052f59" stroke-width="3"/>
+	<path d="M622 127H658V201H719V237H658V317H622V237H561V201H622Z" fill="#fff"/>
+	<circle cx="640" cy="222" r="139" fill="none" stroke="#00b7c9" stroke-width="2" stroke-dasharray="2 12" stroke-linecap="round"/>
+	<path d="M351 171C333 147 294 156 294 189C294 225 351 253 351 253C351 253 408 225 408 189C408 156 369 147 351 171Z"
+		fill="none" stroke="#052f59" stroke-width="6" stroke-linejoin="round"/>
+	<path d="M351 171C333 147 294 156 294 189C294 225 351 253 351 253" fill="none" stroke="#00b7c9" stroke-width="6" stroke-linecap="round"/>
+	<circle cx="351" cy="212" r="84" fill="none" stroke="#e6e2de" stroke-width="2"/>
+	<circle cx="929" cy="212" r="84" fill="none" stroke="#e6e2de" stroke-width="2"/>
+	<path d="M929 156C900 156 881 178 884 201C869 214 878 240 897 242C903 263 925 268 929 268C933 268 955 263 961 242C980 240 989 214 974 201C977 178 958 156 929 156Z"
+		fill="none" stroke="#052f59" stroke-width="6" stroke-linejoin="round"/>
+	<path d="M929 156V268M929 174C911 165 896 181 902 196M929 211C912 199 894 211 898 228M929 174C947 165 962 181 956 196M929 211C946 199 964 211 960 228"
+		fill="none" stroke="#00b7c9" stroke-width="6" stroke-linecap="round"/>
+	<circle cx="501" cy="116" r="6" fill="#00b7c9"/>
+	<circle cx="779" cy="328" r="6" fill="#00b7c9"/>
+</svg>
