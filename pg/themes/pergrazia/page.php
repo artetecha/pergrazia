@@ -32,10 +32,6 @@ get_header();
 					);
 					?>
 				</div>
-
-				<?php if ( comments_open() || get_comments_number() ) : ?>
-					<?php comments_template(); ?>
-				<?php endif; ?>
 			</div>
 		</article>
 	<?php endwhile; ?>
