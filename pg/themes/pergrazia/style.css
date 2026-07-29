@@ -4,7 +4,7 @@ Theme URI: https://www.pergrazia.com/
 Author: ArteTecha
 Author URI: https://artetecha.com/
 Description: A calm, typography-led theme created for Pergrazia.
-Version: 1.2.0
+Version: 1.3.0
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 8.4
@@ -21,10 +21,10 @@ Tags: blog, custom-logo, custom-menu, featured-images, translation-ready, wide-b
 	--pg-paper: #fafafa;
 	--pg-white: #ffffff;
 	--pg-line: #e6e2de;
-	--pg-accent: #052f59;
-	--pg-accent-dark: #03213d;
+	--pg-accent: #007c89;
+	--pg-accent-dark: #005e68;
+	--pg-accent-bright: #00b7c9;
 	--pg-blue: #052f59;
-	--pg-teal: #00b7c9;
 	--pg-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
 	--pg-sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 	--pg-shell: min(100% - 2.5rem, 76rem);
@@ -91,7 +91,7 @@ input[type="submit"] {
 
 :focus-visible {
 	border-radius: 0.15rem;
-	outline: 3px solid color-mix(in srgb, var(--pg-teal) 65%, white);
+	outline: 3px solid var(--pg-accent);
 	outline-offset: 4px;
 }
 
@@ -602,7 +602,7 @@ input[type="submit"] {
 .entry-content h3 { font-size: clamp(1.65rem, 4vw, 2.35rem); }
 
 .entry-content blockquote {
-	border-left: 3px solid var(--pg-accent);
+	border-left: 3px solid var(--pg-accent-bright);
 	color: #292724;
 	font-size: clamp(1.35rem, 3vw, 1.8rem);
 	font-style: italic;

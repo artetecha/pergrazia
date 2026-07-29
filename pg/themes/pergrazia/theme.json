@@ -10,8 +10,9 @@
 				{ "slug": "ink", "color": "#111111", "name": "Ink" },
 				{ "slug": "paper", "color": "#fafafa", "name": "Paper" },
 				{ "slug": "white", "color": "#ffffff", "name": "White" },
-				{ "slug": "pergrazia-blue", "color": "#052f59", "name": "Pergrazia blue" },
-				{ "slug": "hero-teal", "color": "#00b7c9", "name": "Hero teal" }
+				{ "slug": "pergrazia-teal", "color": "#007c89", "name": "Pergrazia teal" },
+				{ "slug": "hero-cyan", "color": "#00b7c9", "name": "Hero cyan" },
+				{ "slug": "hero-navy", "color": "#052f59", "name": "Hero navy" }
 			]
 		},
 		"layout": {
@@ -45,7 +46,7 @@
 		},
 		"elements": {
 			"link": {
-				"color": { "text": "#052f59" }
+				"color": { "text": "#007c89" }
 			}
 		},
 		"spacing": {
