@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PERGRAZIA_VERSION', '1.6.1' );
+define( 'PERGRAZIA_VERSION', '1.7.0' );
 
 /**
  * Register theme features and navigation areas.
@@ -57,9 +57,14 @@ function pergrazia_setup(): void {
 
 	register_default_headers(
 		array(
-			'pergrazia-original' => array(
+			'pergrazia-new'      => array(
 				'url'           => '%s/assets/images/pergrazia-hero.svg',
 				'thumbnail_url' => '%s/assets/images/pergrazia-hero.svg',
+				'description'   => __( 'Heart, cross and mind artwork', 'pergrazia' ),
+			),
+			'pergrazia-original' => array(
+				'url'           => '%s/assets/images/pergrazia-hero-original.svg',
+				'thumbnail_url' => '%s/assets/images/pergrazia-hero-original.svg',
 				'description'   => __( 'Original Per Grazia artwork', 'pergrazia' ),
 			),
 		)

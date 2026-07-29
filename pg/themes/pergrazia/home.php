@@ -11,7 +11,9 @@ $pergrazia_is_first_page = ! is_paged();
 $pergrazia_hero_classes  = 'site-hero__image';
 
 if ( $pergrazia_header_image && str_contains( $pergrazia_header_image, '/pergrazia-hero.' ) ) {
-	$pergrazia_hero_classes .= ' is-pergrazia-artwork';
+	$pergrazia_hero_classes .= ' is-pergrazia-artwork is-pergrazia-new-artwork';
+} elseif ( $pergrazia_header_image && str_contains( $pergrazia_header_image, '/pergrazia-hero-original.' ) ) {
+	$pergrazia_hero_classes .= ' is-pergrazia-artwork is-pergrazia-original-artwork';
 }
 
 $pergrazia_newsletter_form = '';
