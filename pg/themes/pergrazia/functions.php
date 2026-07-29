@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PERGRAZIA_VERSION', '1.3.0' );
+define( 'PERGRAZIA_VERSION', '1.4.0' );
 
 /**
  * Register theme features and navigation areas.
@@ -44,7 +44,7 @@ function pergrazia_setup(): void {
 	add_theme_support(
 		'custom-header',
 		array(
-			'default-image'      => get_template_directory_uri() . '/assets/images/pergrazia-hero.png',
+			'default-image'      => get_template_directory_uri() . '/assets/images/pergrazia-hero.svg',
 			'width'              => 1280,
 			'height'             => 444,
 			'flex-width'         => true,
@@ -58,8 +58,8 @@ function pergrazia_setup(): void {
 	register_default_headers(
 		array(
 			'pergrazia-original' => array(
-				'url'           => '%s/assets/images/pergrazia-hero.png',
-				'thumbnail_url' => '%s/assets/images/pergrazia-hero.png',
+				'url'           => '%s/assets/images/pergrazia-hero.svg',
+				'thumbnail_url' => '%s/assets/images/pergrazia-hero.svg',
 				'description'   => __( 'Original Pergrazia artwork', 'pergrazia' ),
 			),
 		)
