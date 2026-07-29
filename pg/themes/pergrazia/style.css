@@ -4,7 +4,7 @@ Theme URI: https://www.pergrazia.com/
 Author: ArteTecha
 Author URI: https://artetecha.com/
 Description: A calm, typography-led theme created for Pergrazia.
-Version: 1.4.0
+Version: 1.5.0
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 8.4
@@ -283,12 +283,13 @@ input[type="submit"] {
 .site-hero {
 	background: var(--pg-white);
 	border-bottom: 1px solid var(--pg-line);
-	padding: clamp(2.5rem, 6vw, 5.5rem) 0 clamp(2rem, 5vw, 4.5rem);
+	overflow: hidden;
+	padding: clamp(0.75rem, 2vw, 1.5rem) 0;
 }
 
 .site-hero__image {
 	margin-inline: auto;
-	width: min(100%, 64rem);
+	width: min(100%, 76rem);
 }
 
 .site-hero__image img {
@@ -296,6 +297,22 @@ input[type="submit"] {
 	max-height: 24rem;
 	object-fit: contain;
 	width: 100%;
+}
+
+.site-hero__image.is-pergrazia-artwork {
+	aspect-ratio: 1280 / 300;
+	overflow: hidden;
+}
+
+.site-hero__image.is-pergrazia-artwork img {
+	height: 100%;
+	max-height: none;
+	object-fit: cover;
+	transform: scale(1.2);
+}
+
+.home-journal {
+	background: var(--pg-paper);
 }
 
 .home-intro {
@@ -335,6 +352,151 @@ input[type="submit"] {
 /* Article cards */
 .post-list {
 	padding-bottom: clamp(4rem, 9vw, 8rem);
+}
+
+/* Homepage calls to action */
+.home-newsletter,
+.home-donate {
+	padding-block: clamp(4.5rem, 9vw, 8rem);
+}
+
+.home-newsletter {
+	background: #eaf6f6;
+	border-block: 1px solid color-mix(in srgb, var(--pg-accent) 22%, var(--pg-line));
+}
+
+.home-newsletter__inner,
+.home-donate__inner {
+	align-items: center;
+	display: grid;
+	gap: clamp(2.5rem, 7vw, 7rem);
+	grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.8fr);
+}
+
+.home-newsletter h2,
+.home-donate h2 {
+	font-size: clamp(2.5rem, 5.5vw, 4.75rem);
+	font-weight: 500;
+	letter-spacing: -0.045em;
+	line-height: 1;
+	margin: 0;
+}
+
+.home-newsletter__copy > p:last-child,
+.home-donate__copy > p:last-child {
+	font-size: 1.12rem;
+	margin: 1.4rem 0 0;
+	max-width: 38rem;
+}
+
+.home-newsletter__copy > p:last-child {
+	color: var(--pg-muted);
+}
+
+.home-newsletter .eyebrow {
+	color: var(--pg-accent-dark);
+}
+
+.home-newsletter__form-wrap {
+	background: var(--pg-white);
+	border: 1px solid color-mix(in srgb, var(--pg-accent) 25%, var(--pg-line));
+	box-shadow: 0 1.5rem 4rem rgb(5 47 89 / 8%);
+	padding: clamp(1.5rem, 4vw, 2.75rem);
+}
+
+.home-newsletter__form-wrap .mc4wp-form-fields > :first-child {
+	margin-top: 0;
+}
+
+.home-newsletter__form-wrap .mc4wp-form-fields > :last-child {
+	margin-bottom: 0;
+}
+
+.home-newsletter__form-wrap input[type="submit"] {
+	background: var(--pg-accent);
+	border-color: var(--pg-accent);
+}
+
+.home-newsletter__form-wrap input[type="submit"]:hover {
+	background: var(--pg-accent-dark);
+	border-color: var(--pg-accent-dark);
+}
+
+.home-newsletter__pending {
+	color: var(--pg-muted);
+	font-style: italic;
+	margin: 0;
+}
+
+.home-donate {
+	background: var(--pg-blue);
+	color: var(--pg-white);
+	overflow: hidden;
+}
+
+.home-donate__inner {
+	position: relative;
+}
+
+.home-donate__inner::after {
+	color: var(--pg-accent-bright);
+	content: "+";
+	font-family: var(--pg-sans);
+	font-size: clamp(16rem, 34vw, 30rem);
+	font-weight: 700;
+	line-height: 0.65;
+	opacity: 0.07;
+	pointer-events: none;
+	position: absolute;
+	right: -0.12em;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.home-donate .eyebrow {
+	color: var(--pg-accent-bright);
+}
+
+.home-donate__copy,
+.home-donate__action {
+	position: relative;
+	z-index: 1;
+}
+
+.home-donate__copy > p:last-child {
+	color: #c8d7e5;
+}
+
+.home-donate__action {
+	justify-self: end;
+}
+
+.home-donate .button {
+	background: var(--pg-accent-bright);
+	border-color: var(--pg-accent-bright);
+	color: var(--pg-blue);
+	display: inline-block;
+	text-decoration: none;
+}
+
+.home-donate .button:hover {
+	background: var(--pg-white);
+	border-color: var(--pg-white);
+	color: var(--pg-blue);
+}
+
+.home-donate .button:focus-visible {
+	outline-color: var(--pg-white);
+}
+
+.home-donate .button--pending {
+	cursor: not-allowed;
+	opacity: 0.72;
+}
+
+.home-donate .button--pending:hover {
+	background: var(--pg-accent-bright);
+	border-color: var(--pg-accent-bright);
 }
 
 .featured-story {
@@ -986,6 +1148,8 @@ a.button {
 	.single-layout { grid-template-columns: 1fr; }
 	.article-sidebar { border-top: 1px solid var(--pg-line); padding-top: 3rem; }
 	.article-sidebar__inner { position: static; }
+	.home-newsletter__inner, .home-donate__inner { grid-template-columns: 1fr; }
+	.home-donate__action { justify-self: start; }
 	.site-footer__grid { grid-template-columns: 1fr 1fr; }
 }
 
@@ -993,7 +1157,7 @@ a.button {
 	:root { --pg-shell: min(100% - 1.5rem, 76rem); --pg-reading: min(100% - 1.5rem, 46rem); }
 	body { font-size: 1.05rem; }
 	.site-description { display: none; }
-	.site-hero { padding-block: 2rem; }
+	.site-hero { padding-block: 0.5rem; }
 	.post-grid { grid-template-columns: 1fr; }
 	.featured-story__media { min-height: 15rem; }
 	.featured-story__content { padding: 1.6rem; }

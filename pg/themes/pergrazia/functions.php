@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PERGRAZIA_VERSION', '1.4.0' );
+define( 'PERGRAZIA_VERSION', '1.5.0' );
 
 /**
  * Register theme features and navigation areas.
@@ -116,9 +116,9 @@ function pergrazia_assets(): void {
 add_action( 'wp_enqueue_scripts', 'pergrazia_assets' );
 
 /**
- * Show one extra article on the first blog page without shifting later pages.
+ * Show five articles on the homepage without shifting later blog pages.
  *
- * Page one contains the featured story plus twelve cards. Subsequent pages
+ * Page one contains the featured story plus four cards. Subsequent pages
  * continue with twelve articles and an offset that prevents duplicates.
  *
  * @param WP_Query $query The current query.
@@ -131,12 +131,12 @@ function pergrazia_blog_page_size( WP_Query $query ): void {
 	$paged = max( 1, (int) $query->get( 'paged' ) );
 
 	if ( 1 === $paged ) {
-		$query->set( 'posts_per_page', 13 );
+		$query->set( 'posts_per_page', 5 );
 		return;
 	}
 
 	$query->set( 'posts_per_page', 12 );
-	$query->set( 'offset', 13 + ( ( $paged - 2 ) * 12 ) );
+	$query->set( 'offset', 5 + ( ( $paged - 2 ) * 12 ) );
 }
 add_action( 'pre_get_posts', 'pergrazia_blog_page_size' );
 
@@ -154,10 +154,10 @@ function pergrazia_blog_page_count( array $posts, WP_Query $query ): array {
 
 	$total = (int) $query->found_posts;
 
-	if ( $total <= 13 ) {
+	if ( $total <= 5 ) {
 		$query->max_num_pages = $total > 0 ? 1 : 0;
 	} else {
-		$query->max_num_pages = 1 + (int) ceil( ( $total - 13 ) / 12 );
+		$query->max_num_pages = 1 + (int) ceil( ( $total - 5 ) / 12 );
 	}
 
 	return $posts;
@@ -178,3 +178,4 @@ function pergrazia_page_menu(): void {
 }
 
 require get_template_directory() . '/inc/template-tags.php';
+require get_template_directory() . '/inc/customizer.php';
