@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "763410bbf2e230ecf6f24a3c28360d6c",
+    "content-hash": "39e48571e758521a4bd8de7aad3605c0",
     "packages": [
         {
             "name": "artetecha/upsun-wp",
@@ -427,15 +427,15 @@
         },
         {
             "name": "wpackagist-plugin/contextual-category-widget",
-            "version": "0.6.1",
+            "version": "0.7.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/contextual-category-widget/",
-                "reference": "tags/0.6.1"
+                "reference": "tags/0.7.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/contextual-category-widget.0.6.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/contextual-category-widget.0.7.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
