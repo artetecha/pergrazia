@@ -2,7 +2,7 @@
 
 Pergrazia is a Composer-managed WordPress application based on the
 `artetecha/wordpress-upsun-starter` architecture. WordPress core, the
-Lovecraft theme, plugins, translations, the `upsun-wp` MU plugin, and the
+first-party Pergrazia theme, plugins, translations, the `upsun-wp` MU plugin, and the
 Redis object-cache drop-in are assembled into the ignored `wordpress/`
 directory. Do not edit generated files there.
 
@@ -39,12 +39,14 @@ switching branches or when `composer.lock` changes.
 - copies `wp-config.php` into WordPress;
 - installs the project `mu-plugins/` files plus the staged `upsun-wp` plugin
   and loader;
-- installs the Redis object-cache drop-in; and
+- installs the Redis object-cache drop-in;
+- copies the first-party `themes/pergrazia/` theme into WordPress; and
 - removes WordPress's unmanaged bundled plugin and themes.
 
-Add WordPress plugins and themes to `composer.json`; do not install or update
-them from wp-admin on Upsun. Italian translations are downloaded during the
-Composer build.
+Add WordPress plugins and third-party themes to `composer.json`; do not install
+or update them from wp-admin on Upsun. The Pergrazia theme is maintained in
+`themes/pergrazia/`. Italian translations are downloaded during the Composer
+build, and the theme ships its own Italian catalogue.
 
 ## Upsun runtime
 

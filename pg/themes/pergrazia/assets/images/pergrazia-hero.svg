@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="444" viewBox="0 0 1280 444" role="img" aria-labelledby="title desc">
+	<title id="title">Per Grazia: heart, cross and mind</title>
+	<desc id="desc">A heart and a mind are joined around a cross by a continuous line.</desc>
+	<defs>
+		<linearGradient id="cross-fill" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0" stop-color="#073c6d"/>
+			<stop offset="1" stop-color="#052f59"/>
+		</linearGradient>
+		<linearGradient id="heart-fill" x1="0" y1="0" x2=".9" y2="1">
+			<stop offset="0" stop-color="#20c8d6"/>
+			<stop offset=".58" stop-color="#00b7c9"/>
+			<stop offset="1" stop-color="#007c89"/>
+		</linearGradient>
+		<linearGradient id="heart-panel" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0" stop-color="#00a7bb"/>
+			<stop offset="1" stop-color="#046985"/>
+		</linearGradient>
+		<filter id="soft-shadow" x="-20%" y="-20%" width="140%" height="150%">
+			<feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#052f59" flood-opacity=".12"/>
+		</filter>
+	</defs>
+
+	<rect width="1280" height="444" fill="#fff"/>
+
+	<!-- Halo and rays -->
+	<g fill="none" stroke="#00a9bd" stroke-linecap="round" transform="translate(0 30)">
+		<path d="M464 133A190 190 0 0 1 816 133" stroke-width="13"/>
+		<path d="M466 247A190 190 0 0 0 570 343" stroke-width="11"/>
+		<path d="M710 343A190 190 0 0 0 814 247" stroke-width="11"/>
+		<path d="M438 163h42M800 163h42" stroke-width="10"/>
+		<path d="M452 123l34 23M794 146l34-23" stroke-width="9"/>
+	</g>
+
+	<!-- Infinity line behind the symbols -->
+	<path d="M392 342C454 385 500 371 551 326C589 292 616 315 640 340C664 315 691 292 729 326C780 371 826 385 888 342"
+		fill="none" stroke="#052f59" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+	<path d="M640 340L674 367L640 393L606 367Z" fill="#fff" stroke="#052f59" stroke-width="8" stroke-linejoin="round"/>
+
+	<!-- Heart -->
+	<g filter="url(#soft-shadow)">
+		<path d="M392 342C371 323 296 278 296 219C296 172 351 154 392 194C433 154 488 172 488 219C488 278 413 323 392 342Z"
+			fill="url(#heart-fill)" stroke="#052f59" stroke-width="8" stroke-linejoin="round"/>
+		<path d="M315 198C315 246 344 298 392 338C366 286 355 242 363 180C343 179 325 184 315 198Z" fill="#26c8d4" opacity=".78"/>
+		<path d="M363 180C353 244 365 290 392 338C405 288 408 239 419 180C399 185 392 194 392 194C382 185 373 181 363 180Z" fill="url(#heart-panel)"/>
+		<path d="M419 180C410 238 407 288 392 338C423 306 462 269 480 229C483 219 482 208 479 199C461 180 439 176 419 180Z" fill="#009aae" opacity=".9"/>
+		<path d="M315 198C319 246 345 298 392 338M363 181C354 243 366 289 392 338M419 181C410 240 408 287 392 338M480 229C450 227 428 243 412 264"
+			fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".92"/>
+		<path d="M319 197C331 181 352 179 368 184" fill="none" stroke="#bdf7fa" stroke-width="8" stroke-linecap="round" opacity=".65"/>
+	</g>
+
+	<!-- Cross -->
+	<g filter="url(#soft-shadow)">
+		<path d="M608 68H672V154H766V218H672V350H608V218H514V154H608Z"
+			fill="url(#cross-fill)" stroke="#00b7c9" stroke-width="11" stroke-linejoin="round"/>
+		<path d="M608 68H672V154H766V218H672V350M608 350V218H514V154H608V68Z"
+			fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round" opacity=".9"/>
+	</g>
+
+	<!-- Mind -->
+	<g fill="#fff" stroke="#052f59" stroke-linecap="round" stroke-linejoin="round" filter="url(#soft-shadow)">
+		<path d="M934 181C911 156 875 167 874 197C849 199 838 225 852 244C831 259 842 292 865 297C861 324 892 342 915 325C924 344 950 346 966 330C989 344 1017 324 1010 298C1037 291 1040 259 1019 244C1035 219 1017 193 994 196C992 166 956 156 934 181Z"
+			stroke-width="8"/>
+		<path d="M934 181V329" fill="none" stroke-width="7"/>
+		<path d="M934 207C920 192 899 196 895 215M934 239C917 224 896 233 898 252M934 279C916 266 897 281 902 299M934 214C947 195 969 199 972 219M934 250C951 231 974 240 973 258M934 289C951 271 972 285 968 303"
+			fill="none" stroke-width="6"/>
+		<path d="M875 197C873 216 883 226 897 227M852 244C864 239 876 245 879 258M865 297C879 300 888 292 891 281M994 196C997 215 988 226 973 228M1019 244C1007 240 995 246 992 259M1010 298C996 300 987 292 984 281"
+			fill="none" stroke-width="6"/>
+	</g>
+
+	<!-- Lower loops complete the shared path -->
+	<path d="M296 219C268 246 268 297 303 327C330 351 362 356 392 342M488 219C514 244 513 293 483 321"
+		fill="none" stroke="#052f59" stroke-width="8" stroke-linecap="round" opacity=".98"/>
+	<path d="M792 321C763 293 766 247 793 218M888 342C918 356 950 351 977 327C1012 297 1012 246 984 219"
+		fill="none" stroke="#052f59" stroke-width="8" stroke-linecap="round" opacity=".98"/>
+</svg>

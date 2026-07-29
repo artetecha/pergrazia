@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="444" viewBox="0 0 1280 444" role="img" aria-labelledby="title desc">
+	<title id="title">Per Grazia hero concept: open path</title>
+	<desc id="desc">A flowing editorial composition suggests heart, cross, and mind as one journey.</desc>
+	<rect width="1280" height="444" fill="#fff"/>
+	<path d="M0 360C194 281 339 314 487 356C659 405 861 389 1012 283C1111 214 1184 136 1280 109V444H0Z" fill="#f4fbfc"/>
+	<path d="M-32 379C184 277 339 312 487 356C658 407 859 390 1012 283C1111 214 1184 136 1312 101"
+		fill="none" stroke="#00b7c9" stroke-width="4" stroke-linecap="round"/>
+	<path d="M-32 394C184 292 339 327 487 371C658 422 859 405 1012 298C1111 229 1184 151 1312 116"
+		fill="none" stroke="#052f59" stroke-width="2" stroke-linecap="round" opacity=".18"/>
+	<path d="M474 74H522V155H603V203H522V349H474V203H393V155H474Z" fill="#052f59"/>
+	<path d="M474 74H522V349H474Z" fill="#063b69"/>
+	<path d="M248 185C225 154 176 166 176 208C176 253 248 288 248 288C248 288 320 253 320 208C320 166 271 154 248 185Z"
+		fill="#00b7c9"/>
+	<path d="M248 185C225 154 176 166 176 208C176 253 248 288 248 288C248 288 320 253 320 208C320 166 271 154 248 185Z"
+		fill="none" stroke="#052f59" stroke-width="5" stroke-linejoin="round"/>
+	<path d="M201 201C204 182 221 175 236 181" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".85"/>
+	<g fill="none" stroke-linecap="round">
+		<path d="M774 168C820 118 906 118 952 168" stroke="#052f59" stroke-width="8"/>
+		<path d="M753 210C812 143 914 143 973 210" stroke="#007c89" stroke-width="8"/>
+		<path d="M742 254C808 177 918 177 984 254" stroke="#00b7c9" stroke-width="8"/>
+		<path d="M770 291C822 237 904 237 956 291" stroke="#052f59" stroke-width="8"/>
+	</g>
+	<path d="M863 132V308" fill="none" stroke="#052f59" stroke-width="3" stroke-dasharray="3 13" stroke-linecap="round" opacity=".5"/>
+	<circle cx="863" cy="132" r="7" fill="#00b7c9"/>
+	<circle cx="863" cy="308" r="7" fill="#00b7c9"/>
+	<circle cx="1122" cy="146" r="78" fill="none" stroke="#e6e2de" stroke-width="2"/>
+	<circle cx="1122" cy="146" r="52" fill="none" stroke="#e6e2de" stroke-width="2"/>
+</svg>

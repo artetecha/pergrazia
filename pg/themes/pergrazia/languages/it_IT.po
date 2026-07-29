@@ -1,0 +1,198 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Per Grazia 1.7.0\n"
+"PO-Revision-Date: 2026-07-29 00:00+0200\n"
+"Last-Translator: ArteTecha\n"
+"Language-Team: Italian\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Original Per Grazia artwork"
+msgstr "Illustrazione originale di Per Grazia"
+
+msgid "Heart, cross and mind artwork"
+msgstr "Illustrazione con cuore, croce e mente"
+
+msgid "Primary navigation"
+msgstr "Navigazione principale"
+
+msgid "Footer navigation"
+msgstr "Navigazione nel piè di pagina"
+
+msgid "Article sidebar"
+msgstr "Barra laterale degli articoli"
+
+msgid "Optional widgets displayed beside single articles."
+msgstr "Widget opzionali visualizzati accanto ai singoli articoli."
+
+msgid "This page could not be found."
+msgstr "Questa pagina non è stata trovata."
+
+msgid "The address may have changed. Search the site or return to the home page."
+msgstr "L’indirizzo potrebbe essere cambiato. Cerca nel sito o torna alla pagina iniziale."
+
+msgid "Return home"
+msgstr "Torna alla pagina iniziale"
+
+msgid "Published on"
+msgstr "Pubblicato il"
+
+msgid "By"
+msgstr "Di"
+
+#. translators: %s: estimated number of minutes.
+#, php-format
+msgid "%s minute read"
+msgid_plural "%s minutes read"
+msgstr[0] "%s minuto di lettura"
+msgstr[1] "%s minuti di lettura"
+
+msgid "Journal"
+msgstr "Diario"
+
+msgid "Latest articles"
+msgstr "Ultimi articoli"
+
+msgid "Archive"
+msgstr "Archivio"
+
+#. translators: %s: number of comments.
+#, php-format
+msgid "%s comment"
+msgid_plural "%s comments"
+msgstr[0] "%s commento"
+msgstr[1] "%s commenti"
+
+msgid "Comments are closed."
+msgstr "I commenti sono chiusi."
+
+msgid "Per Grazia artwork"
+msgstr "Illustrazione di Per Grazia"
+
+msgid "Faith, grace and life"
+msgstr "Fede, grazia e vita"
+
+msgid "Thoughts for a lived faith."
+msgstr "Pensieri per una fede vissuta."
+
+msgid "Previous"
+msgstr "Precedente"
+
+msgid "Next"
+msgstr "Successivo"
+
+msgid "Search"
+msgstr "Cerca"
+
+#. translators: %s: search phrase.
+#, php-format
+msgid "Results for “%s”"
+msgstr "Risultati per “%s”"
+
+msgid "Skip to content"
+msgstr "Vai al contenuto"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Nothing found"
+msgstr "Nessun risultato"
+
+msgid "No results matched your search. Try a different phrase."
+msgstr "Nessun risultato corrisponde alla ricerca. Prova con parole diverse."
+
+msgid "There are no articles here yet."
+msgstr "Non ci sono ancora articoli qui."
+
+msgid "Read the article"
+msgstr "Leggi l’articolo"
+
+msgid "Explore"
+msgstr "Esplora"
+
+msgid "Grace received, words shared."
+msgstr "Grazia ricevuta, parole condivise."
+
+msgid "Pages:"
+msgstr "Pagine:"
+
+msgid "Previous article:"
+msgstr "Articolo precedente:"
+
+msgid "Next article:"
+msgstr "Articolo successivo:"
+
+msgid "Search for:"
+msgstr "Cerca:"
+
+msgid "Search…"
+msgstr "Cerca…"
+
+msgid "Ink"
+msgstr "Inchiostro"
+
+msgid "Paper"
+msgstr "Carta"
+
+msgid "White"
+msgstr "Bianco"
+
+msgid "Per Grazia teal"
+msgstr "Turchese Per Grazia"
+
+msgid "Hero cyan"
+msgstr "Ciano dell’illustrazione"
+
+msgid "Hero navy"
+msgstr "Blu marino dell’illustrazione"
+
+msgid "Editorial serif"
+msgstr "Serif editoriale"
+
+msgid "Clean sans"
+msgstr "Sans pulito"
+
+msgid "Topics"
+msgstr "Argomenti"
+
+msgid "Stay in touch"
+msgstr "Rimani in contatto"
+
+msgid "A quiet note in your inbox."
+msgstr "Una nota discreta nella tua casella di posta."
+
+msgid "Receive new reflections and updates from Per Grazia. No noise, only what matters."
+msgstr "Ricevi nuove riflessioni e aggiornamenti da Per Grazia. Niente rumore, solo ciò che conta."
+
+msgid "The newsletter sign-up form will be available soon."
+msgstr "Il modulo di iscrizione alla newsletter sarà disponibile a breve."
+
+msgid "Support Per Grazia"
+msgstr "Sostieni Per Grazia"
+
+msgid "Help this space keep growing."
+msgstr "Aiuta questo spazio a continuare a crescere."
+
+msgid "Your contribution helps Per Grazia continue publishing thoughtful, independent reflections and reaching new readers."
+msgstr "Il tuo contributo aiuta Per Grazia a continuare a pubblicare riflessioni curate e indipendenti e a raggiungere nuovi lettori."
+
+msgid "Donate"
+msgstr "Dona"
+
+msgid "Donation link coming soon"
+msgstr "Link per donare disponibile a breve"
+
+msgid "Homepage settings"
+msgstr "Impostazioni della homepage"
+
+msgid "Configure the calls to action shown below the latest articles."
+msgstr "Configura gli inviti all’azione mostrati sotto gli ultimi articoli."
+
+msgid "Donation URL"
+msgstr "URL per le donazioni"
+
+msgid "The homepage donation button will become active when this URL is set."
+msgstr "Il pulsante per le donazioni nella homepage si attiverà quando verrà impostato questo URL."

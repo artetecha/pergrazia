@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="444" viewBox="0 0 1280 444" role="img" aria-labelledby="title desc">
+	<title id="title">Per Grazia hero concept: continuous line</title>
+	<desc id="desc">A modern continuous line joins a heart, a cross, and an abstract mind.</desc>
+	<rect width="1280" height="444" fill="#fff"/>
+	<circle cx="190" cy="222" r="124" fill="none" stroke="#e6e2de" stroke-width="1"/>
+	<circle cx="1090" cy="222" r="124" fill="none" stroke="#e6e2de" stroke-width="1"/>
+	<path d="M292 292C348 292 367 316 421 316C474 316 504 281 552 281H590M690 281H730C778 281 806 316 859 316C915 316 929 292 988 292"
+		fill="none" stroke="#052f59" stroke-width="5" stroke-linecap="round"/>
+	<path d="M348 163C322 129 263 140 263 189C263 239 348 279 348 279C348 279 433 239 433 189C433 140 374 129 348 163Z"
+		fill="#00b7c9" stroke="#052f59" stroke-width="5" stroke-linejoin="round"/>
+	<path d="M324 164C307 160 292 171 291 189" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".9"/>
+	<path d="M616 82H664V153H739V201H664V334H616V201H541V153H616Z" fill="#052f59"/>
+	<path d="M616 82H664V334H616Z" fill="#063b69"/>
+	<rect x="614" y="80" width="52" height="256" rx="2" fill="none" stroke="#00b7c9" stroke-width="3"/>
+	<path d="M541 153H739V201H541Z" fill="none" stroke="#00b7c9" stroke-width="3"/>
+	<circle cx="932" cy="206" r="70" fill="#f4fbfc" stroke="#052f59" stroke-width="5"/>
+	<path d="M932 145V267M932 159C910 148 891 162 895 183C875 187 872 216 892 224C884 247 908 265 932 251M932 159C954 148 973 162 969 183C989 187 992 216 972 224C980 247 956 265 932 251"
+		fill="none" stroke="#00b7c9" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+	<path d="M905 181C920 184 922 196 916 207M959 181C944 184 942 196 948 207M901 225C914 218 925 224 932 235M963 225C950 218 939 224 932 235"
+		fill="none" stroke="#052f59" stroke-width="4" stroke-linecap="round"/>
+	<circle cx="515" cy="281" r="7" fill="#00b7c9"/>
+	<circle cx="765" cy="281" r="7" fill="#00b7c9"/>
+</svg>
