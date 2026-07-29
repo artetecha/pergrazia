@@ -116,6 +116,55 @@ function pergrazia_assets(): void {
 add_action( 'wp_enqueue_scripts', 'pergrazia_assets' );
 
 /**
+ * Show one extra article on the first blog page without shifting later pages.
+ *
+ * Page one contains the featured story plus twelve cards. Subsequent pages
+ * continue with twelve articles and an offset that prevents duplicates.
+ *
+ * @param WP_Query $query The current query.
+ */
+function pergrazia_blog_page_size( WP_Query $query ): void {
+	if ( is_admin() || ! $query->is_main_query() || ! $query->is_home() ) {
+		return;
+	}
+
+	$paged = max( 1, (int) $query->get( 'paged' ) );
+
+	if ( 1 === $paged ) {
+		$query->set( 'posts_per_page', 13 );
+		return;
+	}
+
+	$query->set( 'posts_per_page', 12 );
+	$query->set( 'offset', 13 + ( ( $paged - 2 ) * 12 ) );
+}
+add_action( 'pre_get_posts', 'pergrazia_blog_page_size' );
+
+/**
+ * Correct the blog page count after applying the variable first-page size.
+ *
+ * @param WP_Post[] $posts The queried posts.
+ * @param WP_Query  $query The current query.
+ * @return WP_Post[]
+ */
+function pergrazia_blog_page_count( array $posts, WP_Query $query ): array {
+	if ( is_admin() || ! $query->is_main_query() || ! $query->is_home() ) {
+		return $posts;
+	}
+
+	$total = (int) $query->found_posts;
+
+	if ( $total <= 13 ) {
+		$query->max_num_pages = $total > 0 ? 1 : 0;
+	} else {
+		$query->max_num_pages = 1 + (int) ceil( ( $total - 13 ) / 12 );
+	}
+
+	return $posts;
+}
+add_filter( 'the_posts', 'pergrazia_blog_page_count', 10, 2 );
+
+/**
  * Fallback navigation when no menu has been assigned yet.
  */
 function pergrazia_page_menu(): void {
