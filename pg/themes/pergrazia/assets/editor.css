@@ -21,3 +21,11 @@
 
 .editor-styles-wrapper a { color: #007c89; }
 .editor-styles-wrapper blockquote { border-left: 3px solid #00b7c9; padding-left: 1.5rem; }
+
+.editor-styles-wrapper p:not([class*="has-text-align-"]),
+.editor-styles-wrapper li {
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	text-align: justify;
+	text-justify: inter-word;
+}

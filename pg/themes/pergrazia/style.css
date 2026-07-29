@@ -4,7 +4,7 @@ Theme URI: https://www.pergrazia.com/
 Author: ArteTecha
 Author URI: https://artetecha.com/
 Description: A calm, typography-led theme created for Per Grazia.
-Version: 1.7.0
+Version: 1.7.1
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 8.4
@@ -693,8 +693,7 @@ input[type="submit"] {
 	text-align: center;
 }
 
-.single-hero h1,
-.page-header h1 {
+.single-hero h1 {
 	font-size: clamp(2.8rem, 7vw, 5.75rem);
 	font-weight: 500;
 	letter-spacing: -0.055em;
@@ -737,6 +736,16 @@ input[type="submit"] {
 
 .entry-content {
 	font-size: clamp(1.12rem, 1.5vw, 1.25rem);
+}
+
+body.single-post .entry-content p:not([class*="has-text-align-"]),
+body.single-post .entry-content li,
+body.page .entry-content p:not([class*="has-text-align-"]),
+body.page .entry-content li {
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	text-align: justify;
+	text-justify: inter-word;
 }
 
 .entry-content > * {
@@ -957,13 +966,10 @@ input[type="submit"] {
 	margin-top: 0.6rem;
 }
 
-.page-header {
-	padding: clamp(4rem, 10vw, 8rem) 0 clamp(2rem, 5vw, 4rem);
-	text-align: center;
-}
-
-.page-content-wrap {
+.page-layout {
+	margin-inline: auto;
 	padding-bottom: clamp(4rem, 9vw, 8rem);
+	width: min(100% - 2.5rem, 50rem);
 }
 
 /* Comments and forms */
@@ -1158,7 +1164,7 @@ a.button {
 	.post-grid { grid-template-columns: 1fr; }
 	.featured-story__media { min-height: 15rem; }
 	.featured-story__content { padding: 1.6rem; }
-	.single-hero h1, .single-hero.is-long-title h1, .page-header h1 { font-size: clamp(2.6rem, 13vw, 4.25rem); }
+	.single-hero h1, .single-hero.is-long-title h1 { font-size: clamp(2.6rem, 13vw, 4.25rem); }
 	.post-navigation .nav-links { grid-template-columns: 1fr; }
 	.post-navigation .nav-next { text-align: left; }
 	.site-footer__grid { grid-template-columns: 1fr; }
