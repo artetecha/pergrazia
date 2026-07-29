@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PERGRAZIA_VERSION', '1.1.0' );
+define( 'PERGRAZIA_VERSION', '1.2.0' );
 
 /**
  * Register theme features and navigation areas.

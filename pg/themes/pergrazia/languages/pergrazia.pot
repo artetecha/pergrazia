@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Pergrazia 1.1.0\n"
+"Project-Id-Version: Pergrazia 1.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/artetecha/pergrazia/issues\n"
 "POT-Creation-Date: 2026-07-29 00:25+0200\n"
 "MIME-Version: 1.0\n"
@@ -134,13 +134,10 @@ msgstr ""
 msgid "White"
 msgstr ""
 
-msgid "Pergrazia red"
+msgid "Pergrazia blue"
 msgstr ""
 
-msgid "Deep blue"
-msgstr ""
-
-msgid "Clear teal"
+msgid "Hero teal"
 msgstr ""
 
 msgid "Editorial serif"

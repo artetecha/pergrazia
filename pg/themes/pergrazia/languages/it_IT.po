@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Pergrazia 1.1.0\n"
+"Project-Id-Version: Pergrazia 1.2.0\n"
 "PO-Revision-Date: 2026-07-29 00:00+0200\n"
 "Last-Translator: ArteTecha\n"
 "Language-Team: Italian\n"
@@ -137,14 +137,11 @@ msgstr "Carta"
 msgid "White"
 msgstr "Bianco"
 
-msgid "Pergrazia red"
-msgstr "Rosso Pergrazia"
+msgid "Pergrazia blue"
+msgstr "Blu Pergrazia"
 
-msgid "Deep blue"
-msgstr "Blu profondo"
-
-msgid "Clear teal"
-msgstr "Turchese chiaro"
+msgid "Hero teal"
+msgstr "Turchese dell’illustrazione"
 
 msgid "Editorial serif"
 msgstr "Serif editoriale"

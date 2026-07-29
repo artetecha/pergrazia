@@ -4,7 +4,7 @@ Theme URI: https://www.pergrazia.com/
 Author: ArteTecha
 Author URI: https://artetecha.com/
 Description: A calm, typography-led theme created for Pergrazia.
-Version: 1.1.0
+Version: 1.2.0
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 8.4
@@ -21,10 +21,10 @@ Tags: blog, custom-logo, custom-menu, featured-images, translation-ready, wide-b
 	--pg-paper: #fafafa;
 	--pg-white: #ffffff;
 	--pg-line: #e6e2de;
-	--pg-accent: #ca2017;
-	--pg-accent-dark: #9e1812;
-	--pg-blue: #123c59;
-	--pg-teal: #59b4c5;
+	--pg-accent: #052f59;
+	--pg-accent-dark: #03213d;
+	--pg-blue: #052f59;
+	--pg-teal: #00b7c9;
 	--pg-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
 	--pg-sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 	--pg-shell: min(100% - 2.5rem, 76rem);
