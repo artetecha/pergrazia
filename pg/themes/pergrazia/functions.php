@@ -80,6 +80,67 @@ function pergrazia_setup(): void {
 add_action( 'after_setup_theme', 'pergrazia_setup' );
 
 /**
+ * Check whether a primary-menu item targets a section fragment.
+ *
+ * WordPress treats /#fragment links as the current homepage because their
+ * path matches /. Section links should not inherit that page-level state.
+ *
+ * @param WP_Post  $menu_item The current menu item.
+ * @param stdClass $args      The navigation menu arguments.
+ */
+function pergrazia_is_primary_fragment_link( WP_Post $menu_item, stdClass $args ): bool {
+	return 'primary' === ( $args->theme_location ?? '' )
+		&& ! empty( $menu_item->url )
+		&& str_contains( $menu_item->url, '#' );
+}
+
+/**
+ * Remove page-current classes from primary-menu section links.
+ *
+ * @param string[] $classes   CSS classes for the menu item.
+ * @param WP_Post  $menu_item The current menu item.
+ * @param stdClass $args      The navigation menu arguments.
+ * @return string[]
+ */
+function pergrazia_fragment_menu_classes( array $classes, WP_Post $menu_item, stdClass $args ): array {
+	if ( ! pergrazia_is_primary_fragment_link( $menu_item, $args ) ) {
+		return $classes;
+	}
+
+	return array_values(
+		array_diff(
+			$classes,
+			array(
+				'current-menu-item',
+				'current_page_item',
+				'current-menu-parent',
+				'current_page_parent',
+				'current-menu-ancestor',
+				'current_page_ancestor',
+			)
+		)
+	);
+}
+add_filter( 'nav_menu_css_class', 'pergrazia_fragment_menu_classes', 10, 3 );
+
+/**
+ * Remove aria-current from primary-menu section links.
+ *
+ * @param array<string, string> $attributes Link attributes.
+ * @param WP_Post               $menu_item  The current menu item.
+ * @param stdClass              $args       The navigation menu arguments.
+ * @return array<string, string>
+ */
+function pergrazia_fragment_menu_attributes( array $attributes, WP_Post $menu_item, stdClass $args ): array {
+	if ( pergrazia_is_primary_fragment_link( $menu_item, $args ) ) {
+		unset( $attributes['aria-current'] );
+	}
+
+	return $attributes;
+}
+add_filter( 'nav_menu_link_attributes', 'pergrazia_fragment_menu_attributes', 10, 3 );
+
+/**
  * Set a comfortable content width for embeds and media.
  */
 function pergrazia_content_width(): void {
