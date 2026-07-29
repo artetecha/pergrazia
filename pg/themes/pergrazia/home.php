@@ -85,7 +85,7 @@ $pergrazia_donate_url = (string) get_theme_mod( 'pergrazia_donate_url', '' );
 	<?php if ( $pergrazia_is_first_page ) : ?>
 		</section>
 
-		<section class="home-newsletter" aria-labelledby="home-newsletter-title">
+		<section id="newsletter" class="home-newsletter" aria-labelledby="home-newsletter-title">
 			<div class="home-newsletter__inner shell">
 				<div class="home-newsletter__copy">
 					<p class="eyebrow"><?php esc_html_e( 'Stay in touch', 'pergrazia' ); ?></p>
@@ -105,7 +105,7 @@ $pergrazia_donate_url = (string) get_theme_mod( 'pergrazia_donate_url', '' );
 			</div>
 		</section>
 
-		<section class="home-donate" aria-labelledby="home-donate-title">
+		<section id="donazioni" class="home-donate" aria-labelledby="home-donate-title">
 			<div class="home-donate__inner shell">
 				<div class="home-donate__copy">
 					<p class="eyebrow"><?php esc_html_e( 'Support Per Grazia', 'pergrazia' ); ?></p>
