@@ -1,0 +1,61 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"settings": {
+		"appearanceTools": true,
+		"color": {
+			"defaultDuotone": false,
+			"defaultGradients": false,
+			"palette": [
+				{ "slug": "ink", "color": "#111111", "name": "Ink" },
+				{ "slug": "paper", "color": "#fafafa", "name": "Paper" },
+				{ "slug": "white", "color": "#ffffff", "name": "White" },
+				{ "slug": "pergrazia-red", "color": "#ca2017", "name": "Pergrazia red" },
+				{ "slug": "deep-blue", "color": "#123c59", "name": "Deep blue" },
+				{ "slug": "clear-teal", "color": "#59b4c5", "name": "Clear teal" }
+			]
+		},
+		"layout": {
+			"contentSize": "46rem",
+			"wideSize": "76rem"
+		},
+		"spacing": {
+			"units": [ "px", "rem", "em", "%", "vw", "vh" ]
+		},
+		"typography": {
+			"dropCap": true,
+			"fluid": true,
+			"fontFamilies": [
+				{
+					"fontFamily": "\"Iowan Old Style\", \"Palatino Linotype\", Palatino, Georgia, serif",
+					"name": "Editorial serif",
+					"slug": "serif"
+				},
+				{
+					"fontFamily": "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+					"name": "Clean sans",
+					"slug": "sans"
+				}
+			]
+		}
+	},
+	"styles": {
+		"color": {
+			"background": "#fafafa",
+			"text": "#111111"
+		},
+		"elements": {
+			"link": {
+				"color": { "text": "#ca2017" }
+			}
+		},
+		"spacing": {
+			"blockGap": "1.5rem"
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--serif)",
+			"fontSize": "1.125rem",
+			"lineHeight": "1.75"
+		}
+	}
+}

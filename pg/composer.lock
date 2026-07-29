@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "763410bbf2e230ecf6f24a3c28360d6c",
+    "content-hash": "05788af28c7eafb70d1b3e8f2b79844c",
     "packages": [
         {
             "name": "artetecha/upsun-wp",
@@ -550,24 +550,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wpforms-lite/"
-        },
-        {
-            "name": "wpackagist-theme/lovecraft",
-            "version": "2.1.2",
-            "source": {
-                "type": "svn",
-                "url": "https://themes.svn.wordpress.org/lovecraft/",
-                "reference": "2.1.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/theme/lovecraft.2.1.2.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-theme",
-            "homepage": "https://wordpress.org/themes/lovecraft/"
         }
     ],
     "packages-dev": [],

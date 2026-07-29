@@ -39,8 +39,7 @@
     "wpackagist-plugin/redirection": "^5.8",
     "wpackagist-plugin/series": "^2.0.1",
     "wpackagist-plugin/social-pug": "^1.7.0",
-    "wpackagist-plugin/wpforms-lite": "^2.0.0.2",
-    "wpackagist-theme/lovecraft": "^2.0.1"
+    "wpackagist-plugin/wpforms-lite": "^2.0.0.2"
   },
   "extra": {
     "wordpress-install-dir": "wordpress",
@@ -59,7 +58,7 @@
       ]
     },
     "distro": {
-      "default-theme": "lovecraft",
+      "default-theme": "pergrazia",
       "enable-plugins": [
         "akismet",
         "contextual-category-widget",
@@ -86,6 +85,8 @@
       "cp -R composer-mu-plugins/upsun wordpress/wp-content/mu-plugins/upsun",
       "cp composer-mu-plugins/upsun/upsun-loader.php wordpress/wp-content/mu-plugins/upsun-loader.php",
       "cp wordpress/wp-content/plugins/redis-cache/includes/object-cache.php wordpress/wp-content/object-cache.php",
+      "rm -rf wordpress/wp-content/themes/pergrazia",
+      "cp -R themes/pergrazia wordpress/wp-content/themes/pergrazia",
       "rm -rf wordpress/wp-content/themes/twenty*",
       "rm -f wordpress/wp-content/plugins/hello.php"
     ],

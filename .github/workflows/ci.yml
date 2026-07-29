@@ -40,9 +40,12 @@ jobs:
           test -f wordpress/wp-content/mu-plugins/upsun-loader.php
           test -f wordpress/wp-content/mu-plugins/site-config.php
           test -f wordpress/wp-content/object-cache.php
+          test -f wordpress/wp-content/themes/pergrazia/style.css
+          test -f wordpress/wp-content/themes/pergrazia/functions.php
           test ! -f wordpress/wp-content/plugins/hello.php
 
       - name: Lint project PHP
         run: |
           php -l wp-config.php
           php -l mu-plugins/site-config.php
+          find themes/pergrazia migrations -name '*.php' -print0 | xargs -0 -n1 php -l

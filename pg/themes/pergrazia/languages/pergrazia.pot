@@ -1,0 +1,150 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pergrazia 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/artetecha/pergrazia/issues\n"
+"POT-Creation-Date: 2026-07-29 00:25+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Original Pergrazia artwork"
+msgstr ""
+
+msgid "Primary navigation"
+msgstr ""
+
+msgid "Footer navigation"
+msgstr ""
+
+msgid "Footer"
+msgstr ""
+
+msgid "Widgets displayed in the site footer."
+msgstr ""
+
+msgid "This page could not be found."
+msgstr ""
+
+msgid "The address may have changed. Search the site or return to the home page."
+msgstr ""
+
+msgid "Return home"
+msgstr ""
+
+msgid "Published on"
+msgstr ""
+
+msgid "By"
+msgstr ""
+
+#. translators: %s: estimated number of minutes.
+#, php-format
+msgid "%s minute read"
+msgid_plural "%s minutes read"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Journal"
+msgstr ""
+
+msgid "Latest articles"
+msgstr ""
+
+msgid "Archive"
+msgstr ""
+
+#. translators: %s: number of comments.
+#, php-format
+msgid "%s comment"
+msgid_plural "%s comments"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Comments are closed."
+msgstr ""
+
+msgid "Pergrazia artwork"
+msgstr ""
+
+msgid "Faith, grace and life"
+msgstr ""
+
+msgid "Thoughts for a lived faith."
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+#. translators: %s: search phrase.
+#, php-format
+msgid "Results for “%s”"
+msgstr ""
+
+msgid "Skip to content"
+msgstr ""
+
+msgid "Menu"
+msgstr ""
+
+msgid "Nothing found"
+msgstr ""
+
+msgid "No results matched your search. Try a different phrase."
+msgstr ""
+
+msgid "There are no articles here yet."
+msgstr ""
+
+msgid "Read the article"
+msgstr ""
+
+msgid "Explore"
+msgstr ""
+
+msgid "Grace received, words shared."
+msgstr ""
+
+msgid "Pages:"
+msgstr ""
+
+msgid "Previous article:"
+msgstr ""
+
+msgid "Next article:"
+msgstr ""
+
+msgid "Search for:"
+msgstr ""
+
+msgid "Search…"
+msgstr ""
+
+msgid "Ink"
+msgstr ""
+
+msgid "Paper"
+msgstr ""
+
+msgid "White"
+msgstr ""
+
+msgid "Pergrazia red"
+msgstr ""
+
+msgid "Deep blue"
+msgstr ""
+
+msgid "Clear teal"
+msgstr ""
+
+msgid "Editorial serif"
+msgstr ""
+
+msgid "Clean sans"
+msgstr ""

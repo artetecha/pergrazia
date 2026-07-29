@@ -1,0 +1,23 @@
+:root {
+	--wp--preset--font-family--serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
+.editor-styles-wrapper {
+	color: #111111;
+	font-family: var(--wp--preset--font-family--serif);
+	font-size: 20px;
+	line-height: 1.75;
+}
+
+.editor-styles-wrapper .wp-block-post-title,
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3 {
+	font-family: var(--wp--preset--font-family--serif);
+	font-weight: 550;
+	letter-spacing: -0.04em;
+	line-height: 1.08;
+}
+
+.editor-styles-wrapper a { color: #ca2017; }
+.editor-styles-wrapper blockquote { border-left: 3px solid #ca2017; padding-left: 1.5rem; }
