@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Pergrazia 1.5.0\n"
+"Project-Id-Version: Per Grazia 1.6.0\n"
 "PO-Revision-Date: 2026-07-29 00:00+0200\n"
 "Last-Translator: ArteTecha\n"
 "Language-Team: Italian\n"
@@ -10,8 +10,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Original Pergrazia artwork"
-msgstr "Illustrazione originale di Pergrazia"
+msgid "Original Per Grazia artwork"
+msgstr "Illustrazione originale di Per Grazia"
 
 msgid "Primary navigation"
 msgstr "Navigazione principale"
@@ -66,8 +66,8 @@ msgstr[1] "%s commenti"
 msgid "Comments are closed."
 msgstr "I commenti sono chiusi."
 
-msgid "Pergrazia artwork"
-msgstr "Illustrazione di Pergrazia"
+msgid "Per Grazia artwork"
+msgstr "Illustrazione di Per Grazia"
 
 msgid "Faith, grace and life"
 msgstr "Fede, grazia e vita"
@@ -137,8 +137,8 @@ msgstr "Carta"
 msgid "White"
 msgstr "Bianco"
 
-msgid "Pergrazia teal"
-msgstr "Turchese Pergrazia"
+msgid "Per Grazia teal"
+msgstr "Turchese Per Grazia"
 
 msgid "Hero cyan"
 msgstr "Ciano dell’illustrazione"
@@ -161,20 +161,20 @@ msgstr "Rimani in contatto"
 msgid "A quiet note in your inbox."
 msgstr "Una nota discreta nella tua casella di posta."
 
-msgid "Receive new reflections and updates from Pergrazia. No noise, only what matters."
-msgstr "Ricevi nuove riflessioni e aggiornamenti da Pergrazia. Niente rumore, solo ciò che conta."
+msgid "Receive new reflections and updates from Per Grazia. No noise, only what matters."
+msgstr "Ricevi nuove riflessioni e aggiornamenti da Per Grazia. Niente rumore, solo ciò che conta."
 
 msgid "The newsletter sign-up form will be available soon."
 msgstr "Il modulo di iscrizione alla newsletter sarà disponibile a breve."
 
-msgid "Support Pergrazia"
-msgstr "Sostieni Pergrazia"
+msgid "Support Per Grazia"
+msgstr "Sostieni Per Grazia"
 
 msgid "Help this space keep growing."
 msgstr "Aiuta questo spazio a continuare a crescere."
 
-msgid "Your contribution helps Pergrazia continue publishing thoughtful, independent reflections and reaching new readers."
-msgstr "Il tuo contributo aiuta Pergrazia a continuare a pubblicare riflessioni curate e indipendenti e a raggiungere nuovi lettori."
+msgid "Your contribution helps Per Grazia continue publishing thoughtful, independent reflections and reaching new readers."
+msgstr "Il tuo contributo aiuta Per Grazia a continuare a pubblicare riflessioni curate e indipendenti e a raggiungere nuovi lettori."
 
 msgid "Donate"
 msgstr "Dona"

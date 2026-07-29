@@ -1,10 +1,10 @@
 /*
-Theme Name: Pergrazia
+Theme Name: Per Grazia
 Theme URI: https://www.pergrazia.com/
 Author: ArteTecha
 Author URI: https://artetecha.com/
-Description: A calm, typography-led theme created for Pergrazia.
-Version: 1.5.0
+Description: A calm, typography-led theme created for Per Grazia.
+Version: 1.6.0
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 8.4
@@ -334,19 +334,11 @@ input[type="submit"] {
 
 .home-intro h1,
 .archive-header h1 {
-	font-size: clamp(2.6rem, 7vw, 5.25rem);
+	font-size: clamp(2.5rem, 5vw, 4rem);
 	font-weight: 500;
 	letter-spacing: -0.05em;
 	line-height: 0.98;
 	margin: 0;
-}
-
-.home-intro p:last-child {
-	color: var(--pg-muted);
-	font-size: clamp(1.1rem, 2vw, 1.35rem);
-	font-style: italic;
-	margin: 1.3rem auto 0;
-	max-width: 38rem;
 }
 
 /* Article cards */

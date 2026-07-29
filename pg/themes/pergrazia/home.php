@@ -25,7 +25,7 @@ $pergrazia_donate_url = (string) get_theme_mod( 'pergrazia_donate_url', '' );
 <main id="main-content">
 	<?php if ( $pergrazia_is_first_page ) : ?>
 		<?php if ( $pergrazia_header_image ) : ?>
-			<section class="site-hero" aria-label="<?php esc_attr_e( 'Pergrazia artwork', 'pergrazia' ); ?>">
+			<section class="site-hero" aria-label="<?php esc_attr_e( 'Per Grazia artwork', 'pergrazia' ); ?>">
 				<figure class="<?php echo esc_attr( $pergrazia_hero_classes ); ?>">
 					<img src="<?php echo esc_url( $pergrazia_header_image ); ?>" width="<?php echo esc_attr( (string) get_custom_header()->width ); ?>" height="<?php echo esc_attr( (string) get_custom_header()->height ); ?>" alt="">
 				</figure>
@@ -35,7 +35,6 @@ $pergrazia_donate_url = (string) get_theme_mod( 'pergrazia_donate_url', '' );
 			<header class="home-intro reading-width">
 				<p class="eyebrow"><?php esc_html_e( 'Faith, grace and life', 'pergrazia' ); ?></p>
 				<h1 id="home-journal-title"><?php esc_html_e( 'Thoughts for a lived faith.', 'pergrazia' ); ?></h1>
-				<p><?php bloginfo( 'description' ); ?></p>
 			</header>
 	<?php else : ?>
 		<header class="archive-header">
@@ -84,7 +83,7 @@ $pergrazia_donate_url = (string) get_theme_mod( 'pergrazia_donate_url', '' );
 				<div class="home-newsletter__copy">
 					<p class="eyebrow"><?php esc_html_e( 'Stay in touch', 'pergrazia' ); ?></p>
 					<h2 id="home-newsletter-title"><?php esc_html_e( 'A quiet note in your inbox.', 'pergrazia' ); ?></h2>
-					<p><?php esc_html_e( 'Receive new reflections and updates from Pergrazia. No noise, only what matters.', 'pergrazia' ); ?></p>
+					<p><?php esc_html_e( 'Receive new reflections and updates from Per Grazia. No noise, only what matters.', 'pergrazia' ); ?></p>
 				</div>
 				<div class="home-newsletter__form-wrap">
 					<?php if ( $pergrazia_newsletter_form ) : ?>
@@ -102,9 +101,9 @@ $pergrazia_donate_url = (string) get_theme_mod( 'pergrazia_donate_url', '' );
 		<section class="home-donate" aria-labelledby="home-donate-title">
 			<div class="home-donate__inner shell">
 				<div class="home-donate__copy">
-					<p class="eyebrow"><?php esc_html_e( 'Support Pergrazia', 'pergrazia' ); ?></p>
+					<p class="eyebrow"><?php esc_html_e( 'Support Per Grazia', 'pergrazia' ); ?></p>
 					<h2 id="home-donate-title"><?php esc_html_e( 'Help this space keep growing.', 'pergrazia' ); ?></h2>
-					<p><?php esc_html_e( 'Your contribution helps Pergrazia continue publishing thoughtful, independent reflections and reaching new readers.', 'pergrazia' ); ?></p>
+					<p><?php esc_html_e( 'Your contribution helps Per Grazia continue publishing thoughtful, independent reflections and reaching new readers.', 'pergrazia' ); ?></p>
 				</div>
 				<div class="home-donate__action">
 					<?php if ( $pergrazia_donate_url ) : ?>

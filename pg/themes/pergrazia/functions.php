@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PERGRAZIA_VERSION', '1.5.0' );
+define( 'PERGRAZIA_VERSION', '1.6.0' );
 
 /**
  * Register theme features and navigation areas.
@@ -60,7 +60,7 @@ function pergrazia_setup(): void {
 			'pergrazia-original' => array(
 				'url'           => '%s/assets/images/pergrazia-hero.svg',
 				'thumbnail_url' => '%s/assets/images/pergrazia-hero.svg',
-				'description'   => __( 'Original Pergrazia artwork', 'pergrazia' ),
+				'description'   => __( 'Original Per Grazia artwork', 'pergrazia' ),
 			),
 		)
 	);
