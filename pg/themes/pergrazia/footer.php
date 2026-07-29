@@ -28,16 +28,6 @@
 				?>
 			</div>
 
-			<?php if ( is_active_sidebar( 'footer-1' ) ) : ?>
-				<div class="footer-widgets">
-					<?php dynamic_sidebar( 'footer-1' ); ?>
-				</div>
-			<?php else : ?>
-				<div>
-					<h2 class="footer-heading"><?php esc_html_e( 'Search', 'pergrazia' ); ?></h2>
-					<?php get_search_form(); ?>
-				</div>
-			<?php endif; ?>
 		</div>
 
 		<div class="site-info">

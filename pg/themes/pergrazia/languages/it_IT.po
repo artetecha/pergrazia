@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Pergrazia 1.0.0\n"
+"Project-Id-Version: Pergrazia 1.1.0\n"
 "PO-Revision-Date: 2026-07-29 00:00+0200\n"
 "Last-Translator: ArteTecha\n"
 "Language-Team: Italian\n"
@@ -19,11 +19,11 @@ msgstr "Navigazione principale"
 msgid "Footer navigation"
 msgstr "Navigazione nel piè di pagina"
 
-msgid "Footer"
-msgstr "Piè di pagina"
+msgid "Article sidebar"
+msgstr "Barra laterale degli articoli"
 
-msgid "Widgets displayed in the site footer."
-msgstr "Widget visualizzati nel piè di pagina del sito."
+msgid "Optional widgets displayed beside single articles."
+msgstr "Widget opzionali visualizzati accanto ai singoli articoli."
 
 msgid "This page could not be found."
 msgstr "Questa pagina non è stata trovata."
@@ -151,3 +151,6 @@ msgstr "Serif editoriale"
 
 msgid "Clean sans"
 msgstr "Sans pulito"
+
+msgid "Topics"
+msgstr "Argomenti"

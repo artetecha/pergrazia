@@ -4,7 +4,7 @@ Theme URI: https://www.pergrazia.com/
 Author: ArteTecha
 Author URI: https://artetecha.com/
 Description: A calm, typography-led theme created for Pergrazia.
-Version: 1.0.0
+Version: 1.1.0
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 8.4
@@ -207,6 +207,38 @@ input[type="submit"] {
 .primary-navigation .current-menu-item > a,
 .primary-navigation .current_page_item > a {
 	color: var(--pg-accent);
+}
+
+.header-search {
+	width: min(16rem, 22vw);
+}
+
+.header-search .search-form {
+	gap: 0;
+}
+
+.header-search input[type="search"] {
+	background: var(--pg-paper);
+	border-color: var(--pg-line);
+	border-right: 0;
+	font-family: var(--pg-sans);
+	font-size: 0.8rem;
+	height: 2.75rem;
+	min-width: 0;
+	padding: 0.65rem 0.8rem;
+}
+
+.header-search input[type="submit"] {
+	background: var(--pg-accent);
+	border-color: var(--pg-accent);
+	font-size: 0.68rem;
+	height: 2.75rem;
+	padding: 0.65rem 0.85rem;
+}
+
+.header-search input[type="submit"]:hover {
+	background: var(--pg-accent-dark);
+	border-color: var(--pg-accent-dark);
 }
 
 .menu-toggle {
@@ -504,11 +536,15 @@ input[type="submit"] {
 
 .single-hero h1,
 .page-header h1 {
-	font-size: clamp(2.8rem, 8vw, 6.8rem);
+	font-size: clamp(2.8rem, 7vw, 5.75rem);
 	font-weight: 500;
 	letter-spacing: -0.055em;
 	line-height: 0.98;
 	margin: 0;
+}
+
+.single-hero.is-long-title h1 {
+	font-size: clamp(2.8rem, 6.25vw, 5.25rem);
 }
 
 .single-hero .entry-meta {
@@ -525,6 +561,19 @@ input[type="submit"] {
 	max-height: 48rem;
 	object-fit: cover;
 	width: 100%;
+}
+
+.single-layout {
+	align-items: start;
+	display: grid;
+	gap: clamp(3rem, 6vw, 5.5rem);
+	grid-template-columns: minmax(0, 50rem) minmax(15rem, 18rem);
+	justify-content: center;
+	padding-bottom: clamp(4rem, 9vw, 8rem);
+}
+
+.single-main {
+	min-width: 0;
 }
 
 .entry-content {
@@ -585,6 +634,14 @@ input[type="submit"] {
 	max-width: none;
 	transform: translateX(-50%);
 	width: 100vw;
+}
+
+.single-main .entry-content .alignwide,
+.single-main .entry-content .alignfull {
+	margin-left: 0;
+	max-width: 100%;
+	transform: none;
+	width: 100%;
 }
 
 .entry-content figcaption {
@@ -653,6 +710,92 @@ input[type="submit"] {
 
 .post-navigation .nav-next {
 	text-align: right;
+}
+
+/* Article sidebar */
+.article-sidebar {
+	font-size: 1rem;
+	min-width: 0;
+}
+
+.article-sidebar__inner {
+	position: sticky;
+	top: 2rem;
+}
+
+.article-sidebar__section,
+.article-sidebar__widget {
+	border-top: 2px solid var(--pg-ink);
+	padding-top: 1.1rem;
+}
+
+.article-sidebar__section + .article-sidebar__section,
+.article-sidebar__widget + .article-sidebar__widget {
+	margin-top: 2.75rem;
+}
+
+.sidebar-heading {
+	font-family: var(--pg-sans);
+	font-size: 0.7rem;
+	font-weight: 750;
+	letter-spacing: 0.14em;
+	margin: 0 0 1.1rem;
+	text-transform: uppercase;
+}
+
+.sidebar-posts,
+.sidebar-categories,
+.article-sidebar__widget ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.sidebar-posts li + li {
+	border-top: 1px solid var(--pg-line);
+	margin-top: 1rem;
+	padding-top: 1rem;
+}
+
+.sidebar-posts a {
+	display: block;
+	font-size: 1.1rem;
+	font-weight: 600;
+	line-height: 1.25;
+	text-decoration: none;
+}
+
+.sidebar-posts time {
+	color: var(--pg-muted);
+	display: block;
+	font-family: var(--pg-sans);
+	font-size: 0.66rem;
+	font-weight: 650;
+	letter-spacing: 0.055em;
+	margin-top: 0.4rem;
+	text-transform: uppercase;
+}
+
+.sidebar-categories {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.sidebar-categories a {
+	border: 1px solid var(--pg-line);
+	display: block;
+	font-family: var(--pg-sans);
+	font-size: 0.67rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	padding: 0.4rem 0.6rem;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.article-sidebar__widget li + li {
+	margin-top: 0.6rem;
 }
 
 .page-header {
@@ -764,7 +907,7 @@ input[type="submit"]:hover,
 .site-footer__grid {
 	display: grid;
 	gap: 3rem;
-	grid-template-columns: 1.4fr 0.8fr 0.8fr;
+	grid-template-columns: minmax(0, 1.5fr) minmax(12rem, 0.5fr);
 }
 
 .footer-brand .site-title {
@@ -837,10 +980,13 @@ a.button {
 	.primary-navigation.is-open { display: block; }
 	.primary-navigation ul { align-items: flex-start; flex-direction: column; gap: 1.25rem; }
 	.primary-navigation a { font-size: 0.85rem; }
+	.header-search { margin-top: 1.75rem; width: 100%; }
 	.featured-story { grid-template-columns: 1fr; }
 	.featured-story__media { min-height: 20rem; }
+	.single-layout { grid-template-columns: 1fr; }
+	.article-sidebar { border-top: 1px solid var(--pg-line); padding-top: 3rem; }
+	.article-sidebar__inner { position: static; }
 	.site-footer__grid { grid-template-columns: 1fr 1fr; }
-	.footer-brand { grid-column: 1 / -1; }
 }
 
 @media (max-width: 38rem) {
@@ -851,11 +997,10 @@ a.button {
 	.post-grid { grid-template-columns: 1fr; }
 	.featured-story__media { min-height: 15rem; }
 	.featured-story__content { padding: 1.6rem; }
-	.single-hero h1, .page-header h1 { font-size: clamp(2.6rem, 14vw, 4.5rem); }
+	.single-hero h1, .single-hero.is-long-title h1, .page-header h1 { font-size: clamp(2.6rem, 13vw, 4.25rem); }
 	.post-navigation .nav-links { grid-template-columns: 1fr; }
 	.post-navigation .nav-next { text-align: left; }
 	.site-footer__grid { grid-template-columns: 1fr; }
-	.footer-brand { grid-column: auto; }
 	.site-info { display: block; }
 	.site-info span { display: block; margin-top: 0.4rem; }
 }

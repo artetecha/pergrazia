@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PERGRAZIA_VERSION', '1.0.0' );
+define( 'PERGRAZIA_VERSION', '1.1.0' );
 
 /**
  * Register theme features and navigation areas.
@@ -83,17 +83,17 @@ function pergrazia_content_width(): void {
 add_action( 'after_setup_theme', 'pergrazia_content_width', 0 );
 
 /**
- * Register optional footer widget area.
+ * Register the optional article sidebar widget area.
  */
 function pergrazia_widgets_init(): void {
 	register_sidebar(
 		array(
-			'name'          => __( 'Footer', 'pergrazia' ),
-			'id'            => 'footer-1',
-			'description'   => __( 'Widgets displayed in the site footer.', 'pergrazia' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'name'          => __( 'Article sidebar', 'pergrazia' ),
+			'id'            => 'article-sidebar',
+			'description'   => __( 'Optional widgets displayed beside single articles.', 'pergrazia' ),
+			'before_widget' => '<section id="%1$s" class="article-sidebar__widget widget %2$s">',
 			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="footer-heading">',
+			'before_title'  => '<h2 class="sidebar-heading">',
 			'after_title'   => '</h2>',
 		)
 	);
