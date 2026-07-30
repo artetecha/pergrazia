@@ -4,7 +4,7 @@ Theme URI: https://www.pergrazia.com/
 Author: ArteTecha
 Author URI: https://artetecha.com/
 Description: A calm, typography-led theme created for Per Grazia.
-Version: 1.7.2
+Version: 1.7.3
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 8.4
@@ -287,9 +287,19 @@ input[type="submit"] {
 	padding: clamp(0.75rem, 2vw, 1.5rem) 0;
 }
 
-.site-hero__image {
+.site-hero__link {
+	display: block;
 	margin-inline: auto;
+	text-decoration: none;
 	width: min(100%, 76rem);
+}
+
+.site-hero__link:focus-visible {
+	outline-offset: -4px;
+}
+
+.site-hero__image {
+	width: 100%;
 }
 
 .site-hero__image img {

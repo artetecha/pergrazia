@@ -6,20 +6,7 @@
  */
 
 get_header();
-$pergrazia_header_image = get_header_image();
 $pergrazia_is_first_page = ! is_paged();
-$pergrazia_hero_classes  = 'site-hero__image';
-$pergrazia_hero_src      = $pergrazia_header_image;
-
-if ( $pergrazia_header_image && str_contains( $pergrazia_header_image, '/pergrazia-hero.' ) ) {
-	$pergrazia_hero_classes .= ' is-pergrazia-artwork is-pergrazia-new-artwork';
-} elseif ( $pergrazia_header_image && str_contains( $pergrazia_header_image, '/pergrazia-hero-original.' ) ) {
-	$pergrazia_hero_classes .= ' is-pergrazia-artwork is-pergrazia-original-artwork';
-}
-
-if ( $pergrazia_hero_src && str_contains( $pergrazia_hero_src, '/themes/pergrazia/assets/images/' ) ) {
-	$pergrazia_hero_src = add_query_arg( 'ver', PERGRAZIA_VERSION, $pergrazia_hero_src );
-}
 
 $pergrazia_newsletter_form = '';
 
@@ -31,13 +18,7 @@ $pergrazia_donate_url = (string) get_theme_mod( 'pergrazia_donate_url', '' );
 ?>
 <main id="main-content">
 	<?php if ( $pergrazia_is_first_page ) : ?>
-		<?php if ( $pergrazia_header_image ) : ?>
-			<section class="site-hero" aria-label="<?php esc_attr_e( 'Per Grazia artwork', 'pergrazia' ); ?>">
-				<figure class="<?php echo esc_attr( $pergrazia_hero_classes ); ?>">
-					<img src="<?php echo esc_url( $pergrazia_hero_src ); ?>" width="<?php echo esc_attr( (string) get_custom_header()->width ); ?>" height="<?php echo esc_attr( (string) get_custom_header()->height ); ?>" alt="">
-				</figure>
-			</section>
-		<?php endif; ?>
+		<?php get_template_part( 'template-parts/site', 'hero' ); ?>
 		<section class="home-journal" aria-labelledby="home-journal-title">
 			<header class="home-intro shell">
 				<p class="eyebrow"><?php esc_html_e( 'From the blog', 'pergrazia' ); ?></p>
