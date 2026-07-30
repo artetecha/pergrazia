@@ -39,8 +39,8 @@ $pergrazia_donate_url = (string) get_theme_mod( 'pergrazia_donate_url', '' );
 			</section>
 		<?php endif; ?>
 		<section class="home-journal" aria-labelledby="home-journal-title">
-			<header class="home-intro reading-width">
-				<p class="eyebrow"><?php esc_html_e( 'Faith, grace and life', 'pergrazia' ); ?></p>
+			<header class="home-intro shell">
+				<p class="eyebrow"><?php esc_html_e( 'From the blog', 'pergrazia' ); ?></p>
 				<h1 id="home-journal-title"><?php esc_html_e( 'Thoughts for a lived faith.', 'pergrazia' ); ?></h1>
 			</header>
 	<?php else : ?>
