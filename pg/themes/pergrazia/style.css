@@ -4,7 +4,7 @@ Theme URI: https://www.pergrazia.com/
 Author: ArteTecha
 Author URI: https://artetecha.com/
 Description: A calm, typography-led theme created for Per Grazia.
-Version: 1.7.1
+Version: 1.7.3
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 8.4
@@ -287,9 +287,19 @@ input[type="submit"] {
 	padding: clamp(0.75rem, 2vw, 1.5rem) 0;
 }
 
-.site-hero__image {
+.site-hero__link {
+	display: block;
 	margin-inline: auto;
+	text-decoration: none;
 	width: min(100%, 76rem);
+}
+
+.site-hero__link:focus-visible {
+	outline-offset: -4px;
+}
+
+.site-hero__image {
+	width: 100%;
 }
 
 .site-hero__image img {
@@ -321,8 +331,26 @@ input[type="submit"] {
 }
 
 .home-intro {
-	padding: clamp(4rem, 8vw, 7rem) 0 clamp(2rem, 5vw, 4rem);
-	text-align: center;
+	align-items: center;
+	display: grid;
+	gap: 0.8rem clamp(1rem, 2.5vw, 2rem);
+	grid-template-columns: max-content minmax(0, 1fr);
+	padding-block: clamp(3rem, 6vw, 5rem) clamp(2rem, 4vw, 3.25rem);
+	text-align: left;
+}
+
+.home-intro::after {
+	background: var(--pg-line);
+	content: "";
+	grid-column: 2;
+	grid-row: 1;
+	height: 1px;
+}
+
+.home-intro .eyebrow {
+	grid-column: 1;
+	grid-row: 1;
+	margin: 0;
 }
 
 .eyebrow,
@@ -337,12 +365,22 @@ input[type="submit"] {
 	text-transform: uppercase;
 }
 
-.home-intro h1,
 .archive-header h1 {
 	font-size: clamp(2.5rem, 5vw, 4rem);
 	font-weight: 500;
 	letter-spacing: -0.05em;
 	line-height: 0.98;
+	margin: 0;
+}
+
+.home-intro h1 {
+	color: var(--pg-muted);
+	font-family: var(--pg-sans);
+	font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+	font-weight: 550;
+	grid-column: 1 / -1;
+	letter-spacing: -0.025em;
+	line-height: 1.3;
 	margin: 0;
 }
 

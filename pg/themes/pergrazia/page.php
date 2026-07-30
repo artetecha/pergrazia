@@ -8,6 +8,7 @@
 get_header();
 ?>
 <main id="main-content">
+	<?php get_template_part( 'template-parts/site', 'hero' ); ?>
 	<?php while ( have_posts() ) : ?>
 		<?php the_post(); ?>
 		<?php $pergrazia_long_title = strlen( wp_strip_all_tags( get_the_title() ) ) > 48; ?>

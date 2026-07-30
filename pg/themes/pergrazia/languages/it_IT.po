@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Per Grazia 1.7.1\n"
-"PO-Revision-Date: 2026-07-29 00:00+0200\n"
+"Project-Id-Version: Per Grazia 1.7.3\n"
+"PO-Revision-Date: 2026-07-30 00:00+0200\n"
 "Last-Translator: ArteTecha\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
@@ -72,8 +72,11 @@ msgstr "I commenti sono chiusi."
 msgid "Per Grazia artwork"
 msgstr "Illustrazione di Per Grazia"
 
-msgid "Faith, grace and life"
-msgstr "Fede, grazia e vita"
+msgid "Go to the homepage"
+msgstr "Vai alla pagina iniziale"
+
+msgid "From the blog"
+msgstr "Dal blog"
 
 msgid "Thoughts for a lived faith."
 msgstr "Pensieri per una fede vissuta."
