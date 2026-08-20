@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "artetecha/upsun-wp",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/artetecha/upsun-wp.git",
-                "reference": "f6398fcd92a462591cd3071c2c1554d0bd3e723e"
+                "reference": "f554839b0b57ede7cb30f2aaa83613c6feba95e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/artetecha/upsun-wp/zipball/f6398fcd92a462591cd3071c2c1554d0bd3e723e",
-                "reference": "f6398fcd92a462591cd3071c2c1554d0bd3e723e",
+                "url": "https://api.github.com/repos/artetecha/upsun-wp/zipball/f554839b0b57ede7cb30f2aaa83613c6feba95e6",
+                "reference": "f554839b0b57ede7cb30f2aaa83613c6feba95e6",
                 "shasum": ""
             },
             "require": {
@@ -52,7 +52,7 @@
                 "issues": "https://github.com/artetecha/upsun-wp/issues",
                 "source": "https://github.com/artetecha/upsun-wp"
             },
-            "time": "2026-08-06T06:48:03+00:00"
+            "time": "2026-08-16T21:58:41+00:00"
         },
         {
             "name": "composer/installers",
