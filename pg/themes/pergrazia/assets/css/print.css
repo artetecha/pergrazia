@@ -1,0 +1,236 @@
+@page {
+	margin: 18mm 20mm 20mm;
+	size: auto;
+}
+
+body:is(.single-post, .page:not(.home)) {
+	background: #fff !important;
+	color: #000 !important;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 11pt !important;
+	line-height: 1.55 !important;
+	margin: 0 !important;
+}
+
+body:is(.single-post, .page:not(.home)) *,
+body:is(.single-post, .page:not(.home)) *::before,
+body:is(.single-post, .page:not(.home)) *::after {
+	background-color: transparent !important;
+	background-image: none !important;
+	box-shadow: none !important;
+	text-shadow: none !important;
+}
+
+body:is(.single-post, .page:not(.home)) :is(
+	#wpadminbar,
+	.site-header,
+	.site-footer,
+	.site-hero,
+	.single-featured-image,
+	.article-sidebar,
+	.dpsp-content-wrapper,
+	.dpsp-floating-sidebar,
+	.post-footer,
+	.post-navigation,
+	.comments-area,
+	.page-links,
+	form,
+	button,
+	iframe,
+	video,
+	audio,
+	picture,
+	figure,
+	img,
+	svg
+) {
+	display: none !important;
+}
+
+body:is(.single-post, .page:not(.home)) :is(main, article, .single-main) {
+	display: block;
+	margin: 0;
+	max-width: none;
+	padding: 0;
+	width: auto;
+}
+
+body:is(.single-post, .page:not(.home)) .single-hero {
+	border-bottom: 0.5pt solid #aaa;
+	break-after: avoid-page;
+	margin: 0 0 9mm;
+	padding: 0 0 7mm;
+	text-align: left;
+	width: auto;
+}
+
+body:is(.single-post, .page:not(.home)) .single-hero::before {
+	content: "Per Grazia";
+	display: block;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 8.5pt;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	margin-bottom: 9mm;
+	text-transform: uppercase;
+}
+
+body:is(.single-post, .page:not(.home)) .single-hero h1,
+body:is(.single-post, .page:not(.home)) .single-hero.is-long-title h1 {
+	color: #000;
+	font-size: 26pt;
+	font-weight: 600;
+	letter-spacing: -0.025em;
+	line-height: 1.1;
+	margin: 0;
+}
+
+body:is(.single-post, .page:not(.home)) .single-hero .entry-kicker {
+	color: #333;
+	font-size: 8pt;
+	letter-spacing: 0.12em;
+	margin-bottom: 3mm;
+}
+
+body:is(.single-post, .page:not(.home)) .single-hero .entry-meta {
+	color: #444;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	gap: 2mm 5mm;
+	justify-content: flex-start;
+	letter-spacing: 0.04em;
+	margin-top: 4mm;
+}
+
+body:is(.single-post, .page:not(.home)) :is(.single-layout, .page-layout) {
+	display: block;
+	margin: 0;
+	max-width: none;
+	padding: 0;
+	width: auto;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content {
+	color: #000;
+	font-size: 11pt;
+	line-height: 1.55;
+	max-width: none;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content :is(p, li) {
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	orphans: 3;
+	text-align: justify;
+	widows: 3;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content > * {
+	margin-block: 0 1.25em;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content :is(h2, h3, h4, h5, h6) {
+	break-after: avoid-page;
+	color: #000;
+	font-weight: 600;
+	letter-spacing: -0.015em;
+	line-height: 1.2;
+	margin-bottom: 0.45em;
+	margin-top: 1.35em;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content h2 {
+	font-size: 18pt;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content h3 {
+	font-size: 14pt;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content :is(h4, h5, h6) {
+	font-size: 11.5pt;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content :is(.alignwide, .alignfull) {
+	margin-left: 0;
+	max-width: none;
+	transform: none;
+	width: auto;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content .wp-block-columns {
+	display: block !important;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content blockquote {
+	border-left: 1.5pt solid #555;
+	break-inside: avoid-page;
+	color: #222;
+	font-size: 12pt;
+	line-height: 1.45;
+	margin: 5mm 0;
+	padding-left: 5mm;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content cite {
+	font-size: 8pt;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content :is(pre, table) {
+	break-inside: avoid-page;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content pre {
+	border: 0.5pt solid #aaa;
+	font-size: 8.5pt;
+	overflow: visible;
+	padding: 3mm;
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content :is(code, kbd, samp) {
+	font-family: "Courier New", Courier, monospace;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content table {
+	border-collapse: collapse;
+	font-size: 8.5pt;
+	width: 100%;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content thead {
+	display: table-header-group;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content tr {
+	break-inside: avoid-page;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content :is(th, td) {
+	border: 0.5pt solid #999;
+	padding: 2mm;
+}
+
+body:is(.single-post, .page:not(.home)) .entry-content :is(ul, ol) {
+	padding-left: 7mm;
+}
+
+body:is(.single-post, .page:not(.home)) a {
+	color: #000 !important;
+	text-decoration: underline;
+	text-decoration-thickness: 0.5pt;
+	text-underline-offset: 1.5pt;
+}
+
+body:is(.single-post, .page:not(.home)) main article::after {
+	border-top: 0.5pt solid #aaa;
+	color: #555;
+	content: "pergrazia.com";
+	display: block;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	letter-spacing: 0.08em;
+	margin-top: 10mm;
+	padding-top: 3mm;
+}
