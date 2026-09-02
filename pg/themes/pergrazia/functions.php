@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PERGRAZIA_VERSION', '1.7.5' );
+define( 'PERGRAZIA_VERSION', '1.8.0' );
 
 /**
  * Register theme features and navigation areas.
@@ -171,6 +171,17 @@ add_action( 'widgets_init', 'pergrazia_widgets_init' );
  */
 function pergrazia_assets(): void {
 	wp_enqueue_style( 'pergrazia-style', get_stylesheet_uri(), array(), PERGRAZIA_VERSION );
+
+	if ( is_singular( array( 'post', 'page' ) ) ) {
+		wp_enqueue_style(
+			'pergrazia-print',
+			get_template_directory_uri() . '/assets/css/print.css',
+			array( 'pergrazia-style' ),
+			PERGRAZIA_VERSION,
+			'print'
+		);
+	}
+
 	wp_enqueue_script(
 		'pergrazia-navigation',
 		get_template_directory_uri() . '/assets/js/navigation.js',
