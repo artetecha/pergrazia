@@ -8,9 +8,10 @@ directory. Do not edit generated files there.
 
 WordPress core comes from `roots/wordpress`, which installs the official
 WordPress archive without bundled themes or plugins through
-`roots/wordpress-core-installer`. Core remains constrained to 7.1 for this
-package migration; upgrading WordPress is a separate change. The standalone
-Pergrazia theme is source-controlled and has no third-party parent theme.
+`roots/wordpress-core-installer`. The lockfile installs WordPress 7.1.2; the
+Composer constraint permits subsequent patches in the 7.1 series. The
+standalone Pergrazia theme is source-controlled and has no third-party parent
+theme.
 
 ## Local installation
 
