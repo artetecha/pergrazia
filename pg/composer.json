@@ -29,9 +29,8 @@
     "artetecha/upsun-wp": "^1.0",
     "composer/installers": "^2.3",
     "inpsyde/wp-translation-downloader": "^2.0",
-    "johnpbloch/wordpress-core": ">=7.1.0 <7.1.1",
-    "johnpbloch/wordpress-core-installer": "^2.0",
     "platformsh/config-reader": "^3.0",
+    "roots/wordpress": "~7.1.2",
     "wpackagist-plugin/akismet": "^5.0",
     "wpackagist-plugin/contextual-category-widget": "^0.7.0",
     "wpackagist-plugin/mailchimp-for-wp": "^4.10",
@@ -87,9 +86,8 @@
       "cp composer-mu-plugins/upsun/upsun-loader.php wordpress/wp-content/mu-plugins/upsun-loader.php",
       "cp wordpress/wp-content/plugins/redis-cache/includes/object-cache.php wordpress/wp-content/object-cache.php",
       "rm -rf wordpress/wp-content/themes/pergrazia",
-      "cp -R themes/pergrazia wordpress/wp-content/themes/pergrazia",
-      "rm -rf wordpress/wp-content/themes/twenty*",
-      "rm -f wordpress/wp-content/plugins/hello.php"
+      "mkdir -p wordpress/wp-content/themes",
+      "cp -R themes/pergrazia wordpress/wp-content/themes/pergrazia"
     ],
     "post-install-cmd": "@postbuild",
     "post-update-cmd": "@postbuild"
@@ -98,7 +96,7 @@
     "allow-plugins": {
       "composer/installers": true,
       "inpsyde/wp-translation-downloader": true,
-      "johnpbloch/wordpress-core-installer": true
+      "roots/wordpress-core-installer": true
     },
     "platform": {
       "php": "8.4.0"
