@@ -5,7 +5,3 @@ updates:
   schedule:
     interval: daily
   open-pull-requests-limit: 10
-  ignore:
-  # Incomplete upstream package: https://github.com/johnpbloch/wordpress-core/issues/40
-  - dependency-name: "johnpbloch/wordpress-core"
-    versions: ["7.1.1"]
