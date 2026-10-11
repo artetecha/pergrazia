@@ -53,8 +53,14 @@ applications:
               allow: false
             ^/+readme\.html$:
               allow: false
-            ^/+xmlrpc\.php$:
-              allow: false
+        # `allow: false` rules only stop static files; PHP still runs under
+        # `scripts: true`. Give xmlrpc.php its own location so brute-force
+        # POSTs never reach PHP.
+        "/xmlrpc.php":
+          root: "wordpress"
+          passthru: false
+          scripts: false
+          allow: false
         "/wp-content/cache":
           root: "wordpress/wp-content/cache"
           scripts: false
