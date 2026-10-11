@@ -44,14 +44,16 @@ applications:
           allow: true
           headers:
             X-Content-Type-Options: nosniff
+          # Rules match the full request path, leading slash included. `/+`
+          # also catches the `//xmlrpc.php` form that brute-force bots use.
           rules:
-            ^composer\.(json|lock)$:
+            ^/+composer\.(json|lock)$:
               allow: false
-            ^license\.txt$:
+            ^/+license\.txt$:
               allow: false
-            ^readme\.html$:
+            ^/+readme\.html$:
               allow: false
-            ^xmlrpc\.php$:
+            ^/+xmlrpc\.php$:
               allow: false
         "/wp-content/cache":
           root: "wordpress/wp-content/cache"
