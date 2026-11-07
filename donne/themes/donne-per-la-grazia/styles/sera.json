@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.8/theme.json",
+	"version": 3,
+	"title": "Evening",
+	"settings": {
+		"color": {
+			"palette": [
+				{ "slug": "base", "color": "#1e171a", "name": "Base" },
+				{ "slug": "base-2", "color": "#2a2125", "name": "Base 2" },
+				{ "slug": "contrast", "color": "#f4ece7", "name": "Contrast" },
+				{ "slug": "contrast-2", "color": "#c4b4b8", "name": "Contrast 2" },
+				{ "slug": "accent", "color": "#eba3b1", "name": "Accent" },
+				{ "slug": "accent-2", "color": "#5fc9d4", "name": "Accent 2" },
+				{ "slug": "accent-3", "color": "#5a3a43", "name": "Accent 3" },
+				{ "slug": "accent-4", "color": "#a3b394", "name": "Accent 4" },
+				{ "slug": "line", "color": "#3b2f34", "name": "Line" }
+			]
+		}
+	},
+	"styles": {
+		"elements": {
+			"button": {
+				"color": { "background": "var:preset|color|accent", "text": "var:preset|color|base" },
+				":hover": { "color": { "background": "var:preset|color|contrast", "text": "var:preset|color|base" } }
+			}
+		}
+	}
+}

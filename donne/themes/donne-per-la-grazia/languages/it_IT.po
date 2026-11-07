@@ -1,0 +1,299 @@
+# Copyright (C) 2026 ArteTecha
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Language: it_IT\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: Donne per la Grazia 1.0.0\\n"
+"MIME-Version: 1.0\\n"
+"Content-Type: text/plain; charset=UTF-8\\n"
+"Content-Transfer-Encoding: 8bit\\n"
+"X-Domain: donne-per-la-grazia\\n"
+
+#. Theme Name of the theme
+#: functions.php:44 style.css
+msgid "Donne per la Grazia"
+msgstr "Donne per la Grazia"
+
+#: functions.php:45
+msgid "Sections and content blocks designed for this site."
+msgstr "Sezioni e blocchi di contenuto pensati per questo sito."
+
+#: patterns/author-bio.php:17
+msgid "Written by"
+msgstr "Scritto da"
+
+#: patterns/author-bio.php
+msgctxt "Pattern title"
+msgid "Author biography"
+msgstr "Biografia dell’autrice"
+
+#: patterns/comments.php
+msgctxt "Pattern title"
+msgid "Comments"
+msgstr "Commenti"
+
+#: patterns/feed-intro.php:14
+msgid "Latest reflections"
+msgstr "Ultime riflessioni"
+
+#: patterns/feed-intro.php
+msgctxt "Pattern title"
+msgid "Feed heading"
+msgstr "Intestazione degli articoli"
+
+#: patterns/feed.php
+msgctxt "Pattern title"
+msgid "Article feed"
+msgstr "Elenco articoli"
+
+#: patterns/feed.php
+msgctxt "Pattern description"
+msgid "Grid of articles that follows the current page's query. On the first blog page the newest article is featured."
+msgstr "Griglia di articoli che segue la query della pagina corrente. Nella prima pagina del blog l’articolo più recente è in evidenza."
+
+#: patterns/footer.php:23 patterns/hero-home.php:25
+msgid "Bible readings, reflections and stories from women living each day by the free gift of God."
+msgstr "Letture bibliche, riflessioni e storie di donne che vivono ogni giorno del dono gratuito di Dio."
+
+#: patterns/footer.php:29
+msgid "Explore"
+msgstr "Esplora"
+
+#: patterns/footer.php:37
+msgid "The family"
+msgstr "La famiglia"
+
+#: patterns/footer.php:41
+msgid "Newsletter"
+msgstr "Newsletter"
+
+#: patterns/footer.php:56
+msgid "By grace, together."
+msgstr "Per grazia, insieme."
+
+#: patterns/footer.php
+msgctxt "Pattern title"
+msgid "Footer"
+msgstr "Piè di pagina"
+
+#. translators: %s: link to the Per Grazia website.
+#: patterns/header.php:20
+#, php-format
+msgid "A space of the %s family"
+msgstr "Uno spazio della famiglia %s"
+
+#: patterns/header.php
+msgctxt "Pattern title"
+msgid "Header"
+msgstr "Intestazione"
+
+#: patterns/hero-home.php:17
+msgid "A Per Grazia space"
+msgstr "Uno spazio di Per Grazia"
+
+#: patterns/hero-home.php:21
+msgid "Women who stand firm in <em>grace</em>."
+msgstr "Donne salde nella <em>grazia</em>."
+
+#: patterns/hero-home.php:30
+msgid "Start reading"
+msgstr "Inizia a leggere"
+
+#: patterns/hero-home.php:37
+msgid "An arched doorway opening onto a rising sun, a cross and gentle hills."
+msgstr "Un portale ad arco che si apre su un sole nascente, una croce e dolci colline."
+
+#: patterns/hero-home.php
+msgctxt "Pattern title"
+msgid "Home hero"
+msgstr "Benvenuto in home page"
+
+#: patterns/hero-home.php
+msgctxt "Pattern description"
+msgid "Welcome section with the open-arch artwork."
+msgstr "Sezione di benvenuto con l’illustrazione dell’arco aperto."
+
+#: patterns/no-results.php:14
+msgid "Nothing here yet. Try a different search."
+msgstr "Qui non c’è ancora nulla. Prova un’altra ricerca."
+
+#: patterns/no-results.php:17 patterns/page-404.php:29
+msgctxt "search form label"
+msgid "Search"
+msgstr "Cerca"
+
+#: patterns/no-results.php:17 patterns/page-404.php:29
+msgid "Search the articles…"
+msgstr "Cerca negli articoli…"
+
+#: patterns/no-results.php:17 patterns/page-404.php:29
+msgctxt "search button text"
+msgid "Search"
+msgstr "Cerca"
+
+#: patterns/no-results.php
+msgctxt "Pattern title"
+msgid "No results"
+msgstr "Nessun risultato"
+
+#: patterns/page-404.php:18
+msgid "Error 404"
+msgstr "Errore 404"
+
+#: patterns/page-404.php:22
+msgid "This page is not here."
+msgstr "Questa pagina non c’è."
+
+#: patterns/page-404.php:26
+msgid "It may have moved, or the address may be mistyped. A search might help."
+msgstr "Potrebbe essere stata spostata, o l’indirizzo potrebbe contenere un errore. Prova a cercare."
+
+#: patterns/page-404.php
+msgctxt "Pattern title"
+msgid "Page not found"
+msgstr "Pagina non trovata"
+
+#: patterns/post-meta.php
+msgctxt "Pattern title"
+msgid "Post meta"
+msgstr "Dati dell’articolo"
+
+#: patterns/reflection-questions.php:15
+msgid "For reflection"
+msgstr "Per riflettere"
+
+#: patterns/reflection-questions.php:20
+msgid "What does this passage show us about who God is?"
+msgstr "Che cosa ci mostra questo brano su chi è Dio?"
+
+#: patterns/reflection-questions.php:24
+msgid "Where do you see grace given rather than earned?"
+msgstr "Dove vedi la grazia donata anziché meritata?"
+
+#: patterns/reflection-questions.php:28
+msgid "How might this truth shape your week?"
+msgstr "In che modo questa verità può dare forma alla tua settimana?"
+
+#: patterns/reflection-questions.php
+msgctxt "Pattern title"
+msgid "Questions for reflection"
+msgstr "Domande per riflettere"
+
+#: patterns/reflection-questions.php
+msgctxt "Pattern description"
+msgid "A boxed list of questions to close a Bible reading or devotional."
+msgstr "Un elenco di domande in riquadro per concludere una lettura biblica o una meditazione."
+
+#: patterns/sister-site.php:15
+msgid "The Per Grazia family"
+msgstr "La famiglia Per Grazia"
+
+#: patterns/sister-site.php:19
+msgid "Keep reading on Per Grazia."
+msgstr "Continua a leggere su Per Grazia."
+
+#: patterns/sister-site.php:23
+msgid "Articles on grace, faith and the Christian life, and a quiet newsletter for new reflections."
+msgstr "Articoli sulla grazia, la fede e la vita cristiana, e una newsletter discreta per le nuove riflessioni."
+
+#: patterns/sister-site.php:28
+msgid "Visit Per Grazia"
+msgstr "Visita Per Grazia"
+
+#: patterns/sister-site.php:32
+msgid "Subscribe to the newsletter"
+msgstr "Iscriviti alla newsletter"
+
+#: patterns/sister-site.php
+msgctxt "Pattern title"
+msgid "Per Grazia family banner"
+msgstr "Banner della famiglia Per Grazia"
+
+#: patterns/sister-site.php
+msgctxt "Pattern description"
+msgid "Invites readers to the main Per Grazia blog and its newsletter."
+msgstr "Invita i lettori al blog principale di Per Grazia e alla sua newsletter."
+
+#: patterns/verse-card.php:16
+msgid "For by grace are ye saved through faith; and that not of yourselves: it is the gift of God."
+msgstr "Poiché gli è per grazia che voi siete stati salvati, mediante la fede; e ciò non vien da voi; è il dono di Dio."
+
+#: patterns/verse-card.php:17
+msgid "Ephesians 2:8"
+msgstr "Efesini 2:8 (Riveduta)"
+
+#: patterns/verse-card.php
+msgctxt "Pattern title"
+msgid "Scripture card"
+msgstr "Versetto biblico"
+
+#: patterns/verse-card.php
+msgctxt "Pattern description"
+msgid "A Bible verse set apart, with its reference."
+msgstr "Un versetto biblico in evidenza, con il riferimento."
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Page without title"
+msgstr "Pagina senza titolo"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Wide page"
+msgstr "Pagina larga"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Header"
+msgstr "Intestazione"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Footer"
+msgstr "Piè di pagina"
+
+#: styles/blocks/arch.json
+msgctxt "Style variation name"
+msgid "Arch"
+msgstr "Arco"
+
+#: styles/blocks/card.json
+msgctxt "Style variation name"
+msgid "Card"
+msgstr "Riquadro"
+
+#: styles/blocks/eyebrow.json
+msgctxt "Style variation name"
+msgid "Eyebrow"
+msgstr "Occhiello"
+
+#: styles/blocks/verse.json
+msgctxt "Style variation name"
+msgid "Scripture"
+msgstr "Scrittura"
+
+#: styles/salvia.json
+msgctxt "Style variation name"
+msgid "Sage"
+msgstr "Salvia"
+
+#: styles/sections/section-blush.json
+msgctxt "Style variation name"
+msgid "Blush section"
+msgstr "Sezione cipria"
+
+#: styles/sections/section-ink.json
+msgctxt "Style variation name"
+msgid "Ink section"
+msgstr "Sezione inchiostro"
+
+#: styles/sera.json
+msgctxt "Style variation name"
+msgid "Evening"
+msgstr "Sera"
+
+#. Description of the theme
+#: style.css
+msgid "A block theme for Donne per la Grazia, the women's journal of the Per Grazia family. Editorial typography, an arched-doorway motif and a warm palette, all editable in the Site Editor."
+msgstr "Un tema a blocchi per Donne per la Grazia, il diario al femminile della famiglia Per Grazia. Tipografia editoriale, il motivo del portale ad arco e una palette calda, tutto modificabile nell’Editor del sito."

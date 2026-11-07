@@ -50,3 +50,24 @@ jobs:
           php -l wp-config.php
           php -l mu-plugins/site-config.php
           find themes/pergrazia migrations -name '*.php' -print0 | xargs -0 -n1 php -l
+
+  donne-theme:
+    name: Lint Donne per la Grazia theme
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: donne/themes/donne-per-la-grazia
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          coverage: none
+
+      - name: Lint PHP
+        run: find . -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Validate JSON
+        run: find . -name '*.json' -print0 | xargs -0 -n1 python3 -m json.tool > /dev/null

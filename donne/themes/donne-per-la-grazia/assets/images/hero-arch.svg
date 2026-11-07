@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="760" viewBox="0 0 640 760" role="img" aria-labelledby="title desc">
+	<title id="title">An open arch of grace</title>
+	<desc id="desc">An arched doorway opens onto a rising sun, a slender cross and gentle hills, with an olive sprig in the foreground.</desc>
+	<defs>
+		<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="#f6e4dd"/>
+			<stop offset=".55" stop-color="#efd2cb"/>
+			<stop offset="1" stop-color="#e3b9b3"/>
+		</linearGradient>
+		<radialGradient id="sun" cx=".5" cy=".5" r=".5">
+			<stop offset="0" stop-color="#fffaf5"/>
+			<stop offset=".7" stop-color="#fbeee6"/>
+			<stop offset="1" stop-color="#fbeee6" stop-opacity="0"/>
+		</radialGradient>
+		<clipPath id="door">
+			<path d="M40 760V320a280 280 0 0 1 560 0v440z"/>
+		</clipPath>
+	</defs>
+
+	<g clip-path="url(#door)">
+		<rect width="640" height="760" fill="url(#sky)"/>
+		<circle cx="320" cy="400" r="210" fill="url(#sun)"/>
+		<circle cx="320" cy="400" r="118" fill="#fff8f2"/>
+
+		<!-- Cross -->
+		<g stroke="#9b3a52" stroke-linecap="round">
+			<path d="M320 214v330" stroke-width="7"/>
+			<path d="M262 300h116" stroke-width="7"/>
+		</g>
+
+		<!-- Hills -->
+		<path d="M0 560c90-40 170-52 260-30s160 30 250 0 120-28 130-26v256H0z" fill="#d79c99"/>
+		<path d="M0 620c110-34 210-30 310-4s200 24 330-8v152H0z" fill="#b8676f"/>
+		<path d="M0 688c130-26 250-22 360 0s190 14 280-2v74H0z" fill="#9b3a52"/>
+
+		<!-- Path of light -->
+		<path d="M300 760c8-60 14-110 20-150 6 40 12 90 20 150z" fill="#f6e4dd" opacity=".55"/>
+	</g>
+
+	<!-- Arch frame -->
+	<path d="M40 760V320a280 280 0 0 1 560 0v440" fill="none" stroke="#2b2024" stroke-opacity=".12" stroke-width="2"/>
+	<path d="M16 760V320a304 304 0 0 1 608 0v440" fill="none" stroke="#9b3a52" stroke-opacity=".45" stroke-width="1.5"/>
+
+	<!-- Olive sprig -->
+	<g transform="translate(520 640) rotate(-28)">
+		<path d="M0 0c-40-40-70-100-78-170" fill="none" stroke="#5f6e54" stroke-width="4" stroke-linecap="round"/>
+		<g fill="#7c8b6f">
+			<ellipse cx="-22" cy="-34" rx="9" ry="24" transform="rotate(-50 -22 -34)"/>
+			<ellipse cx="-34" cy="-60" rx="9" ry="24" transform="rotate(40 -34 -60)"/>
+			<ellipse cx="-52" cy="-92" rx="9" ry="24" transform="rotate(-40 -52 -92)"/>
+			<ellipse cx="-62" cy="-118" rx="9" ry="24" transform="rotate(30 -62 -118)"/>
+			<ellipse cx="-74" cy="-150" rx="8" ry="22" transform="rotate(-20 -74 -150)"/>
+		</g>
+		<circle cx="-46" cy="-70" r="7" fill="#4e5c45"/>
+	</g>
+</svg>
