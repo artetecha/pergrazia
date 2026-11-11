@@ -145,3 +145,103 @@ The CI workflow validates Composer metadata, installs exactly from
 on PHP 8.4. The backup workflow runs daily (and manually), uses a pinned and
 checksum-verified Upsun CLI, and backs up the `main` environment. It requires
 the `UPSUN_PROJECT` and `UPSUN_CLI_TOKEN` repository secrets.
+
+## Commentario
+
+`mu-plugins/pg-commentario.php` registers the hierarchical `pg_commentario`
+post type. Its book archive is `/commentario/`; a book such as Atti lives at
+`/commentario/atti/`. The first-party theme has dedicated archive and single
+PHP templates, without dates or chronological article navigation. Search
+results use commentary cards without dates. The theme version is bumped when
+its CSS changes so browser caches receive the new styles.
+
+In **Commentario → Aggiungi**, use the **Libro e brano** panel:
+
+- For a book, leave the parent empty, select **Libro**, and enter its Protestant
+  canon number (1–66; Atti = 44). Book entries sort by this number.
+- For an introduction, select the book as parent, choose **Introduzione**, and
+  leave the book number and reference empty.
+- For a puntata, select the book and **Puntata**, then enter a continuous range
+  such as `1:1-14` or `1:12-2:4`. A single verse such as `2:1` is accepted too.
+- For an excursus, select the book and **Excursus**. Its reference is optional;
+  a new empty slug becomes `excursus-` followed by the title slug.
+
+The reference parser validates syntax, positive chapter/verse numbers and
+range order; it does not contain a verse-count database for every biblical
+book. Derived `pg_ref_start` and `pg_ref_end` metadata use BBCCCVVV, and
+`menu_order` follows the start reference. Existing slugs are preserved when
+references change. WordPress slug collisions produce an editorial warning,
+not an unsafe override of its uniqueness checks. Invalid REST requests return
+an Italian error before the post is changed; an invalid legacy panel leaves
+its previous valid metadata in place and displays an admin notice.
+
+The book index and previous/next links use published entries only. Excursuses
+have a separate index group and never enter the previous/next chain. The main
+blog, date archives and `/feed/` exclude commentary; public site search and
+`/commentario/feed/` include published commentary. Drafts remain private,
+including the introduction while it awaits publication.
+
+### Explicit introduction migration
+
+The production introduction is **ID 5126**, titled **Atti degli Apostoli —
+Introduzione**. It has **never been published**. Keep it as a draft: there is
+no historical dated permalink to redirect. Its existing `?p=5126` alias is
+recorded in `pg_commentario_redirects`, but a 301 activates only if the entry
+is subsequently published. Draft URLs and previews are not redirected.
+
+The migration is intentionally outside `migrations/` and is **not run by
+any deployment hook**. Rehearse on local/staging first. Get explicit approval
+before production deployment/database changes, then take both an Upsun backup
+and a fresh database export. From the deployed application root (`/app`):
+
+```bash
+wp --path=wordpress db export /tmp/commentario-before.sql
+wp --path=wordpress eval-file scripts/migrate-commentario.php 5126 /tmp/commentario-before.sql
+```
+
+The command above refuses production. **Only after explicit production
+approval**, append `production-approved` to the migration command. The SQL
+export must exist, be readable and nonempty, and be less than an hour old.
+Store backups securely outside the web root and retain them for rollback.
+
+The script creates the published Atti book (`pg_book=44`) if absent, converts
+the introduction in place, and verifies that its ID, draft status, title,
+content, author, original dates, and comment count/status remain unchanged.
+It sets parent Atti, slug `introduzione`, kind `introduzione`, and order 0;
+repeated runs reuse the book. It runs `wp rewrite flush` and `wp cache flush`.
+
+After approval and migration, purge Cloudflare through the deployed Upsun MU
+plugin (`wp --path=wordpress upsun cloudflare purge --all`, with configured
+purge credentials). The Upsun router has no purge API; invalidate its cached
+responses by redeploying or wait for their TTL, then verify fresh responses.
+Check `/commentario/` and `/commentario/atti/`. The introduction should still
+be absent from the public index, search and **both feeds**. Its pretty URL
+should not expose the draft. After a future publication, verify its pretty
+URL, commentary-feed inclusion, and the 301 from `?p=5126`.
+
+### Commentary integration checks
+
+Use a **disposable local database** (`WP_ENVIRONMENT_TYPE=local`), admin user
+ID 1, this theme, this MU plugin, and a date-based permalink structure. The
+suite creates real posts and exercises normal saves, the legacy panel, REST
+validation, passage sorting, slug collisions, hierarchy changes, and content
+navigation. It removes its fixtures by default:
+
+```bash
+wp --path=wordpress eval-file tests/commentario.php
+```
+
+For HTTP checks, run the local site and retain fixtures temporarily:
+
+```bash
+PG_COMMENTARIO_TEST_OUTPUT=/tmp/commentario-fixtures.json \
+  wp --path=wordpress eval-file tests/commentario.php
+python3 tests/commentario-http.py http://localhost:8080 /tmp/commentario-fixtures.json
+```
+
+Do not run the fixture suite against an existing Atti book. Rehearse the
+migration with the generated `source` ID and a fresh local backup, verify
+that its original comment and draft status survive, and test a 301 with a
+separate published fixture. Delete the IDs in the fixture JSON after HTTP
+checks, or discard the disposable database. Never publish post 5126 as part
+of acceptance testing.
