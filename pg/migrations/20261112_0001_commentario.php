@@ -10,15 +10,18 @@ return static function () {
 	$id = 5126;
 	$intro = get_post( $id );
 	if ( ! $intro || 'draft' !== $intro->post_status || 'Atti degli Apostoli — Introduzione' !== $intro->post_title || ! in_array( $intro->post_type, array( 'post', 'pg_commentario' ), true ) ) {
-		throw new RuntimeException( 'The specified post must be the unpublished Acts introduction draft.' );
+		WP_CLI::log( 'Skipping introduction migration: post 5126 is absent or no longer the expected unpublished draft.' );
+		return;
 	}
 	$before = array_intersect_key( $intro->to_array(), array_flip( array( 'ID', 'post_content', 'post_title', 'post_date', 'post_date_gmt', 'post_status', 'post_author', 'comment_count', 'comment_status' ) ) );
 	$books = get_posts( array( 'post_type' => 'pg_commentario', 'post_parent' => 0, 'name' => 'atti', 'post_status' => array( 'publish', 'draft', 'pending', 'private', 'future' ), 'numberposts' => 2 ) );
 	if ( count( $books ) > 1 || ( $books && 44 !== (int) get_post_meta( $books[0]->ID, 'pg_book', true ) ) ) {
-		throw new RuntimeException( 'An incompatible Atti entry already exists; resolve it before migrating.' );
+		WP_CLI::log( 'Skipping introduction migration: the existing Atti entry is incompatible or ambiguous.' );
+		return;
 	}
 	if ( $books && 'publish' !== $books[0]->post_status ) {
-		throw new RuntimeException( 'The existing Atti book must be published before migrating its introduction.' );
+		WP_CLI::log( 'Skipping introduction migration: the existing Atti book is not published.' );
+		return;
 	}
 
 	// This persistent mount is outside WordPress's document root. A failed

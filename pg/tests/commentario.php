@@ -108,6 +108,12 @@ try {
 	$ids = array_values( array_diff( $ids, array( $collision ) ) );
 	// Ordinary blog control and never-published introduction for the migration rehearsal.
 	$blog = $create( array( 'post_type' => 'post', 'post_title' => 'Articolo del blog PGQABLOG' ) );
+	update_post_meta( $blog, 'pg_ref_start', 44001001 );
+	$assert( true === delete_metadata( 'post', 0, 'pg_ref_start', 44001001, true ), 'Value-filtered bulk deletion removes ordinary post metadata' );
+	$assert( ! metadata_exists( 'post', $blog, 'pg_ref_start' ) && 44001001 === (int) get_post_meta( $first, 'pg_ref_start', true ), 'Bulk deletion preserves required commentary metadata' );
+	update_post_meta( $blog, 'pg_ref_start', 'unrelated' );
+	$assert( false === delete_metadata( 'post', 0, 'pg_ref_start', 'not-matching', true ) && 'unrelated' === get_post_meta( $blog, 'pg_ref_start', true ), 'Bulk deletion respects the requested value' );
+	$assert( true === delete_post_meta_by_key( 'pg_ref_start' ) && ! metadata_exists( 'post', $blog, 'pg_ref_start' ) && 44001001 === (int) get_post_meta( $first, 'pg_ref_start', true ), 'Unfiltered bulk deletion also scopes protection to commentary' );
 	$blog_archive = '/' . get_post_time( 'Y/m', false, $blog ) . '/';
 	$source = $create( array( 'post_type' => 'post', 'post_title' => 'Atti degli Apostoli — Introduzione', 'post_status' => 'draft', 'post_name' => '', 'post_date' => '2026-11-11 07:57:32', 'post_date_gmt' => '2026-11-11 06:57:32' ) );
 	$comment = wp_insert_comment( array( 'comment_post_ID' => $source, 'comment_content' => 'Commento da preservare', 'comment_approved' => 1, 'comment_author' => 'QA' ) );

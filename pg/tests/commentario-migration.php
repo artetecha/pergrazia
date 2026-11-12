@@ -22,6 +22,10 @@ $assert = static function ( $test, string $message ) use ( &$checks ) {
 	++$checks;
 };
 try {
+	delete_option( $marker );
+	$result = Upsun\Migrations::run();
+	$assert( null === $result['error'] && (bool) get_option( $marker ) && ! get_post( 5126 ), 'Fresh databases skip and record the absent introduction without failing deployment' );
+	$assert( $before_backups === ( glob( $backups . '*.sql' ) ?: array() ), 'Inapplicable migration creates no backup' );
 	$source = wp_insert_post( array(
 		'import_id' => 5126, 'post_type' => 'post', 'post_status' => 'draft',
 		'post_title' => 'Atti degli Apostoli — Introduzione',
@@ -32,6 +36,15 @@ try {
 	$comment = wp_insert_comment( array( 'comment_post_ID' => 5126, 'comment_content' => 'Da conservare', 'comment_approved' => 1 ) );
 	$original = get_post( 5126 );
 	$assert( '0000-00-00 00:00:00' === $original->post_date_gmt, 'Fixture reproduces a never-published draft with zero GMT date' );
+	foreach ( array( array( 'post_status' => 'publish' ), array( 'post_title' => 'An unrelated draft' ), array( 'post_type' => 'page' ) ) as $change ) {
+		wp_update_post( array_merge( array( 'ID' => 5126 ), $change ) );
+		$edited = get_post( 5126 )->to_array();
+		delete_option( $marker );
+		$result = Upsun\Migrations::run();
+		$assert( null === $result['error'] && (bool) get_option( $marker ) && $edited === get_post( 5126 )->to_array(), 'Changed editorial state is preserved and skipped' );
+		wp_update_post( array_merge( $original->to_array(), array( 'edit_date' => true ) ) );
+	}
+	$assert( $before_backups === ( glob( $backups . '*.sql' ) ?: array() ), 'Skipped editorial changes create no backups' );
 	delete_option( $marker );
 	$result = Upsun\Migrations::run();
 	$assert( null === $result['error'], 'Migration succeeds: ' . ( $result['error'] ?? '' ) );

@@ -5,11 +5,11 @@ return static function () {
 	$menu_id = (int) ( $locations['primary'] ?? 0 );
 	$items = $menu_id ? wp_get_nav_menu_items( $menu_id ) : array();
 	$matches = array_filter( $items ?: array(), static function ( $item ) {
-		return 0 === (int) $item->menu_item_parent
-			&& in_array( trim( wp_strip_all_tags( $item->title ) ), array( 'Statuto di fede', 'Statuto' ), true );
+		return in_array( trim( wp_strip_all_tags( $item->title ) ), array( 'Statuto di fede', 'Statuto' ), true );
 	} );
 	if ( 1 !== count( $matches ) ) {
-		throw new RuntimeException( 'Expected exactly one Statuto item in the primary menu.' );
+		WP_CLI::log( 'Skipping Statuto menu update: no unique matching item exists in the primary menu.' );
+		return;
 	}
 	$item = reset( $matches );
 	if ( 'Statuto' !== $item->title ) {

@@ -199,13 +199,20 @@ Merging this PR therefore deploys both the code and the content migration.
 **Home** in the menu assigned to the theme's `primary` location. It uses a
 native post-type archive link, which resolves to `/commentari/` on the current
 environment. Existing items retain their relative order. A retry reuses the
-link; missing Home or an ambiguous duplicate stops the migration. This second
+link, including a nested link which is promoted to the top level. A missing or
+empty primary menu, missing Home, or ambiguous duplicates produce a logged skip. This second
 migration also refreshes rewrite rules for the plural `/commentari/` namespace,
 including book and passage URLs on previews that already ran the first migration.
 
 `20261112_0003_statuto_navigation` shortens the primary-menu label from
 **Statuto di fede** to **Statuto**, preserving its destination, position and
-the linked page's title. It also accepts the already-shortened label on retry.
+the linked page's title, including for a nested item. It also accepts the
+already-shortened label on retry. Missing or ambiguous matches produce a logged skip.
+
+If post 5126 is absent or no longer the expected draft, or the existing Atti
+book is incompatible or unpublished, the content migration logs a skip without
+changing editorial state or creating a backup. Skips are recorded as completed
+by the runner; later editorial changes do not retry these one-time migrations.
 
 Before changing content, the migration exports the database to the persistent
 `/app/private/migration-backups/` mount, outside the web document root. The

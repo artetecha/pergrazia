@@ -1,14 +1,17 @@
 <?php
 /** Add the commentary landing page immediately after Home in the primary menu. */
 return static function () {
+	if ( ! get_post_type_archive_link( 'pg_commentario' ) ) {
+		throw new RuntimeException( 'The commentary archive must be registered before migrating navigation.' );
+	}
+	// Activate plural URLs even when this database has no applicable menu.
+	flush_rewrite_rules( false );
 	$locations = get_nav_menu_locations();
 	$menu_id = (int) ( $locations['primary'] ?? 0 );
-	if ( ! $menu_id || ! get_post_type_archive_link( 'pg_commentario' ) ) {
-		throw new RuntimeException( 'The primary menu and commentary archive must exist before adding Commentari.' );
-	}
-	$items = wp_get_nav_menu_items( $menu_id );
+	$items = $menu_id ? wp_get_nav_menu_items( $menu_id ) : array();
 	if ( ! $items ) {
-		throw new RuntimeException( 'The primary menu has no items.' );
+		WP_CLI::log( 'Skipping Commentari menu update: no populated primary menu is assigned.' );
+		return;
 	}
 	$home_id = 0;
 	$existing = array();
@@ -18,11 +21,8 @@ return static function () {
 		$home_path . 'commentario/',
 	);
 	foreach ( $items as $item ) {
-		if ( (int) $item->menu_item_parent ) {
-			continue;
-		}
 		$path = trailingslashit( wp_parse_url( $item->url, PHP_URL_PATH ) ?: '/' );
-		if ( 'Home' === trim( wp_strip_all_tags( $item->title ) ) && $home_path === $path && ! wp_parse_url( $item->url, PHP_URL_FRAGMENT ) && ! wp_parse_url( $item->url, PHP_URL_QUERY ) ) {
+		if ( 0 === (int) $item->menu_item_parent && 'Home' === trim( wp_strip_all_tags( $item->title ) ) && $home_path === $path && ! wp_parse_url( $item->url, PHP_URL_FRAGMENT ) && ! wp_parse_url( $item->url, PHP_URL_QUERY ) ) {
 			$home_id = $item->ID;
 		}
 		if ( ( 'post_type_archive' === $item->type && 'pg_commentario' === $item->object ) || ( 'custom' === $item->type && in_array( $path, $archive_paths, true ) ) ) {
@@ -30,7 +30,8 @@ return static function () {
 		}
 	}
 	if ( ! $home_id || count( $existing ) > 1 ) {
-		throw new RuntimeException( 'Expected Home and at most one commentary landing link in the primary menu.' );
+		WP_CLI::log( 'Skipping Commentari menu update: Home is absent or commentary links are ambiguous.' );
+		return;
 	}
 	$current = $existing[0] ?? null;
 	// Native archive items resolve against this environment's URL and track the
@@ -68,7 +69,5 @@ return static function () {
 			}
 		}
 	}
-	// This migration also activates the plural archive rewrite on existing previews.
-	flush_rewrite_rules( false );
 	wp_cache_flush();
 };

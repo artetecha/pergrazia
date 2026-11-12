@@ -301,12 +301,24 @@ final class PG_Commentario {
 	}
 
 	public static function guard_delete( $check, int $id, string $key, $value, bool $delete_all ) {
-		if ( self::$syncing || ! in_array( $key, array( 'pg_book', 'pg_kind', 'pg_ref', 'pg_ref_start', 'pg_ref_end' ), true ) ) {
+		if ( null !== $check || self::$syncing || ! in_array( $key, array( 'pg_book', 'pg_kind', 'pg_ref', 'pg_ref_start', 'pg_ref_end' ), true ) ) {
 			return $check;
 		}
 		if ( $delete_all ) {
-			self::notice( 'I metadati del commentario non possono essere eliminati in blocco.' );
-			return false;
+			// Apply the per-post guard instead of blocking unrelated post types.
+			global $wpdb;
+			$query = $wpdb->prepare( "SELECT DISTINCT post_id FROM $wpdb->postmeta WHERE meta_key = %s", $key );
+			$serialized = maybe_serialize( $value );
+			if ( '' !== $serialized && null !== $serialized && false !== $serialized ) {
+				$query .= $wpdb->prepare( ' AND meta_value = %s', $serialized );
+			}
+			$deleted = false;
+			foreach ( $wpdb->get_col( $query ) as $post_id ) {
+				if ( delete_metadata( 'post', (int) $post_id, wp_slash( $key ), wp_slash( $value ) ) ) {
+					$deleted = true;
+				}
+			}
+			return $deleted;
 		}
 		if ( self::TYPE !== get_post_type( $id ) ) {
 			return $check;
