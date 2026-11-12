@@ -203,6 +203,10 @@ link; missing Home or an ambiguous duplicate stops the migration. This second
 migration also refreshes rewrite rules for the plural `/commentari/` namespace,
 including book and passage URLs on previews that already ran the first migration.
 
+`20261112_0003_statuto_navigation` shortens the primary-menu label from
+**Statuto di fede** to **Statuto**, preserving its destination, position and
+the linked page's title. It also accepts the already-shortened label on retry.
+
 Before changing content, the migration exports the database to the persistent
 `/app/private/migration-backups/` mount, outside the web document root. The
 directory is mode 0700 and exports are mode 0600. If the backup fails, deployment
