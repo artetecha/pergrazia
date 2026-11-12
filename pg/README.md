@@ -181,7 +181,7 @@ blog, date archives and `/feed/` exclude commentary; public site search and
 `/commentario/feed/` include published commentary. Drafts remain private,
 including the introduction while it awaits publication.
 
-### Explicit introduction migration
+### Automatic introduction migration
 
 The production introduction is **ID 5126**, titled **Atti degli Apostoli —
 Introduzione**. It has **never been published**. Keep it as a draft: there is
@@ -189,35 +189,35 @@ no historical dated permalink to redirect. Its existing `?p=5126` alias is
 recorded in `pg_commentario_redirects`, but a 301 activates only if the entry
 is subsequently published. Draft URLs and previews are not redirected.
 
-The migration is intentionally outside `migrations/` and is **not run by
-any deployment hook**. Rehearse on local/staging first. Get explicit approval
-before production deployment/database changes, then take both an Upsun backup
-and a fresh database export. From the deployed application root (`/app`):
+`migrations/20261112_0001_commentario.php` runs automatically through the
+existing `wp upsun migrate` deploy hook in preview and production. The runner
+records successful execution in the database; later deployments skip it, and
+previews cloned after production migration inherit that completed state.
+Merging this PR therefore deploys both the code and the content migration.
 
-```bash
-wp --path=wordpress db export /tmp/commentario-before.sql
-wp --path=wordpress eval-file scripts/migrate-commentario.php 5126 /tmp/commentario-before.sql
-```
+Before changing content, the migration exports the database to the persistent
+`/app/private/migration-backups/` mount, outside the web document root. The
+directory is mode 0700 and exports are mode 0600. If the backup fails, deployment
+stops before any content is changed. Backup filenames include the migration
+ID, UTC timestamp and a random suffix. Retain the export for rollback; restore
+only to the intended environment, with appropriate approval for production.
 
-The command above refuses production. **Only after explicit production
-approval**, append `production-approved` to the migration command. The SQL
-export must exist, be readable and nonempty, and be less than an hour old.
-Store backups securely outside the web root and retain them for rollback.
+The migration creates published Atti (`pg_book=44`) and converts post 5126 in
+place, keeping its draft status, title, content, author, original dates and
+comments. It explicitly preserves a never-published draft's zero GMT date.
+Content writes and preservation checks run in a transaction; failure rolls
+back those changes and leaves the migration pending. Successful writes are
+followed by rewrite-rule and object-cache flushes before completion is recorded.
+A retry reuses an already-created compatible Atti book.
 
-The script creates the published Atti book (`pg_book=44`) if absent, converts
-the introduction in place, and verifies that its ID, draft status, title,
-content, author, original dates, and comment count/status remain unchanged.
-It sets parent Atti, slug `introduzione`, kind `introduzione`, and order 0;
-repeated runs reuse the book. It runs `wp rewrite flush` and `wp cache flush`.
-
-After approval and migration, purge Cloudflare through the deployed Upsun MU
-plugin (`wp --path=wordpress upsun cloudflare purge --all`, with configured
-purge credentials). The Upsun router has no purge API; invalidate its cached
-responses by redeploying or wait for their TTL, then verify fresh responses.
-Check `/commentario/` and `/commentario/atti/`. The introduction should still
-be absent from the public index, search and **both feeds**. Its pretty URL
-should not expose the draft. After a future publication, verify its pretty
-URL, commentary-feed inclusion, and the 301 from `?p=5126`.
+The deployment switches the Upsun router to the new application. Cloudflare
+purging, if required for cached public pages, is available through
+`wp --path=wordpress upsun cloudflare purge --all` with configured credentials.
+The introduction remains absent from the public book index, search and both
+feeds. `/commentario/` and `/commentario/atti/` are available immediately after
+deployment; the draft introduction URL must not expose its content. After a
+future publication, verify its pretty URL, commentary-feed inclusion, and the
+301 from `?p=5126`.
 
 ### Commentary integration checks
 
@@ -239,9 +239,17 @@ PG_COMMENTARIO_TEST_OUTPUT=/tmp/commentario-fixtures.json \
 python3 tests/commentario-http.py http://localhost:8080 /tmp/commentario-fixtures.json
 ```
 
-Do not run the fixture suite against an existing Atti book. Rehearse the
-migration with the generated `source` ID and a fresh local backup, verify
-that its original comment and draft status survive, and test a 301 with a
-separate published fixture. Delete the IDs in the fixture JSON after HTTP
-checks, or discard the disposable database. Never publish post 5126 as part
-of acceptance testing.
+Do not run the fixture suite against an existing Atti book. Delete the IDs in
+the fixture JSON after HTTP checks, or discard the disposable database.
+The automatic migration regression suite requires an unused post ID 5126 and
+an installed database dump client:
+
+```bash
+wp --path=wordpress eval-file tests/commentario-migration.php
+```
+
+It creates a never-published draft with a zero GMT date, runs the actual Upsun
+migration runner, checks its private backup and preservation guarantees, then
+verifies that a second run is skipped. All migration fixtures are removed.
+Both PHP suites run in CI against MariaDB. Never run these fixture suites on
+preview or production data, and never publish post 5126 for acceptance testing.

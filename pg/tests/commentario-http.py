@@ -35,7 +35,7 @@ check(not re.search(r'<time\b|class="post-navigation', first), 'No dates or chro
 check('Puntata riservata' not in book, 'Draft absent from public index')
 home = get('/')
 check(f'post-{ids["blog"]}' in home and f'post-{ids["first"]}' not in home, 'Blog homepage excludes commentary')
-blog_archive = get('/2026/11/')
+blog_archive = get(ids['blog_archive'])
 check(f'post-{ids["first"]}' not in blog_archive, 'Date archive excludes commentary')
 main_feed = feed_links('/feed/')
 check(not any('/commentario/' in url for url in main_feed), 'Main feed excludes commentary')

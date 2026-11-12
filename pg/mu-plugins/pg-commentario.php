@@ -12,6 +12,7 @@ final class PG_Commentario {
 	private static bool $syncing = false;
 	private static array $expected_slugs = array();
 	private static array $rest_meta = array();
+	private static array $rejected_panels = array();
 
 	public static function init(): void {
 		register_post_type( self::TYPE, array(
@@ -169,6 +170,9 @@ final class PG_Commentario {
 		$state = self::validate( $id, (int) $data['post_parent'], $meta, $data['post_status'] );
 		if ( is_wp_error( $state ) ) {
 			self::notice( $state->get_error_message() . ' I dati del brano non sono stati salvati.' );
+			if ( null !== $panel ) {
+				self::$rejected_panels[ $id ] = true;
+			}
 			$old = get_post( $id );
 			$data['post_status'] = $old ? $old->post_status : 'draft';
 			$data['post_parent'] = $old ? $old->post_parent : 0;
@@ -227,6 +231,10 @@ final class PG_Commentario {
 	}
 
 	public static function save_panel( int $id, WP_Post $post ): void {
+		if ( isset( self::$rejected_panels[ $id ] ) || isset( self::$rejected_panels[0] ) ) {
+			unset( self::$rejected_panels[ $id ], self::$rejected_panels[0] );
+			return;
+		}
 		if ( self::$syncing || wp_is_post_revision( $id ) || wp_is_post_autosave( $id ) || ! current_user_can( 'edit_post', $id ) ) {
 			return;
 		}
@@ -292,6 +300,28 @@ final class PG_Commentario {
 		}
 	}
 
+	public static function guard_delete( $check, int $id, string $key, $value, bool $delete_all ) {
+		if ( self::$syncing || ! in_array( $key, array( 'pg_book', 'pg_kind', 'pg_ref', 'pg_ref_start', 'pg_ref_end' ), true ) ) {
+			return $check;
+		}
+		if ( $delete_all ) {
+			self::notice( 'I metadati del commentario non possono essere eliminati in blocco.' );
+			return false;
+		}
+		if ( self::TYPE !== get_post_type( $id ) ) {
+			return $check;
+		}
+		$post = get_post( $id );
+		$meta = self::metadata( $id );
+		$meta[ $key ] = 'pg_book' === $key ? 0 : '';
+		$state = self::validate( $id, (int) $post->post_parent, $meta, $post->post_status );
+		if ( in_array( $key, array( 'pg_ref_start', 'pg_ref_end' ), true ) || is_wp_error( $state ) ) {
+			self::notice( 'Il metadato è necessario al commentario e non può essere eliminato.' );
+			return false;
+		}
+		return $check;
+	}
+
 	public static function sync( int $id ): void {
 		$post = get_post( $id );
 		if ( self::$syncing || ! $post || self::TYPE !== $post->post_type || 'auto-draft' === $post->post_status ) {
@@ -308,7 +338,7 @@ final class PG_Commentario {
 		if ( $post->post_parent ) {
 			delete_post_meta( $id, 'pg_book' );
 		}
-		$update = array( 'ID' => $id, 'menu_order' => $state['order'] );
+		$update = array( 'ID' => $id, 'menu_order' => $state['order'], 'edit_date' => true );
 		$slug = $state['slug'];
 		if ( 'excursus' === $meta['pg_kind'] ) {
 			$slug = 'excursus-' . sanitize_title( $post->post_title );
@@ -453,6 +483,7 @@ add_action( 'wp_after_insert_post', array( PG_Commentario::class, 'after_insert'
 add_action( 'admin_enqueue_scripts', array( PG_Commentario::class, 'editor_assets' ) );
 add_filter( 'add_post_metadata', array( PG_Commentario::class, 'guard_meta' ), 10, 4 );
 add_filter( 'update_post_metadata', array( PG_Commentario::class, 'guard_meta' ), 10, 4 );
+add_filter( 'delete_post_metadata', array( PG_Commentario::class, 'guard_delete' ), 10, 5 );
 foreach ( array( 'added_post_meta', 'updated_post_meta', 'deleted_post_meta' ) as $pg_meta_hook ) {
 	add_action( $pg_meta_hook, array( PG_Commentario::class, 'meta_changed' ), 10, 3 );
 }

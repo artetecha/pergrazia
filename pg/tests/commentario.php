@@ -70,6 +70,9 @@ try {
 	$assert( ! str_contains( $render( $book ), 'Puntata riservata' ), 'Draft excluded from index' );
 	$assert( false === update_post_meta( $first, 'pg_ref', '1:broken' ), 'Direct invalid meta rejected' );
 	$assert( false === update_post_meta( $first, 'pg_ref', '' ), 'Published passage cannot lose its reference' );
+	$assert( false === delete_post_meta( $first, 'pg_ref' ), 'Required reference cannot be deleted' );
+	$assert( false === delete_post_meta( $first, 'pg_kind' ), 'Published kind cannot be deleted' );
+	$assert( false === delete_post_meta( $book, 'pg_book' ), 'Published book number cannot be deleted' );
 	$assert( '1:1-14' === get_post_meta( $first, 'pg_ref', true ), 'Last valid reference retained' );
 	$assert( false === update_post_meta( $first, 'pg_ref_start', 1 ), 'Derived metadata cannot be entered by hand' );
 	$response = $rest( 'POST', '/' . $first, array( 'title' => 'Should not save', 'meta' => array( 'pg_ref' => '1:14-1' ) ) );
@@ -88,6 +91,12 @@ try {
 	PG_Commentario::save_panel( $first, get_post( $first ) );
 	$assert( '1:1-14' === get_post_meta( $first, 'pg_ref', true ) && (bool) get_transient( 'pg_commentario_notice_1' ), 'Invalid legacy panel retains reference and shows notice' );
 	$_POST = array();
+	// A rejected publication must not save the rejected metadata after reverting to draft.
+	$unready = $create( array( 'post_title' => 'Bozza incompleta', 'post_status' => 'draft', 'post_parent' => $book ) );
+	$_POST = array( 'pg_commentario_nonce' => wp_create_nonce( 'pg_commentario' ), 'pg_book' => '', 'pg_kind' => 'puntata', 'pg_ref' => '' );
+	wp_update_post( array( 'ID' => $unready, 'post_status' => 'publish' ) );
+	$assert( 'draft' === get_post_status( $unready ) && '' === get_post_meta( $unready, 'pg_kind', true ), 'Rejected legacy panel does not save metadata after status fallback' );
+	$_POST = array();
 	$other = $create( array( 'post_title' => 'Luca', 'post_name' => 'luca', 'meta_input' => array( 'pg_book' => 42 ) ) );
 	wp_update_post( array( 'ID' => $cross, 'post_parent' => $other ) );
 	$assert( 42002001 === (int) get_post_meta( $cross, 'pg_ref_start', true ), 'Reparenting recalculates book encoding' );
@@ -99,6 +108,7 @@ try {
 	$ids = array_values( array_diff( $ids, array( $collision ) ) );
 	// Ordinary blog control and never-published introduction for the migration rehearsal.
 	$blog = $create( array( 'post_type' => 'post', 'post_title' => 'Articolo del blog PGQABLOG' ) );
+	$blog_archive = '/' . get_post_time( 'Y/m', false, $blog ) . '/';
 	$source = $create( array( 'post_type' => 'post', 'post_title' => 'Atti degli Apostoli — Introduzione', 'post_status' => 'draft', 'post_name' => '', 'post_date' => '2026-11-11 07:57:32', 'post_date_gmt' => '2026-11-11 06:57:32' ) );
 	$comment = wp_insert_comment( array( 'comment_post_ID' => $source, 'comment_content' => 'Commento da preservare', 'comment_approved' => 1, 'comment_author' => 'QA' ) );
 	$home = new WP_Query( array( 'posts_per_page' => -1 ) );
@@ -108,7 +118,7 @@ try {
 	WP_CLI::success( "$checks commentary assertions passed." );
 	$output = getenv( 'PG_COMMENTARIO_TEST_OUTPUT' );
 	if ( $output ) {
-		file_put_contents( $output, wp_json_encode( compact( 'ids', 'book', 'intro', 'first', 'second', 'excursus', 'draft', 'other', 'cross', 'blog', 'source', 'comment' ), JSON_PRETTY_PRINT ) );
+		file_put_contents( $output, wp_json_encode( compact( 'ids', 'book', 'intro', 'first', 'second', 'excursus', 'draft', 'other', 'cross', 'blog', 'blog_archive', 'source', 'comment' ), JSON_PRETTY_PRINT ) );
 		$keep = true;
 	}
 } finally {
