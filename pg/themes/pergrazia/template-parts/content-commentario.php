@@ -2,7 +2,7 @@
 /** A commentary search result or book card, without a publication date. */
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'post-card' ); ?>>
-	<p class="entry-kicker">Commentario<?php if ( wp_get_post_parent_id( get_the_ID() ) ) : ?> — <?php echo esc_html( get_the_title( wp_get_post_parent_id( get_the_ID() ) ) ); ?><?php endif; ?></p>
+	<p class="entry-kicker">Commentari<?php if ( wp_get_post_parent_id( get_the_ID() ) ) : ?> — <?php echo esc_html( get_the_title( wp_get_post_parent_id( get_the_ID() ) ) ); ?><?php endif; ?></p>
 	<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 	<?php if ( get_post_meta( get_the_ID(), 'pg_ref', true ) ) : ?>
 		<p class="pg-reference"><?php echo esc_html( get_post_meta( get_the_ID(), 'pg_ref', true ) ); ?></p>

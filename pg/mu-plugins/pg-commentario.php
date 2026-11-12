@@ -17,21 +17,21 @@ final class PG_Commentario {
 	public static function init(): void {
 		register_post_type( self::TYPE, array(
 			'labels'       => array(
-				'name' => 'Commentario', 'singular_name' => 'Puntata', 'menu_name' => 'Commentario',
+				'name' => 'Commentari', 'singular_name' => 'Puntata', 'menu_name' => 'Commentari',
 				'add_new' => 'Aggiungi', 'add_new_item' => 'Aggiungi una puntata',
 				'edit_item' => 'Modifica la puntata', 'new_item' => 'Nuova puntata',
 				'view_item' => 'Visualizza la puntata', 'view_items' => 'Visualizza il commentario',
 				'search_items' => 'Cerca nel commentario', 'not_found' => 'Nessuna puntata trovata.',
 				'not_found_in_trash' => 'Nessuna puntata nel cestino.', 'all_items' => 'Libri e puntate',
-				'parent_item_colon' => 'Libro:', 'archives' => 'Commentario',
+				'parent_item_colon' => 'Libro:', 'archives' => 'Commentari',
 				'attributes' => 'Attributi della puntata', 'insert_into_item' => 'Inserisci nella puntata',
 				'uploaded_to_this_item' => 'Caricati per questa puntata',
 			),
 			'public'       => true,
 			'hierarchical' => true,
 			'show_in_rest' => true,
-			'has_archive'  => 'commentario',
-			'rewrite'      => array( 'slug' => 'commentario', 'with_front' => false ),
+			'has_archive'  => 'commentari',
+			'rewrite'      => array( 'slug' => 'commentari', 'with_front' => false ),
 			'menu_icon'    => 'dashicons-book-alt',
 			'supports'     => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'comments', 'page-attributes', 'custom-fields' ),
 		) );

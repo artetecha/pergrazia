@@ -6,7 +6,7 @@ get_header();
 	<?php while ( have_posts() ) : the_post(); ?>
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<header class="single-hero shell is-long-title">
-				<p class="entry-kicker"><a href="<?php echo esc_url( get_post_type_archive_link( 'pg_commentario' ) ); ?>">Commentario</a></p>
+				<p class="entry-kicker"><a href="<?php echo esc_url( get_post_type_archive_link( 'pg_commentario' ) ); ?>">Commentari</a></p>
 				<h1><?php the_title(); ?></h1>
 				<?php if ( get_post_meta( get_the_ID(), 'pg_ref', true ) ) : ?>
 					<p class="pg-reference"><?php echo esc_html( get_post_meta( get_the_ID(), 'pg_ref', true ) ); ?></p>

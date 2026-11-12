@@ -146,16 +146,16 @@ on PHP 8.4. The backup workflow runs daily (and manually), uses a pinned and
 checksum-verified Upsun CLI, and backs up the `main` environment. It requires
 the `UPSUN_PROJECT` and `UPSUN_CLI_TOKEN` repository secrets.
 
-## Commentario
+## Commentari
 
 `mu-plugins/pg-commentario.php` registers the hierarchical `pg_commentario`
-post type. Its book archive is `/commentario/`; a book such as Atti lives at
-`/commentario/atti/`. The first-party theme has dedicated archive and single
+post type. Its book archive is `/commentari/`; a book such as Atti lives at
+`/commentari/atti/`. The first-party theme has dedicated archive and single
 PHP templates, without dates or chronological article navigation. Search
 results use commentary cards without dates. The theme version is bumped when
 its CSS changes so browser caches receive the new styles.
 
-In **Commentario → Aggiungi**, use the **Libro e brano** panel:
+In **Commentari → Aggiungi**, use the **Libro e brano** panel:
 
 - For a book, leave the parent empty, select **Libro**, and enter its Protestant
   canon number (1–66; Atti = 44). Book entries sort by this number.
@@ -178,7 +178,7 @@ its previous valid metadata in place and displays an admin notice.
 The book index and previous/next links use published entries only. Excursuses
 have a separate index group and never enter the previous/next chain. The main
 blog, date archives and `/feed/` exclude commentary; public site search and
-`/commentario/feed/` include published commentary. Drafts remain private,
+`/commentari/feed/` include published commentary. Drafts remain private,
 including the introduction while it awaits publication.
 
 ### Automatic introduction migration
@@ -194,6 +194,14 @@ existing `wp upsun migrate` deploy hook in preview and production. The runner
 records successful execution in the database; later deployments skip it, and
 previews cloned after production migration inherit that completed state.
 Merging this PR therefore deploys both the code and the content migration.
+
+`20261112_0002_commentari_navigation` adds **Commentari** immediately after
+**Home** in the menu assigned to the theme's `primary` location. It uses a
+native post-type archive link, which resolves to `/commentari/` on the current
+environment. Existing items retain their relative order. A retry reuses the
+link; missing Home or an ambiguous duplicate stops the migration. This second
+migration also refreshes rewrite rules for the plural `/commentari/` namespace,
+including book and passage URLs on previews that already ran the first migration.
 
 Before changing content, the migration exports the database to the persistent
 `/app/private/migration-backups/` mount, outside the web document root. The
@@ -214,7 +222,7 @@ The deployment switches the Upsun router to the new application. Cloudflare
 purging, if required for cached public pages, is available through
 `wp --path=wordpress upsun cloudflare purge --all` with configured credentials.
 The introduction remains absent from the public book index, search and both
-feeds. `/commentario/` and `/commentario/atti/` are available immediately after
+feeds. `/commentari/` and `/commentari/atti/` are available immediately after
 deployment; the draft introduction URL must not expose its content. After a
 future publication, verify its pretty URL, commentary-feed inclusion, and the
 301 from `?p=5126`.
@@ -246,10 +254,11 @@ an installed database dump client:
 
 ```bash
 wp --path=wordpress eval-file tests/commentario-migration.php
+wp --path=wordpress eval-file tests/commentari-navigation.php
 ```
 
 It creates a never-published draft with a zero GMT date, runs the actual Upsun
 migration runner, checks its private backup and preservation guarantees, then
 verifies that a second run is skipped. All migration fixtures are removed.
-Both PHP suites run in CI against MariaDB. Never run these fixture suites on
+All PHP suites run in CI against MariaDB. Never run these fixture suites on
 preview or production data, and never publish post 5126 for acceptance testing.

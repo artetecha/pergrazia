@@ -58,7 +58,7 @@ try {
 	$assert( '1-1-14' === get_post_field( 'post_name', $first ), 'Requested slug' );
 	$assert( 44001001 === (int) get_post_meta( $first, 'pg_ref_start', true ) && 44001014 === (int) get_post_meta( $first, 'pg_ref_end', true ), 'Derived bounds' );
 	$assert( 44001001 === (int) get_post_field( 'menu_order', $first ), 'Native passage order' );
-	$assert( home_url( '/commentario/atti/1-1-14/' ) === get_permalink( $first ), 'Hierarchical permalink without dated front' );
+	$assert( home_url( '/commentari/atti/1-1-14/' ) === get_permalink( $first ), 'Hierarchical permalink without dated front' );
 	$assert( 'excursus-il-regno' === get_post_field( 'post_name', $excursus ), 'Excursus slug' );
 	$index = $render( $book );
 	$assert( strpos( $index, get_the_title( $intro ) ) < strpos( $index, get_the_title( $first ) ) && strpos( $index, get_the_title( $first ) ) < strpos( $index, get_the_title( $second ) ), 'Automatic index passage order' );

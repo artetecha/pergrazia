@@ -5,7 +5,7 @@ get_header();
 <main id="main-content">
 	<header class="archive-header"><div class="shell">
 		<p class="archive-kicker">La Bibbia, brano per brano</p>
-		<h1>Commentario</h1>
+		<h1>Commentari</h1>
 		<p>Scegli un libro per consultarne l’introduzione, le puntate e gli excursus.</p>
 	</div></header>
 	<section class="archive-posts shell" aria-label="Libri del commentario">
