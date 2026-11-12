@@ -13,6 +13,17 @@ jobs:
   build:
     name: Build and verify placement
     runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:11.8
+        env:
+          MARIADB_ROOT_PASSWORD: commentario_ci
+          MARIADB_DATABASE: commentario_ci
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mariadb-admin ping -h localhost -pcommentario_ci"
+          --health-interval=5s --health-timeout=5s --health-retries=20
     defaults:
       run:
         working-directory: pg
@@ -23,7 +34,7 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: "8.4"
-          tools: composer
+          tools: composer, wp-cli
           coverage: none
 
       - name: Validate Composer metadata
@@ -39,6 +50,8 @@ jobs:
           test -f wordpress/wp-content/mu-plugins/upsun/upsun.php
           test -f wordpress/wp-content/mu-plugins/upsun-loader.php
           test -f wordpress/wp-content/mu-plugins/site-config.php
+          test -f wordpress/wp-content/mu-plugins/pg-commentario.php
+          test -f wordpress/wp-content/mu-plugins/pg-commentario-editor.js
           test -f wordpress/wp-content/object-cache.php
           test -f wordpress/wp-content/themes/pergrazia/style.css
           test -f wordpress/wp-content/themes/pergrazia/functions.php
@@ -48,5 +61,35 @@ jobs:
       - name: Lint project PHP
         run: |
           php -l wp-config.php
-          php -l mu-plugins/site-config.php
-          find themes/pergrazia migrations -name '*.php' -print0 | xargs -0 -n1 php -l
+          find mu-plugins themes/pergrazia migrations scripts tests -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Install database export client
+        run: sudo apt-get update -qq && sudo apt-get install -y mariadb-client
+
+      - name: Set up disposable WordPress database
+        run: |
+          cat > wp-config-local.php <<'PHP'
+          <?php
+          define( 'DB_NAME', 'commentario_ci' );
+          define( 'DB_USER', 'root' );
+          define( 'DB_PASSWORD', 'commentario_ci' );
+          define( 'DB_HOST', '127.0.0.1:3306' );
+          define( 'WP_HOME', 'http://localhost:8080' );
+          define( 'WP_SITEURL', WP_HOME );
+          define( 'WP_ENVIRONMENT_TYPE', 'local' );
+          define( 'WP_DEBUG', true );
+          define( 'WP_DEBUG_LOG', true );
+          define( 'WP_REDIS_DISABLED', true );
+          PHP
+          # The disposable localhost service has a self-signed database certificate.
+          printf 'db export:\n  skip-ssl: true\n' > wp-cli.local.yml
+          wp --path=wordpress core install --url=http://localhost:8080 --title='Commentario CI' --admin_user=ci --admin_email=ci@example.invalid --admin_password=ci-local-only --skip-email
+          wp --path=wordpress theme activate pergrazia
+          wp --path=wordpress rewrite structure '/%year%/%monthnum%/%day%/%postname%/'
+
+      - name: Verify commentary and automatic migration
+        run: |
+          wp --path=wordpress eval-file tests/commentario.php
+          wp --path=wordpress eval-file tests/commentario-migration.php
+          wp --path=wordpress eval-file tests/commentari-navigation.php
+          test ! -s wordpress/wp-content/debug.log

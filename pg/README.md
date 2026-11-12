@@ -145,3 +145,131 @@ The CI workflow validates Composer metadata, installs exactly from
 on PHP 8.4. The backup workflow runs daily (and manually), uses a pinned and
 checksum-verified Upsun CLI, and backs up the `main` environment. It requires
 the `UPSUN_PROJECT` and `UPSUN_CLI_TOKEN` repository secrets.
+
+## Commentari
+
+`mu-plugins/pg-commentario.php` registers the hierarchical `pg_commentario`
+post type. Its book archive is `/commentari/`; a book such as Atti lives at
+`/commentari/atti/`. The first-party theme has dedicated archive and single
+PHP templates, without dates or chronological article navigation. Search
+results use commentary cards without dates. The theme version is bumped when
+its CSS changes so browser caches receive the new styles.
+
+In **Commentari → Aggiungi**, use the **Libro e brano** panel:
+
+- For a book, leave the parent empty, select **Libro**, and enter its Protestant
+  canon number (1–66; Atti = 44). Book entries sort by this number.
+- For an introduction, select the book as parent, choose **Introduzione**, and
+  leave the book number and reference empty.
+- For a puntata, select the book and **Puntata**, then enter a continuous range
+  such as `1:1-14` or `1:12-2:4`. A single verse such as `2:1` is accepted too.
+- For an excursus, select the book and **Excursus**. Its reference is optional;
+  a new empty slug becomes `excursus-` followed by the title slug.
+
+The reference parser validates syntax, positive chapter/verse numbers and
+range order; it does not contain a verse-count database for every biblical
+book. Derived `pg_ref_start` and `pg_ref_end` metadata use BBCCCVVV, and
+`menu_order` follows the start reference. Existing slugs are preserved when
+references change. WordPress slug collisions produce an editorial warning,
+not an unsafe override of its uniqueness checks. Invalid REST requests return
+an Italian error before the post is changed; an invalid legacy panel leaves
+its previous valid metadata in place and displays an admin notice.
+
+The book index and previous/next links use published entries only. Excursuses
+have a separate index group and never enter the previous/next chain. The main
+blog, date archives and `/feed/` exclude commentary; public site search and
+`/commentari/feed/` include published commentary. Drafts remain private,
+including the introduction while it awaits publication.
+
+### Automatic introduction migration
+
+The production introduction is **ID 5126**, titled **Atti degli Apostoli —
+Introduzione**. It has **never been published**. Keep it as a draft: there is
+no historical dated permalink to redirect. Its existing `?p=5126` alias is
+recorded in `pg_commentario_redirects`, but a 301 activates only if the entry
+is subsequently published. Draft URLs and previews are not redirected.
+
+`migrations/20261112_0001_commentario.php` runs automatically through the
+existing `wp upsun migrate` deploy hook in preview and production. The runner
+records successful execution in the database; later deployments skip it, and
+previews cloned after production migration inherit that completed state.
+Merging this PR therefore deploys both the code and the content migration.
+
+`20261112_0002_commentari_navigation` adds **Commentari** immediately after
+**Home** in the menu assigned to the theme's `primary` location. It uses a
+native post-type archive link, which resolves to `/commentari/` on the current
+environment. Existing items retain their relative order. A retry reuses the
+link, including a nested link which is promoted to the top level. A missing or
+empty primary menu, missing Home, or ambiguous duplicates produce a logged skip. This second
+migration also refreshes rewrite rules for the plural `/commentari/` namespace,
+including book and passage URLs on previews that already ran the first migration.
+
+`20261112_0003_statuto_navigation` shortens the primary-menu label from
+**Statuto di fede** to **Statuto**, preserving its destination, position and
+the linked page's title, including for a nested item. It also accepts the
+already-shortened label on retry. Missing or ambiguous matches produce a logged skip.
+
+If post 5126 is absent or no longer the expected draft, or the existing Atti
+book is incompatible or unpublished, the content migration logs a skip without
+changing editorial state or creating a backup. Skips are recorded as completed
+by the runner; later editorial changes do not retry these one-time migrations.
+
+Before changing content, the migration exports the database to the persistent
+`/app/private/migration-backups/` mount, outside the web document root. The
+directory is mode 0700 and exports are mode 0600. If the backup fails, deployment
+stops before any content is changed. Backup filenames include the migration
+ID, UTC timestamp and a random suffix. Retain the export for rollback; restore
+only to the intended environment, with appropriate approval for production.
+
+The migration creates published Atti (`pg_book=44`) and converts post 5126 in
+place, keeping its draft status, title, content, author, original dates and
+comments. It explicitly preserves a never-published draft's zero GMT date.
+Content writes and preservation checks run in a transaction; failure rolls
+back those changes and leaves the migration pending. Successful writes are
+followed by rewrite-rule and object-cache flushes before completion is recorded.
+A retry reuses an already-created compatible Atti book.
+
+The deployment switches the Upsun router to the new application. Cloudflare
+purging, if required for cached public pages, is available through
+`wp --path=wordpress upsun cloudflare purge --all` with configured credentials.
+The introduction remains absent from the public book index, search and both
+feeds. `/commentari/` and `/commentari/atti/` are available immediately after
+deployment; the draft introduction URL must not expose its content. After a
+future publication, verify its pretty URL, commentary-feed inclusion, and the
+301 from `?p=5126`.
+
+### Commentary integration checks
+
+Use a **disposable local database** (`WP_ENVIRONMENT_TYPE=local`), admin user
+ID 1, this theme, this MU plugin, and a date-based permalink structure. The
+suite creates real posts and exercises normal saves, the legacy panel, REST
+validation, passage sorting, slug collisions, hierarchy changes, and content
+navigation. It removes its fixtures by default:
+
+```bash
+wp --path=wordpress eval-file tests/commentario.php
+```
+
+For HTTP checks, run the local site and retain fixtures temporarily:
+
+```bash
+PG_COMMENTARIO_TEST_OUTPUT=/tmp/commentario-fixtures.json \
+  wp --path=wordpress eval-file tests/commentario.php
+python3 tests/commentario-http.py http://localhost:8080 /tmp/commentario-fixtures.json
+```
+
+Do not run the fixture suite against an existing Atti book. Delete the IDs in
+the fixture JSON after HTTP checks, or discard the disposable database.
+The automatic migration regression suite requires an unused post ID 5126 and
+an installed database dump client:
+
+```bash
+wp --path=wordpress eval-file tests/commentario-migration.php
+wp --path=wordpress eval-file tests/commentari-navigation.php
+```
+
+It creates a never-published draft with a zero GMT date, runs the actual Upsun
+migration runner, checks its private backup and preservation guarantees, then
+verifies that a second run is skipped. All migration fixtures are removed.
+All PHP suites run in CI against MariaDB. Never run these fixture suites on
+preview or production data, and never publish post 5126 for acceptance testing.
