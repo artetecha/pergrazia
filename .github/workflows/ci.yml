@@ -132,5 +132,6 @@ jobs:
       - name: Lint project PHP and theme JSON
         run: |
           php -l wp-config.php
-          find mu-plugins migrations themes/donne-per-la-grazia -name '*.php' -print0 | xargs -0 -n1 php -l
+          bash -n scripts/deploy.sh scripts/post-deploy.sh
+          find mu-plugins migrations scripts themes/donne-per-la-grazia -name '*.php' -print0 | xargs -0 -n1 php -l
           find themes/donne-per-la-grazia -name '*.json' -print0 | xargs -0 -n1 python3 -m json.tool > /dev/null

@@ -54,11 +54,12 @@ On Upsun it runs as a second application in the Per Grazia project
   production. `www.{default}` stays the primary route.
 - **Database:** schema `donne` on the shared `pgdb` MariaDB service, through
   its own `donne` endpoint. The pg app keeps schema `main` via `mysql`.
-- **Redis:** shared service; keys are prefixed `wp:donne:<environment>:`.
+- **Redis:** shared service (8.8); keys are prefixed `wp:donne:<environment>:`.
 - **Salts:** derived from the project entropy plus the application name, so
   they differ from the pg app's.
 - **Uploads:** a `storage` mount (`uploads`); cache files on `instance`.
-- **Deploy hooks:** identical to pg. Nothing runs until WordPress is installed.
+- **Deploy hooks:** install WordPress on the first deploy (see below), then
+  behave like pg's.
 - **Migrations:** `migrations/20261122_0001_activate_donne_theme.php`
   activates the theme and sets seven posts per page.
 
@@ -74,22 +75,31 @@ On Upsun it runs as a second application in the Per Grazia project
 
    then create a `CNAME donne.pergrazia.com → <main environment's target>`
    at the DNS provider (`upsun domain:get donne.pergrazia.com` shows it).
-3. Install WordPress once, on `main`:
+3. Set the administrator as project variables, then redeploy if the app
+   already deployed without them (they are read only while WordPress is
+   not yet installed):
 
    ```bash
-   upsun ssh --app=donne --environment=main
-   cd wordpress
-   wp core install \
-     --url='https://donne.pergrazia.com/' \
-     --title='Donne per la Grazia' \
-     --admin_user='<admin-user>' \
-     --admin_email='<admin-email>' \
-     --prompt=admin_password
-   wp language core install it_IT --activate
-   jq -r '.extra.distro["enable-plugins"][]' ../composer.json | xargs wp plugin activate
-   wp upsun migrate
-   wp redis enable
+   upsun variable:create --level=project --name=env:DONNE_ADMIN_USER --value='<admin-user>'
+   upsun variable:create --level=project --name=env:DONNE_ADMIN_EMAIL --value='<admin-email>'
+   upsun variable:create --level=project --name=env:DONNE_ADMIN_PASSWORD --sensitive=true --value='<password>'
    ```
+
+   The password is optional. Without it the deploy sets a random one that is
+   never shown; use *Password dimenticata?* on the login page, or
+   `upsun ssh --app=donne -- wp --path=wordpress user reset-password <admin-user>`.
+
+On a deploy where WordPress is not installed, `scripts/deploy.sh` installs it
+at the app's route (picked by `scripts/site-url.php`), in Italian with the
+Rome time zone and `/%postname%/` permalinks, activates the plugins and the
+theme listed under `extra.distro` in `composer.json`, then runs the
+migrations as usual. Without the two required variables it skips the install
+and the deploy still succeeds. The web installer (`install.php`,
+`setup-config.php`) is blocked at the router, so an empty site cannot be
+claimed from the browser.
+
+Preview environments clone `main`'s data. Before `main` has a Donne site, a
+preview with the variables set installs its own.
 
 Menus are edited in the Site Editor (*Navigation*); until one exists, the
 header and footer list published pages.

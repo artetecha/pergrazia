@@ -144,6 +144,18 @@ applications:
           passthru: false
           scripts: false
           allow: false
+        # The deploy hook installs WordPress; never expose the web installer,
+        # which anyone could complete while the schema is still empty.
+        "/wp-admin/install.php":
+          root: "wordpress"
+          passthru: false
+          scripts: false
+          allow: false
+        "/wp-admin/setup-config.php":
+          root: "wordpress"
+          passthru: false
+          scripts: false
+          allow: false
         "/wp-content/cache":
           root: "wordpress/wp-content/cache"
           scripts: false
@@ -187,7 +199,7 @@ services:
           privileges:
             donne: admin
   redis:
-    type: redis:8.0
+    type: redis:8.8
 
 routes:
   "https://www.{default}/":
