@@ -75,31 +75,55 @@ On Upsun it runs as a second application in the Per Grazia project
 
    then create a `CNAME donne.pergrazia.com → <main environment's target>`
    at the DNS provider (`upsun domain:get donne.pergrazia.com` shows it).
-3. Set the administrator as project variables, then redeploy if the app
-   already deployed without them (they are read only while WordPress is
-   not yet installed):
+3. Set the administrator's email as a project variable before the first
+   deploy (or redeploy afterwards). It is kept out of git because this
+   repository is public:
 
    ```bash
-   upsun variable:create --level=project --name=env:DONNE_ADMIN_USER --value='<admin-user>'
-   upsun variable:create --level=project --name=env:DONNE_ADMIN_EMAIL --value='<admin-email>'
-   upsun variable:create --level=project --name=env:DONNE_ADMIN_PASSWORD --sensitive=true --value='<password>'
+   upsun variable:create --level=project --name=env:DONNE_ADMIN_EMAIL --value='<email>'
    ```
 
-   The password is optional. Without it the deploy sets a random one that is
-   never shown; use *Password dimenticata?* on the login page, or
-   `upsun ssh --app=donne -- wp --path=wordpress user reset-password <admin-user>`.
+   The username defaults to `manuela`; `env:DONNE_ADMIN_USER` overrides it.
 
-On a deploy where WordPress is not installed, `scripts/deploy.sh` installs it
-at the app's route (picked by `scripts/site-url.php`), in Italian with the
-Rome time zone and `/%postname%/` permalinks, activates the plugins and the
-theme listed under `extra.distro` in `composer.json`, then runs the
-migrations as usual. Without the two required variables it skips the install
-and the deploy still succeeds. The web installer (`install.php`,
-`setup-config.php`) is blocked at the router, so an empty site cannot be
-claimed from the browser.
+On a deploy where WordPress is not installed, `scripts/deploy.sh`:
 
-Preview environments clone `main`'s data. Before `main` has a Donne site, a
-preview with the variables set installs its own.
+- installs it at the app's route (picked by `scripts/site-url.php`), in
+  Italian, with the Rome time zone and `/%postname%/` permalinks;
+- activates the plugins and the theme listed under `extra.distro` in
+  `composer.json`;
+- generates a random 20-character password and prints it in the deploy log
+  (Upsun console → the environment's activity);
+- on the production environment only, emails the username, password and login
+  link to the administrator;
+- flags the account so that `mu-plugins/donne-first-login.php` sends it to the
+  profile page, and keeps it there, until a new password is saved.
+
+Without `env:DONNE_ADMIN_EMAIL` the install is skipped and the deploy still
+succeeds. The web installer (`install.php`, `setup-config.php`) is blocked at
+the router, so an empty site cannot be claimed from a browser. Preview
+environments clone `main`'s data; before `main` has a Donne site, a preview
+installs its own and prints, but does not email, its password.
+
+## Localisation
+
+Everything is written in English and translated:
+
+- theme strings, pattern titles and `theme.json` names (colours, sizes,
+  families, templates, style variations) in
+  `themes/donne-per-la-grazia/languages/` (text domain `donne-per-la-grazia`);
+- the first-login notice and email in `mu-plugins/languages/` (text domain
+  `donne-site`);
+- WordPress core and plugins in Italian through `wp-translation-downloader`.
+
+Each catalogue ships `.pot`, `it_IT.po`, `.mo` and `.l10n.php`. After changing
+a string, regenerate them, e.g. with `wp i18n make-pot`, `make-mo` and
+`make-php`.
+
+## Favicon
+
+Until a Site Icon is chosen in *Impostazioni → Generali*, the theme serves the
+arch mark: `favicon.svg` (with a dark-mode palette), a 32 px PNG and a 180 px
+`apple-touch-icon.png`, on the site, the login page and the dashboard.
 
 Menus are edited in the Site Editor (*Navigation*); until one exists, the
 header and footer list published pages.

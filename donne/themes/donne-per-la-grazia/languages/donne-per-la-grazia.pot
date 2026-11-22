@@ -66,7 +66,13 @@ msgstr ""
 msgid "Newsletter"
 msgstr ""
 
-#: patterns/footer.php:56
+#. translators: 1: current year, 2: site name.
+#: patterns/footer.php:57
+#, php-format
+msgid "© %1$s %2$s"
+msgstr ""
+
+#: patterns/footer.php:67
 msgid "By grace, together."
 msgstr ""
 
@@ -229,6 +235,141 @@ msgstr ""
 #: patterns/verse-card.php
 msgctxt "Pattern description"
 msgid "A Bible verse set apart, with its reference."
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Base"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Base 2"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Contrast"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Contrast 2"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Accent"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Accent 2"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Accent 3"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Accent 4"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Line"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Extra small"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Small"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Medium"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Large"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Extra large"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Huge"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Display"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Fraunces"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Editorial serif"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Clean sans"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "Tiny"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "X-Small"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "Small"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "Medium"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "Large"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "X-Large"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "XX-Large"
+msgstr ""
+
+#: theme.json
+msgctxt "Shadow name"
+msgid "Soft"
 msgstr ""
 
 #: theme.json

@@ -49,7 +49,18 @@
 
 <!-- wp:group {"align":"wide","layout":{"type":"flex","justifyContent":"space-between","flexWrap":"wrap"}} -->
 <div class="wp-block-group alignwide"><!-- wp:paragraph {"fontSize":"x-small"} -->
-<p class="has-x-small-font-size">© <?php echo esc_html( wp_date( 'Y' ) ); ?> Donne per la Grazia</p>
+<p class="has-x-small-font-size">
+<?php
+echo esc_html(
+	sprintf(
+		/* translators: 1: current year, 2: site name. */
+		__( '© %1$s %2$s', 'donne-per-la-grazia' ),
+		wp_date( 'Y' ),
+		get_bloginfo( 'name' )
+	)
+);
+?>
+</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"fontSize":"x-small"} -->

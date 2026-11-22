@@ -123,6 +123,8 @@ jobs:
           test -f wordpress/wp-content/mu-plugins/upsun/upsun.php
           test -f wordpress/wp-content/mu-plugins/upsun-loader.php
           test -f wordpress/wp-content/mu-plugins/site-config.php
+          test -f wordpress/wp-content/mu-plugins/donne-first-login.php
+          test -f wordpress/wp-content/mu-plugins/languages/donne-site-it_IT.l10n.php
           test -f wordpress/wp-content/object-cache.php
           test -f wordpress/wp-content/themes/donne-per-la-grazia/theme.json
           test -f wordpress/wp-content/themes/donne-per-la-grazia/style.css

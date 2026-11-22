@@ -1,0 +1,47 @@
+# Strings of mu-plugins/donne-first-login.php.
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"X-Domain: donne-site\n"
+
+#: donne-first-login.php:43
+#, php-format
+msgid "[%s] Your account"
+msgstr ""
+
+#: donne-first-login.php:47
+#, php-format
+msgid "Hello %s,"
+msgstr ""
+
+#: donne-first-login.php:50
+#, php-format
+msgid "Your administrator account on %s is ready."
+msgstr ""
+
+#: donne-first-login.php:53
+#, php-format
+msgid "Username: %s"
+msgstr ""
+
+#: donne-first-login.php:55
+#, php-format
+msgid "Temporary password: %s"
+msgstr ""
+
+#: donne-first-login.php:57
+#, php-format
+msgid "Log in: %s"
+msgstr ""
+
+#: donne-first-login.php:59
+msgid "At your first login you will be asked to choose a new password. The temporary one stops working as soon as you do."
+msgstr ""
+
+#: donne-first-login.php:109
+msgid "Choose a new password."
+msgstr ""
+
+#: donne-first-login.php:110
+msgid "You are using a temporary password. Set a new password below and save your profile to continue."
+msgstr ""

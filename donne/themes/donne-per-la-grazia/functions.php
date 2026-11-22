@@ -47,3 +47,25 @@ function donne_per_la_grazia_pattern_categories(): void {
 	);
 }
 add_action( 'init', 'donne_per_la_grazia_pattern_categories' );
+
+/**
+ * Use the arch mark as the favicon until a Site Icon is chosen in
+ * Settings → General, which then takes over.
+ */
+function donne_per_la_grazia_favicon(): void {
+	if ( has_site_icon() ) {
+		return;
+	}
+
+	printf(
+		'<link rel="icon" href="%1$s" type="image/svg+xml">' . "\n" .
+		'<link rel="icon" href="%2$s" sizes="32x32" type="image/png">' . "\n" .
+		'<link rel="apple-touch-icon" href="%3$s">' . "\n",
+		esc_url( get_theme_file_uri( 'assets/images/favicon.svg' ) ),
+		esc_url( get_theme_file_uri( 'assets/images/favicon-32.png' ) ),
+		esc_url( get_theme_file_uri( 'assets/images/apple-touch-icon.png' ) )
+	);
+}
+add_action( 'wp_head', 'donne_per_la_grazia_favicon' );
+add_action( 'login_head', 'donne_per_la_grazia_favicon' );
+add_action( 'admin_head', 'donne_per_la_grazia_favicon' );

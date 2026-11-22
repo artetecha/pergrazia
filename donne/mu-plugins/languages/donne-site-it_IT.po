@@ -1,0 +1,49 @@
+# Strings of mu-plugins/donne-first-login.php.
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"X-Domain: donne-site\n"
+"Language: it_IT\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: donne-first-login.php:43
+#, php-format
+msgid "[%s] Your account"
+msgstr "[%s] Il tuo account"
+
+#: donne-first-login.php:47
+#, php-format
+msgid "Hello %s,"
+msgstr "Ciao %s,"
+
+#: donne-first-login.php:50
+#, php-format
+msgid "Your administrator account on %s is ready."
+msgstr "Il tuo account di amministratrice su %s è pronto."
+
+#: donne-first-login.php:53
+#, php-format
+msgid "Username: %s"
+msgstr "Nome utente: %s"
+
+#: donne-first-login.php:55
+#, php-format
+msgid "Temporary password: %s"
+msgstr "Password temporanea: %s"
+
+#: donne-first-login.php:57
+#, php-format
+msgid "Log in: %s"
+msgstr "Accedi: %s"
+
+#: donne-first-login.php:59
+msgid "At your first login you will be asked to choose a new password. The temporary one stops working as soon as you do."
+msgstr "Al primo accesso ti verrà chiesto di scegliere una nuova password. Quella temporanea smetterà di funzionare appena lo avrai fatto."
+
+#: donne-first-login.php:109
+msgid "Choose a new password."
+msgstr "Scegli una nuova password."
+
+#: donne-first-login.php:110
+msgid "You are using a temporary password. Set a new password below and save your profile to continue."
+msgstr "Stai usando una password temporanea. Imposta qui sotto una nuova password e salva il profilo per continuare."
