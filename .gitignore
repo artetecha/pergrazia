@@ -5,12 +5,15 @@
 /pg/.env
 /pg/.env.*
 /pg/wp-config-local.php
+/donne/wp-config-local.php
 
 # Composer and generated build output.
 /*/vendor/
 /*/wordpress/
 /pg/composer-mu-plugins/
 /pg/wp-translation-downloader.lock
+/donne/composer-mu-plugins/
+/donne/wp-translation-downloader.lock
 
 # Temporary/build directories.
 /*/_www
