@@ -1,7 +1,8 @@
 # Donne per la Grazia
 
 Source for `donne.pergrazia.com`, the women's journal of the Per Grazia family.
-It is a separate WordPress installation; this directory holds its theme.
+It is a separate WordPress installation, deployed as the `donne` application
+in the same Upsun project as `www.pergrazia.com`.
 
 ## Theme: `themes/donne-per-la-grazia`
 
@@ -39,19 +40,56 @@ Editorial patterns in the inserter, under *Donne per la Grazia*: home hero,
 Per Grazia banner, Scripture card (Eph 2:8, Riveduta 1924) and Questions for
 reflection.
 
-## Setting up the installation
+## The `donne` application
 
-The theme is not yet wired into a build. When the second installation is
-created, mirror `pg/`: a Composer project with `roots/wordpress`, a `postbuild`
-step that copies `themes/donne-per-la-grazia` into
-`wordpress/wp-content/themes/`, and either a second application in
-`.upsun/config.yaml` with its own database and a `https://donne.{default}/`
-route, or a separate Upsun project. Then:
+`donne/` is a Composer project built like `pg/`: `roots/wordpress`, the
+`upsun-wp` MU plugin, Akismet and Redis Object Cache, Italian translations,
+and a `postbuild` step that copies this theme into
+`wordpress/wp-content/themes/`. Do not edit the generated `wordpress/` tree.
 
-```bash
-wp theme activate donne-per-la-grazia
-wp option update posts_per_page 7
-```
+On Upsun it runs as a second application in the Per Grazia project
+(`.upsun/config.yaml`):
+
+- **Route:** `https://donne.{default}/`, i.e. `donne.pergrazia.com` in
+  production. `www.{default}` stays the primary route.
+- **Database:** schema `donne` on the shared `pgdb` MariaDB service, through
+  its own `donne` endpoint. The pg app keeps schema `main` via `mysql`.
+- **Redis:** shared service; keys are prefixed `wp:donne:<environment>:`.
+- **Salts:** derived from the project entropy plus the application name, so
+  they differ from the pg app's.
+- **Uploads:** a `storage` mount (`uploads`); cache files on `instance`.
+- **Deploy hooks:** identical to pg. Nothing runs until WordPress is installed.
+- **Migrations:** `migrations/20261122_0001_activate_donne_theme.php`
+  activates the theme and sets seven posts per page.
+
+### Going live
+
+1. Deploy to a preview environment first and check that the pg site still
+   reaches its data (the MariaDB service now declares its schemas explicitly).
+2. Add the domain to the project and point DNS at it:
+
+   ```bash
+   upsun domain:add donne.pergrazia.com
+   ```
+
+   then create a `CNAME donne.pergrazia.com → <main environment's target>`
+   at the DNS provider (`upsun domain:get donne.pergrazia.com` shows it).
+3. Install WordPress once, on `main`:
+
+   ```bash
+   upsun ssh --app=donne --environment=main
+   cd wordpress
+   wp core install \
+     --url='https://donne.pergrazia.com/' \
+     --title='Donne per la Grazia' \
+     --admin_user='<admin-user>' \
+     --admin_email='<admin-email>' \
+     --prompt=admin_password
+   wp language core install it_IT --activate
+   jq -r '.extra.distro["enable-plugins"][]' ../composer.json | xargs wp plugin activate
+   wp upsun migrate
+   wp redis enable
+   ```
 
 Menus are edited in the Site Editor (*Navigation*); until one exists, the
 header and footer list published pages.

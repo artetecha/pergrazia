@@ -93,3 +93,44 @@ jobs:
           wp --path=wordpress eval-file tests/commentario-migration.php
           wp --path=wordpress eval-file tests/commentari-navigation.php
           test ! -s wordpress/wp-content/debug.log
+
+  donne:
+    name: Build Donne per la Grazia
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: donne
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          tools: composer
+          coverage: none
+
+      - name: Validate Composer metadata
+        run: composer validate --strict
+
+      - name: Install locked production dependencies
+        run: composer install --no-dev --prefer-dist --no-interaction --no-progress
+
+      - name: Assert build placement
+        run: |
+          test -f wordpress/wp-settings.php
+          test -f wordpress/wp-config.php
+          test -f wordpress/wp-content/mu-plugins/upsun/upsun.php
+          test -f wordpress/wp-content/mu-plugins/upsun-loader.php
+          test -f wordpress/wp-content/mu-plugins/site-config.php
+          test -f wordpress/wp-content/object-cache.php
+          test -f wordpress/wp-content/themes/donne-per-la-grazia/theme.json
+          test -f wordpress/wp-content/themes/donne-per-la-grazia/style.css
+          test "$(find wordpress/wp-content/themes -mindepth 1 -maxdepth 1 -type d | wc -l)" -eq 1
+          test ! -f wordpress/wp-content/plugins/hello.php
+
+      - name: Lint project PHP and theme JSON
+        run: |
+          php -l wp-config.php
+          find mu-plugins migrations themes/donne-per-la-grazia -name '*.php' -print0 | xargs -0 -n1 php -l
+          find themes/donne-per-la-grazia -name '*.json' -print0 | xargs -0 -n1 python3 -m json.tool > /dev/null
