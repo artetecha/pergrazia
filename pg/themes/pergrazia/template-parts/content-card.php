@@ -4,6 +4,10 @@
  *
  * @package Pergrazia
  */
+if ( 'pg_commentario' === get_post_type() ) {
+	get_template_part( 'template-parts/content', 'commentario' );
+	return;
+}
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'post-card' ); ?>>
 	<?php if ( has_post_thumbnail() ) : ?>

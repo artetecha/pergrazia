@@ -32,6 +32,10 @@ applications:
       "wordpress/wp-content/cache":
         source: instance
         source_path: "cache"
+      # Database exports made before content migrations; never web-accessible.
+      "private/migration-backups":
+        source: instance
+        source_path: "migration-backups"
     web:
       locations:
         "/":
